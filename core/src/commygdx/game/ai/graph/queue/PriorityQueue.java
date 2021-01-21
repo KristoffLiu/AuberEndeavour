@@ -1,4 +1,4 @@
-package commygdx.game.AI.graph.queue;
+package commygdx.game.ai.graph.queue;
 
 import java.util.ArrayList;
 

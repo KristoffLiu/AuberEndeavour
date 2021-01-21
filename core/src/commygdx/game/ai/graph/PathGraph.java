@@ -1,8 +1,8 @@
-package commygdx.game.AI.graph;
+package commygdx.game.ai.graph;
 
 import com.badlogic.gdx.math.Vector2;
-import commygdx.game.AI.graph.queue.PriorityItem;
-import commygdx.game.AI.graph.queue.PriorityQueue;
+import commygdx.game.ai.graph.queue.PriorityItem;
+import commygdx.game.ai.graph.queue.PriorityQueue;
 import commygdx.game.Utility;
 
 import java.util.ArrayList;

@@ -1,7 +1,6 @@
-package commygdx.game.AI;
+package commygdx.game.ai;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import commygdx.game.Utility;
 
 public class MovementAI {

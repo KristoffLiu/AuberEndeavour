@@ -2,10 +2,9 @@ package commygdx.game.actors;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import commygdx.game.AI.DemoAI;
-import commygdx.game.AI.graph.PathGraph;
+import commygdx.game.ai.DemoAI;
+import commygdx.game.ai.graph.PathGraph;
 import commygdx.game.TileWorld;
-import commygdx.game.input.PlayerInput;
 import commygdx.game.stages.Hud;
 
 import java.util.ArrayList;

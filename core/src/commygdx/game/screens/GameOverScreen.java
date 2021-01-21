@@ -1,13 +1,11 @@
-package commygdx.game.Screens;
+package commygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import commygdx.game.AuberGame;
-import commygdx.game.actors.Auber;
 
 public class GameOverScreen implements Screen {
     private OrthographicCamera gamecam;

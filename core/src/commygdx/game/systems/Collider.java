@@ -1,4 +1,4 @@
-package commygdx.game.syst;
+package commygdx.game.systems;
 
 import com.badlogic.gdx.math.Vector2;
 

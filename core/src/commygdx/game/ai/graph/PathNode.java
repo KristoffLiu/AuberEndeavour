@@ -1,4 +1,4 @@
-package commygdx.game.AI.graph;
+package commygdx.game.ai.graph;
 
 import com.badlogic.gdx.math.Vector2;
 

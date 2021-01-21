@@ -4,11 +4,10 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
-import commygdx.game.Screens.PlayScreen;
+import commygdx.game.screens.PlayScreen;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.List;
 
 public class TileWorld {
     private Hashtable<String,Rectangle> teleporters;
@@ -41,8 +40,6 @@ public class TileWorld {
         for(MapObject object : map.getLayers().get(1).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = magnifyRectange(((RectangleMapObject) object).getRectangle());
             shipSystems.add(new ShipSystem(rect.x,rect.y,getRoom(rect.x,rect.y),screen.graph));
-
-
         }
 
         //create objects
@@ -51,8 +48,8 @@ public class TileWorld {
         for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = magnifyRectange(((RectangleMapObject) object).getRectangle());
             collisionBoxes.add(rect);
-
         }
+
         //create teleporters
         teleporters = new Hashtable<String,Rectangle>();
         for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
@@ -62,15 +59,12 @@ public class TileWorld {
             rect.width=25;
             rect.height=25;
             teleporters.put(getRoom(rect.x,rect.y),rect);
-
-
         }
-        //walls
 
+        //walls
         for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = magnifyRectange(((RectangleMapObject) object).getRectangle());
             collisionBoxes.add(rect);
-
         }
     }
 
@@ -92,8 +86,6 @@ public class TileWorld {
         command = magnifyRectange(((RectangleMapObject) roomObj).getRectangle());
         roomObj=map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class).get(0);
         engine = magnifyRectange(((RectangleMapObject) roomObj).getRectangle());
-
-
     }
     /**
      * Magnifies the bounds of the rectangle to fit with the zoom of screen
@@ -110,7 +102,6 @@ public class TileWorld {
 
     public Hashtable<String, Rectangle> getTeleporters(){
         return teleporters;
-
     }
 
     public Rectangle getInfirmary(){return infirmary;}
@@ -145,6 +136,5 @@ public class TileWorld {
         } else{
             return "none";
         }
-
     }
 }

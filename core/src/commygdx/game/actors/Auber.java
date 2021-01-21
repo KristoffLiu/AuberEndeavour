@@ -2,19 +2,14 @@ package commygdx.game.actors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import commygdx.game.TileWorld;
-import commygdx.game.input.PlayerInput;
+import commygdx.game.inputs.PlayerInput;
 import commygdx.game.stages.Hud;
-import commygdx.game.syst.MovementSystem;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
 
 public class Auber extends Character {
 
@@ -86,9 +81,6 @@ public class Auber extends Character {
      * @param hud The games HUD overlay
      */
     public void arrest(ArrayList<Infiltrator> infiltrators,Hud hud){
-        /*Arrests the infiltrator if in range and puts it in jail
-        * @param infiltrators this list of infiltrators that are being checked
-        * @hud the hud overlay*/
         if(PlayerInput.arrest()) {
             for (Infiltrator infiltrator : infiltrators) {
                 if (Math.abs(infiltrator.getX() - this.getX()) < 100 && Math.abs(infiltrator.getY() - this.getY()) < 100) {

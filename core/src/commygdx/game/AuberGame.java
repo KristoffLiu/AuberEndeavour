@@ -2,9 +2,9 @@ package commygdx.game;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import commygdx.game.Screens.GameOverScreen;
-import commygdx.game.Screens.IntroScreen;
-import commygdx.game.Screens.PlayScreen;
+import commygdx.game.screens.GameOverScreen;
+import commygdx.game.screens.IntroScreen;
+import commygdx.game.screens.PlayScreen;
 
 public class AuberGame extends com.badlogic.gdx.Game {
 	public SpriteBatch batch;

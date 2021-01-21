@@ -2,20 +2,13 @@ package commygdx.game.actors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
-import commygdx.game.AI.InfiltratorAI;
-import commygdx.game.AI.MovementAI;
+import commygdx.game.ai.InfiltratorAI;
 
-import commygdx.game.AI.graph.PathGraph;
-import commygdx.game.Screens.PlayScreen;
+import commygdx.game.ai.graph.PathGraph;
+import commygdx.game.screens.PlayScreen;
 import commygdx.game.ShipSystem;
-import commygdx.game.stages.Hud;
-import commygdx.game.syst.MovementSystem;
 //import org.graalvm.compiler.lir.aarch64.AArch64Move;
 
 public class Infiltrator extends Character {

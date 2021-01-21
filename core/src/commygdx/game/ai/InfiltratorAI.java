@@ -1,8 +1,8 @@
-package commygdx.game.AI;
+package commygdx.game.ai;
 
 import com.badlogic.gdx.math.Vector2;
-import commygdx.game.AI.graph.PathGraph;
-import commygdx.game.AI.graph.PathNode;
+import commygdx.game.ai.graph.PathGraph;
+import commygdx.game.ai.graph.PathNode;
 import commygdx.game.Utility;
 
 public class InfiltratorAI {
