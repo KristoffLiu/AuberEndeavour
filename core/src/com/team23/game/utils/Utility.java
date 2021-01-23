@@ -1,4 +1,4 @@
-package com.team23.game;
+package com.team23.game.utils;
 
 import com.badlogic.gdx.math.Vector2;
 

@@ -9,6 +9,12 @@ import com.team23.game.screens.PlayScreen;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+/***
+ * TileWorld
+ * the class for reading tiled-map file.
+ *
+ * @author Zhikang Liu
+ */
 public class TileWorld {
     private Hashtable<String,Rectangle> teleporters;
     private ArrayList<ShipSystem> shipSystems;
@@ -26,8 +32,8 @@ public class TileWorld {
 
     /**
      * Creates all objects that the sprites can interactive with
-     *@param screen the main game screen
-     ***/
+     * @param screen the main game screen
+     */
     public TileWorld(PlayScreen screen){
 
         TiledMap map= screen.getMap();
@@ -101,16 +107,28 @@ public class TileWorld {
         return rect;
     }
 
+    /**
+     * get the teleporters.
+     */
     public Hashtable<String, Rectangle> getTeleporters(){
         return teleporters;
     }
 
+    /**
+     * get the infirmary.
+     */
     public Rectangle getInfirmary(){return infirmary;}
 
+    /**
+     * get the systems from the tiled map.
+     */
     public ArrayList<ShipSystem> getSystems(){
         return shipSystems;
     }
 
+    /**
+     * get the boxes which will cause collision.
+     */
     public ArrayList<Rectangle> getCollisionBoxes(){
             return collisionBoxes;
     }

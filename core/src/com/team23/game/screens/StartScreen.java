@@ -18,6 +18,7 @@ import com.team23.game.ui.UIStage;
 import com.team23.game.ui.controls.Button;
 import com.team23.game.ui.controls.ButtonClickListener;
 import com.team23.game.ui.controls.ClickableUIElement;
+import com.team23.game.ui.controls.Image;
 import com.team23.game.ui.controls.labels.LabelStyles;
 
 public class StartScreen implements Screen {
@@ -26,6 +27,7 @@ public class StartScreen implements Screen {
     public UIStage uiStage;
     private Label labelGameTitle;
     private Texture introTexture;
+    private Image headLine;
 
     float stateTime = 0f;
     SpriteBatch backgroundBatch;
@@ -38,8 +40,9 @@ public class StartScreen implements Screen {
         introTexture = new Texture("IntroV2.png");
         uiStage = new UIStage(new StretchViewport(GameEntry.VIEW_WIDTH, GameEntry.VIEW_HEIGHT));
 
-        labelGameTitle = new Label("TEAM 23 - Auber Game 2", LabelStyles.getGameTitleLabelStyle());
-        labelGameTitle.setPosition(uiStage.getWidth()/2-labelGameTitle.getWidth()/2,800);
+        headLine = new Image(this.uiStage, new TextureRegion(new Texture("font/Headline.png")));
+        headLine.setScale(0.7f);
+        headLine.setPosition(this.uiStage.getWidth() - this.headLine.getWidth() + 550, uiStage.getHeight() - headLine.getHeight() / 2 - 130);
 
         Button playButton = new Button(this.uiStage);
         playButton.setTextures(
@@ -49,7 +52,7 @@ public class StartScreen implements Screen {
                 "");
         playButton.setWidth(playButton.getWidth()/2f);
         playButton.setHeight(playButton.getHeight()/2f);
-        playButton.setPosition(uiStage.getWidth()/2-playButton.getWidth()/2,500);
+        playButton.setPosition(0,325);
         playButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.
@@ -68,9 +71,7 @@ public class StartScreen implements Screen {
                 "Menu/Buttons/loadHovered.png",
                 "Menu/Buttons/loadPressed.png",
                 "");
-        loadButton.setWidth(loadButton.getWidth()/2f);
-        loadButton.setHeight(loadButton.getHeight()/2f);
-        loadButton.setPosition(uiStage.getWidth()/2-playButton.getWidth()/2,350);
+        loadButton.setPosition(0,250);
         loadButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.
@@ -87,9 +88,7 @@ public class StartScreen implements Screen {
                 "Menu/Buttons/demoHovered.png",
                 "Menu/Buttons/demoPressed.png",
                 "");
-        demoButton.setWidth(demoButton.getWidth()/2f);
-        demoButton.setHeight(demoButton.getHeight()/2f);
-        demoButton.setPosition(uiStage.getWidth()/2-playButton.getWidth()/2,200);
+        demoButton.setPosition(0,175);
         demoButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.
@@ -99,6 +98,24 @@ public class StartScreen implements Screen {
                 super.clicked(event, x, y);
                 gameEntry.createPlayScreen(true);
                 gameEntry.gameState=0;
+            }
+        });
+
+        Button exitButton = new Button(this.uiStage);
+        exitButton.setTextures(
+                "Menu/Buttons/exitNormal.png",
+                "Menu/Buttons/exitHovered.png",
+                "Menu/Buttons/exitPressed.png",
+                "");
+        exitButton.setPosition(0,100);
+        exitButton.setClickListener(new ButtonClickListener(){
+            /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
+             * button or touch. The touchUp event is always {@link Event#handle() handled}.
+             * @see ButtonClickListener */
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                Gdx.app.exit();
             }
         });
 
@@ -118,9 +135,6 @@ public class StartScreen implements Screen {
         walkAnimation = new Animation(0.5F, backgroundFrames);
         walkAnimation.setPlayMode(Animation.PlayMode.LOOP);
 
-        uiStage.addActor(labelGameTitle);
-        uiStage.addActor(playButton);
-        uiStage.addActor(demoButton);
         Gdx.input.setInputProcessor(uiStage);
     }
 

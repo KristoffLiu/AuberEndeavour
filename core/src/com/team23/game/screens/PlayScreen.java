@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.viewport.*;
 import com.team23.game.GameEntry;
 import com.team23.game.ShipSystem;
 import com.team23.game.TileWorld;
-import com.team23.game.Utility;
+import com.team23.game.utils.Utility;
 import com.team23.game.actors.characters.Auber;
 import com.team23.game.actors.characters.DemoAuber;
 import com.team23.game.actors.characters.Infiltrator;

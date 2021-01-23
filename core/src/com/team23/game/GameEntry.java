@@ -1,12 +1,19 @@
 package com.team23.game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.team23.game.screens.GameOverScreen;
 import com.team23.game.screens.StartScreen;
 import com.team23.game.screens.PlayScreen;
 
-public class GameEntry extends com.badlogic.gdx.Game {
+/***
+ * Game Entry
+ * the whole .
+ *
+ * @author Zhikang Liu
+ */
+public class GameEntry extends Game {
 	public SpriteBatch batch;
 	public static final int VIEW_WIDTH = 1920;
 	public static final int VIEW_HEIGHT = 1080;
@@ -14,7 +21,7 @@ public class GameEntry extends com.badlogic.gdx.Game {
 	public String onTeleport;
 	public Screen screen;
 	public boolean demo;
-	//game state -1= intro screen 0=exit introscreen 1=playing 2=win 3=lost
+	//game state -1= intro screen 0=exit startscreen 1=playing 2=win 3=lost
 	public int gameState;
 	private Screen introScreen;
 	private GameOverScreen gameOverScreen;

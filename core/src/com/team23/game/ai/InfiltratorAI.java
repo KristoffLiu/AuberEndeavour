@@ -1,7 +1,7 @@
 package com.team23.game.ai;
 
 import com.badlogic.gdx.math.Vector2;
-import com.team23.game.Utility;
+import com.team23.game.utils.Utility;
 import com.team23.game.ai.graph.PathGraph;
 import com.team23.game.ai.graph.PathNode;
 
