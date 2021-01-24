@@ -3,6 +3,9 @@ package com.team23.game.ui.controls;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+/***
+ * handles events of a Clickable UI Element.
+ */
 public class ClickableUIElementClickListener extends ClickListener {
 
     boolean isStillOverAfterClicked = false;

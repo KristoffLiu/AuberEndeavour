@@ -7,6 +7,9 @@ import com.badlogic.gdx.utils.Null;
 import com.team23.game.actors.CustomActor;
 import com.team23.game.ui.layouts.UIGroup;
 
+/***
+ * the actor showing the user-interface elements only.
+ */
 public class UIElement extends CustomActor implements IUIElement{
     Object uiParent = null;
     HorizontalAlignment horizontalAlignment = HorizontalAlignment.leftAlignment;
@@ -14,6 +17,10 @@ public class UIElement extends CustomActor implements IUIElement{
     float relativeX = 0;
     float relativeY = 0;
 
+    /***
+     * add UI element
+     * @param parent the actor which will be the child
+     */
     public UIElement(Object parent) {
         super();
         setUIParent(parent);
@@ -27,10 +34,19 @@ public class UIElement extends CustomActor implements IUIElement{
         }
     }
 
+    /***
+     * texture region of the ui element
+     * @param textureRegion texture region of the ui element.
+     */
     public UIElement(TextureRegion textureRegion) {
         super(textureRegion);
     }
 
+    /***
+     * texture region of the ui element
+     * @param parent ui parent of the ui element.
+     * @param textureRegion texture region of the ui element.
+     */
     public UIElement(Object parent, TextureRegion textureRegion) {
         super(textureRegion);
         setUIParent(parent);
@@ -44,6 +60,10 @@ public class UIElement extends CustomActor implements IUIElement{
         }
     }
 
+    /***
+     * set the UI Parent
+     * @param _uiParent parent of the ui
+     */
     public void setUIParent(Object _uiParent){
         this.uiParent = _uiParent;
     }
@@ -62,6 +82,10 @@ public class UIElement extends CustomActor implements IUIElement{
         return relativeY;
     }
 
+    /***
+     * set the relative coordination of X
+     * @param relativeX the relative coordination of X
+     */
     public void setRelativeX(float relativeX){
         if(uiParent != null){
             float offset = 0f;
@@ -104,6 +128,10 @@ public class UIElement extends CustomActor implements IUIElement{
         this.relativeX = relativeX;
     }
 
+    /***
+     * set the relative coordination of Y
+     * @param relativeY the relative coordination of Y
+     */
     public void setRelativeY(float relativeY){
         if(uiParent != null){
             float offset = 0f;

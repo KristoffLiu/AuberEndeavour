@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.team23.game.ui.UIElement;
 import com.team23.game.ui.UIStage;
 
+/***
+ * class of a Nine Patch Image, which is inherited from a UI Element.
+ */
 public class NinePatchImage extends UIElement {
 
     NinePatch ninePatch         ;

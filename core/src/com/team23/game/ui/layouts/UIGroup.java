@@ -11,6 +11,9 @@ import com.team23.game.ui.IUIStage;
 import com.team23.game.ui.UIElement;
 import com.team23.game.ui.UIStage;
 
+/***
+ * class of a UI Group, which is inherited from Group class.
+ */
 public class UIGroup extends Group implements IUIElement, IUIStage {
     Object uiParent = null;
     Array<Actor> uiElements = new Array<>();

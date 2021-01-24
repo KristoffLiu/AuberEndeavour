@@ -2,6 +2,11 @@ package com.team23.game.ui.controls;
 
 import com.badlogic.gdx.scenes.scene2d.*;
 
+/***
+ * ButtonClickListener
+ * handles events of a button.
+ *
+ */
 public class ButtonClickListener extends ClickableUIElementClickListener {
     /** Called any time the mouse cursor or a finger touch is moved over an actor. On the desktop, this event occurs even when no
      * mouse buttons are pressed (pointer will be -1).

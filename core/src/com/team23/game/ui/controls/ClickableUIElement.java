@@ -5,6 +5,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Null;
 import com.team23.game.ui.UIElement;
 
+/***
+ * ClickableUIElement
+ * class of a Clickable UI Element.
+ *
+ */
 public class ClickableUIElement extends UIElement {
     public TextureRegion normalTexture         ;
     public TextureRegion hoveredTexture        ;

@@ -109,6 +109,7 @@ public class TileWorld {
 
     /**
      * get the teleporters.
+     * @return the
      */
     public Hashtable<String, Rectangle> getTeleporters(){
         return teleporters;

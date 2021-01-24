@@ -5,6 +5,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.*;
 import com.badlogic.gdx.utils.Null;
 
+/***
+ * animation helper for actor objects which are not extended as ui element.
+ */
 public class NonUIAnimationHelper {
 
     Actor actor;
