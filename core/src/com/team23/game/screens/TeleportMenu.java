@@ -10,6 +10,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.team23.game.GameEntry;
 
+/***
+ * Teleport Menu
+ */
 public class TeleportMenu implements Screen {
 
     private GameEntry game;
@@ -28,6 +31,9 @@ public class TeleportMenu implements Screen {
     private int tWidth;
     private int tHeight;
 
+    /***
+     * Constructor
+     */
     public TeleportMenu(GameEntry game){
         this.game=game;
         gamecam=new OrthographicCamera();
@@ -48,11 +54,17 @@ public class TeleportMenu implements Screen {
         crewRect=new Rectangle(1543,466,182,307);
     }
 
+    /***
+     * show
+     */
     @Override
     public void show() {
 
     }
 
+    /***
+     * render
+     */
     @Override
     public void render(float delta) {
         //draw menu
@@ -68,10 +80,11 @@ public class TeleportMenu implements Screen {
         game.batch.end();
 
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)){ onClick(Gdx.input.getX(),Gdx.input.getY()); };
-
-
     }
 
+    /***
+     * event handler on Click
+     */
     private void onClick(int x,int y){
             //convert click screen cords to world
             Vector3 clickPos= new Vector3(x,y,0);
@@ -85,26 +98,41 @@ public class TeleportMenu implements Screen {
             if (laboratoryRect.contains(clickPos.x,clickPos.y)){game.onTeleport="laboratory";}
     }
 
+    /***
+     * resize the width and the height
+     */
     @Override
     public void resize(int width, int height) {
 
     }
 
+    /***
+     * pause the game
+     */
     @Override
     public void pause() {
 
     }
 
+    /***
+     * resume the game
+     */
     @Override
     public void resume() {
 
     }
 
+    /***
+     * hide the game
+     */
     @Override
     public void hide() {
 
     }
 
+    /***
+     * dispose this object
+     */
     @Override
     public void dispose() {
 

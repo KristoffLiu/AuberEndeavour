@@ -21,6 +21,9 @@ import com.team23.game.ui.controls.ClickableUIElement;
 import com.team23.game.ui.controls.Image;
 import com.team23.game.ui.controls.labels.LabelStyles;
 
+/***
+ * Start Screen
+ */
 public class StartScreen implements Screen {
 
     private GameEntry gameEntry;
@@ -165,28 +168,42 @@ public class StartScreen implements Screen {
         uiStage.draw();
     }
 
+
+    /***
+     * resize the width and the height
+     */
     @Override
     public void resize(int width, int height) {
 
-
-
     }
 
+    /***
+     * pause the game
+     */
     @Override
     public void pause() {
 
     }
 
+    /***
+     * resume the game
+     */
     @Override
     public void resume() {
 
     }
 
+    /***
+     * hide the game
+     */
     @Override
     public void hide() {
 
     }
 
+    /***
+     * dispose this object
+     */
     @Override
     public void dispose() {
 

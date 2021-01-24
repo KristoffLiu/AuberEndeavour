@@ -2,6 +2,10 @@ package com.team23.game.systems;
 
 import com.badlogic.gdx.math.Vector2;
 
+/***
+ * Movement System
+ * handling the movement
+ */
 public class MovementSystem {
 
     Collider collider;
@@ -10,17 +14,26 @@ public class MovementSystem {
     private  boolean collided;
     //direction 1=left 2=right 3=up 4=down
 
+    /***
+     * constructor
+     */
     public MovementSystem(Vector2 position,float speed){
         this.collider = new Collider(position);
         this.movementSpeed = speed;
         this.direction=0;
     }
 
+    /***
+     * updating the position
+     */
     public void updatePos(Vector2 position){
         this.collider = new Collider(position);
 
     }
 
+    /***
+     * updating the speed
+     */
     public void setSpeed(float speed){
         movementSpeed = speed;
     }
@@ -90,15 +103,24 @@ public class MovementSystem {
         return newPos;
     }
 
+    /***
+     * get the position
+     */
     public Vector2 getPos(){
         return collider.position;
 
     }
 
+    /***
+     * get the direction
+     */
     public int getDirection(){
         return direction;
     }
 
+    /***
+     * set the collision
+     */
     public void setCollided(boolean collided) {
         this.collided = collided;
     }

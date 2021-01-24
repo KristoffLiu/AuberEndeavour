@@ -16,12 +16,15 @@ import com.team23.game.actors.characters.Infiltrator;
 import java.util.ArrayList;
 import java.util.List;
 
+/***
+ * Head Up Display
+ */
 public class Hud {
     public Stage stage;
     private Viewport viewport;
     private int systemsUp;
     private Label systemLabel;
-    private  Label systemTextLabel;
+    private Label systemTextLabel;
 
     private int infiltratorsRemaining;
     private Label infiltratorLabel;
@@ -37,7 +40,10 @@ public class Hud {
     private ArrayList<Infiltrator> enemies;
     private ArrayList<ShipSystem> systems;
 
-//used for buttons,text, etc
+    /***
+     * constructor
+     * used for buttons,text, etc
+     */
     public Hud(SpriteBatch sb,ArrayList<Infiltrator> enemies,ArrayList<ShipSystem> systems){
         viewport=new FitViewport(GameEntry.VIEW_WIDTH, GameEntry.VIEW_HEIGHT,new OrthographicCamera());
         stage= new Stage(viewport,sb);
