@@ -4,7 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.team23.game.screens.GameOverScreen;
-import com.team23.game.screens.StartScreen;
+import com.team23.game.screens.startscreen.StartScreen;
 import com.team23.game.screens.PlayScreen;
 
 /***
@@ -14,6 +14,7 @@ import com.team23.game.screens.PlayScreen;
  * @author Zhikang Liu
  */
 public class GameEntry extends Game {
+	public static GameEntry current;
 	public SpriteBatch batch;
 	public static final int VIEW_WIDTH = 1920;
 	public static final int VIEW_HEIGHT = 1080;
@@ -30,6 +31,7 @@ public class GameEntry extends Game {
 
 	@Override
 	public void create () {
+		current = this;
 		batch = new SpriteBatch();
 		introScreen = new StartScreen(this);
 		gameOverScreen = new GameOverScreen(this);

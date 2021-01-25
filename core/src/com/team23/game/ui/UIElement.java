@@ -24,8 +24,8 @@ public class UIElement extends CustomActor implements IUIElement{
     public UIElement(Object parent) {
         super();
         setUIParent(parent);
-        if(parent instanceof UIStage){
-            UIStage _parent = (UIStage) parent;
+        if(parent instanceof UIPage){
+            UIPage _parent = (UIPage) parent;
             _parent.addUIElement(this);
         }
         else if(parent instanceof UIGroup){
@@ -50,8 +50,8 @@ public class UIElement extends CustomActor implements IUIElement{
     public UIElement(Object parent, TextureRegion textureRegion) {
         super(textureRegion);
         setUIParent(parent);
-        if(parent instanceof UIStage){
-            UIStage _parent = (UIStage) parent;
+        if(parent instanceof UIPage){
+            UIPage _parent = (UIPage) parent;
             _parent.addUIElement(this);
         }
         else if(parent instanceof UIGroup){
@@ -101,8 +101,8 @@ public class UIElement extends CustomActor implements IUIElement{
     public void setRelativeX(float relativeX){
         if(uiParent != null){
             float offset = 0f;
-            if(uiParent instanceof UIStage){
-                UIStage _parent = (UIStage) uiParent;
+            if(uiParent instanceof UIPage){
+                UIPage _parent = (UIPage) uiParent;
                 switch (this.horizontalAlignment){
                     case leftAlignment:
                         this.setX(offset + relativeX);
@@ -147,8 +147,8 @@ public class UIElement extends CustomActor implements IUIElement{
     public void setRelativeY(float relativeY){
         if(uiParent != null){
             float offset = 0f;
-            if(uiParent instanceof UIStage){
-                UIStage _parent = (UIStage) uiParent;
+            if(uiParent instanceof UIPage){
+                UIPage _parent = (UIPage) uiParent;
                 switch (this.verticalAlignment) {
                     case topAlignment:
                         offset = _parent.getHeight() - this.getHeight();
@@ -270,8 +270,6 @@ public class UIElement extends CustomActor implements IUIElement{
 
     /***
      * hide this ui element immediately
-     * @param x set the x coordination for animation
-     * @param y set the x coordination for animation
      */
     public void hide(){
         AlphaAction uiElementAlphaAction = Actions.alpha(0f,0f);
@@ -339,7 +337,14 @@ public class UIElement extends CustomActor implements IUIElement{
      * fade out this ui element in a duration of time
      */
     public void fadeOut(float offset_x, float offset_y, float duration, @Null Interpolation interpolation){
-        fadeOut(animationOrigin_X, animationOrigin_Y, offset_x, offset_y, duration, interpolation);
+        if(this.isVisible()){
+            AlphaAction uiElementAlphaAction = Actions.alpha(0f, duration, interpolation);
+            MoveByAction uiElementMoveByAction = Actions.moveBy(offset_x, offset_y, duration, interpolation);
+            MoveByAction endingMoveByAction = Actions.moveBy(-offset_x,-offset_y,0f);
+            ParallelAction parallelAction = Actions.parallel(uiElementAlphaAction, uiElementMoveByAction);
+            SequenceAction sequenceAction = Actions.sequence(parallelAction,endingMoveByAction);
+            this.addAction(sequenceAction);
+        }
     }
 
     /***
@@ -382,7 +387,16 @@ public class UIElement extends CustomActor implements IUIElement{
      * fade in this ui element in a duration of time
      */
     public void fadeIn(float offset_x, float offset_y, float duration, @Null Interpolation interpolation){
-        fadeIn(animationOrigin_X, animationOrigin_Y, offset_x, offset_y, duration, interpolation);
+        if(this.isVisible()){
+            VisibleAction uiElementVisibleAction = Actions.visible(true);
+            MoveByAction beginningMoveToAction = Actions.moveBy(-offset_x, -offset_y,0f);
+            AlphaAction beginningAlphaAction = Actions.alpha(0f, 0);
+            AlphaAction uiElementAlphaAction = Actions.alpha(1f, duration, interpolation);
+            MoveByAction uiElementMoveByAction = Actions.moveBy(offset_x, offset_y, duration, interpolation);
+            ParallelAction parallelAction = Actions.parallel(uiElementAlphaAction, uiElementMoveByAction);
+            SequenceAction sequenceAction = Actions.sequence(uiElementVisibleAction,beginningMoveToAction,beginningAlphaAction,parallelAction);
+            this.addAction(sequenceAction);
+        }
     }
 
     /***
@@ -390,11 +404,13 @@ public class UIElement extends CustomActor implements IUIElement{
      */
     public void fadeIn(float x, float y, float offset_x, float offset_y, float duration, @Null Interpolation interpolation){
         if(this.isVisible()){
+            VisibleAction uiElementVisibleAction = Actions.visible(true);
             MoveToAction uiElementMoveToAction = Actions.moveTo(x - offset_x,y - offset_y,0f);
+            AlphaAction beginningAlphaAction = Actions.alpha(0f, 0);
             AlphaAction uiElementAlphaAction = Actions.alpha(1f, duration, interpolation);
             MoveByAction uiElementMoveByAction = Actions.moveBy(offset_x, offset_y, duration, interpolation);
             ParallelAction parallelAction = Actions.parallel(uiElementAlphaAction, uiElementMoveByAction);
-            SequenceAction sequenceAction = Actions.sequence(uiElementMoveToAction,parallelAction);
+            SequenceAction sequenceAction = Actions.sequence(uiElementVisibleAction,uiElementMoveToAction,beginningAlphaAction,parallelAction);
             this.addAction(sequenceAction);
         }
     }

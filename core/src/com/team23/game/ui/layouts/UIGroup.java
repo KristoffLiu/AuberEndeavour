@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.Null;
 import com.team23.game.ui.IUIElement;
 import com.team23.game.ui.IUIStage;
 import com.team23.game.ui.UIElement;
-import com.team23.game.ui.UIStage;
+import com.team23.game.ui.UIPage;
 
 /***
  * class of a UI Group, which is inherited from Group class.
@@ -26,8 +26,8 @@ public class UIGroup extends Group implements IUIElement, IUIStage {
      * constructor
      ***/
     public UIGroup(Object parent) {
-        if(parent instanceof UIStage){
-            UIStage _parent = (UIStage) parent;
+        if(parent instanceof UIPage){
+            UIPage _parent = (UIPage) parent;
             _parent.addUIElement(this);
             setUIParent(parent);
         }
@@ -78,8 +78,8 @@ public class UIGroup extends Group implements IUIElement, IUIStage {
     public void setRelativeX(float relativeX){
         if(uiParent != null){
             float offset = 0f;
-            if(uiParent instanceof UIStage){
-                UIStage _parent = (UIStage) uiParent;
+            if(uiParent instanceof UIPage){
+                UIPage _parent = (UIPage) uiParent;
                 switch (this.horizontalAlignment){
                     case leftAlignment:
                         this.setX(offset + relativeX);
@@ -124,8 +124,8 @@ public class UIGroup extends Group implements IUIElement, IUIStage {
     public void setRelativeY(float relativeY){
         if(uiParent != null){
             float offset = 0f;
-            if(uiParent instanceof UIStage){
-                UIStage _parent = (UIStage) uiParent;
+            if(uiParent instanceof UIPage){
+                UIPage _parent = (UIPage) uiParent;
                 switch (this.verticalAlignment) {
                     case topAlignment:
                         offset = _parent.getHeight() - this.getHeight();

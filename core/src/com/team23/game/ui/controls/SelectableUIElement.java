@@ -3,23 +3,16 @@ package com.team23.game.ui.controls;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Null;
-import com.team23.game.ui.UIElement;
 
-/***
- * ClickableUIElement
- * class of a Clickable UI Element.
- *
- */
-public class ClickableUIElement extends UIElement {
+public class SelectableUIElement {
     public TextureRegion normalTexture         ;
     public TextureRegion hoveredTexture        ;
     public TextureRegion pressedTexture        ;
     public TextureRegion notActivatedTexture   ;
     boolean isEnabled;
 
-    ClickableUIElementClickListener clickableUIElementClickListener;
-    ButtonUIState buttonUIState = com.team23.game.ui.controls.Button.ButtonUIState.normal;
-
+    SelectableUIElement clickableUIElementClickListener;
+    SelectableUIElement.ButtonUIState buttonUIState = com.team23.game.ui.controls.Button.ButtonUIState.normal;
 
     public ClickableUIElement(Object uiParent) {
         super(uiParent);
@@ -83,10 +76,10 @@ public class ClickableUIElement extends UIElement {
     public void isEnabled(boolean isEnabled){
         this.isEnabled = isEnabled;
         if(isEnabled){
-            setButtonUIState(ButtonUIState.normal);
+            setButtonUIState(ClickableUIElement.ButtonUIState.normal);
         }
         else {
-            setButtonUIState(ButtonUIState.notActivated);
+            setButtonUIState(ClickableUIElement.ButtonUIState.notActivated);
         }
     }
 
@@ -115,8 +108,17 @@ public class ClickableUIElement extends UIElement {
         }
     }
 
-    public enum ButtonUIState{
-        normal, hovered, pressed, notActivated
+    public enum SelectableUIElementState{
+        unselected,
+        selected
+        unselectedHovered,
+        unselectedPressed,
+        selectedHovered,
+        selectedPressed,
+        notActivated
+    }
+
+    public enum SelectionState{
+        unselected, selected, notActivated
     }
 }
-
