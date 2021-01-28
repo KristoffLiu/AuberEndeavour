@@ -12,7 +12,7 @@ public class MovementSystem {
     float movementSpeed;
     private int direction;
     private  boolean collided;
-    //direction 1=left 2=right 3=up 4=down
+    //direction 1=left 2=right 3=up 4=down 5=upRight, 6=downRight, 7=downLeft, 8= upLeft
 
     /***
      * constructor
@@ -103,7 +103,63 @@ public class MovementSystem {
         return newPos;
     }
 
-    /***
+    public Vector2 upRight() {
+        //don't move if collided
+        if (direction==5 && collided){
+            return collider.position;
+        }
+
+        Vector2 newPos = collider.position;
+        newPos.y += movementSpeed;
+        newPos.x += movementSpeed;
+        this.direction=5;
+        collided=false;
+        return newPos;
+    }
+
+    public Vector2 downRight() {
+        //don't move if collided
+        if (direction==6 && collided){
+            return collider.position;
+        }
+
+        Vector2 newPos = collider.position;
+        newPos.y -= movementSpeed;
+        newPos.x += movementSpeed;
+        this.direction=6;
+        collided=false;
+        return newPos;
+    }
+
+    public Vector2 downLeft() {
+        //don't move if collided
+        if (direction==7 && collided){
+            return collider.position;
+        }
+
+        Vector2 newPos = collider.position;
+        newPos.y -= movementSpeed;
+        newPos.x -= movementSpeed;
+        this.direction=7;
+        collided=false;
+        return newPos;
+    }
+
+    public Vector2 upLeft() {
+        //don't move if collided
+        if (direction==8 && collided){
+            return collider.position;
+        }
+
+        Vector2 newPos = collider.position;
+        newPos.y += movementSpeed;
+        newPos.x -= movementSpeed;
+        this.direction = 8;
+        collided=false;
+        return newPos;
+    }
+
+  /***
      * get the position
      */
     public Vector2 getPos(){
