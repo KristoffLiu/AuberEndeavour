@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.team23.game.ShipSystem;
-import com.team23.game.actors.characters.Character;
 import com.team23.game.ai.InfiltratorAI;
 import com.team23.game.ai.graph.PathGraph;
 
@@ -15,7 +14,7 @@ import com.team23.game.screens.PlayScreen;
 public class Infiltrator extends Character {
 
     //Constants
-    private final float MOV_SPEED = 9f;
+    private float movSpeed;
     private final float TIME_TO_DESTROY = 500f;
 
     private InfiltratorAI ai;
@@ -31,8 +30,8 @@ public class Infiltrator extends Character {
     private boolean facingRight;
 
 
-    public Infiltrator(Vector2 position, SpriteBatch batch, int power, PathGraph graph) {
-        super(position, batch);
+    public Infiltrator(Vector2 position, SpriteBatch batch, int power, PathGraph graph, float movSpeed) {
+        super(position, batch, movSpeed);
         setPosition(position.x,position.y);
         this.power=power;
         powerOn=false;
@@ -77,7 +76,7 @@ public class Infiltrator extends Character {
     public void stopPower(PlayScreen screen){
         if (power==1){resetTexture(); }
         if (power==3){resetTexture();}
-        if (power==4){movementSystem.setSpeed(MOV_SPEED);}
+        if (power==4){movementSystem.setSpeed(movSpeed);}
         powerOn=false;
 
 

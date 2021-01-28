@@ -13,13 +13,13 @@ import java.util.ArrayList;
 
 public class Auber extends Character {
 
-    private final float MOV_SPEED = 6f;
+    private float movSpeed;
     protected boolean facingRight;
 
-    public Auber(Vector2 position, SpriteBatch batch) {
-        super(position,batch);
+    public Auber(Vector2 position, SpriteBatch batch, float movSpeed) {
+        super(position,batch, movSpeed);
         shuffle();
-        movementSystem.setSpeed(MOV_SPEED);
+        movementSystem.setSpeed(movSpeed);
         facingRight=true;
     }
 
@@ -56,6 +56,30 @@ public class Auber extends Character {
         //Down movement
         if(PlayerInput.getDirection()==4){
             Vector2 position = movementSystem.down();
+            setPosition(position.x,position.y);
+        }
+
+        //upRight movement
+        if(PlayerInput.getDirection()==5){
+            Vector2 position = movementSystem.upRight();
+            setPosition(position.x,position.y);
+        }
+
+        //downRight movement
+        if(PlayerInput.getDirection()==6){
+            Vector2 position = movementSystem.downRight();
+            setPosition(position.x,position.y);
+        }
+
+        //downLeft movement
+        if(PlayerInput.getDirection()==7){
+            Vector2 position = movementSystem.downLeft();
+            setPosition(position.x,position.y);
+        }
+
+        //downRight movement
+        if(PlayerInput.getDirection()==8){
+            Vector2 position = movementSystem.upLeft();
             setPosition(position.x,position.y);
         }
     }

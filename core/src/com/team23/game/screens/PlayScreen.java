@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.*;
 import com.team23.game.GameEntry;
 import com.team23.game.ShipSystem;
 import com.team23.game.TileWorld;
+import com.team23.game.actors.characters.NPC;
 import com.team23.game.utils.Utility;
 import com.team23.game.actors.characters.Auber;
 import com.team23.game.actors.characters.DemoAuber;
@@ -37,6 +38,7 @@ public class PlayScreen implements Screen {
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
     public ArrayList<Infiltrator> enemies;
+    public ArrayList<NPC> NPCs;
     //Graph used for AI pathfinding
     public PathGraph graph;
     private boolean demo;
@@ -96,15 +98,26 @@ public class PlayScreen implements Screen {
 
         //Creating and placing infiltrators
         enemies = new ArrayList<Infiltrator>(Arrays.asList(
-                new Infiltrator(new Vector2(4700, 2000), gameEntry.batch, 1, graph),
-                new Infiltrator(new Vector2(4800, 2300), gameEntry.batch, 2, graph),
-                new Infiltrator(new Vector2(5000, 7356), gameEntry.batch, 3, graph),
-                new Infiltrator(new Vector2(4732, 7000), gameEntry.batch, 4, graph),
-                new Infiltrator(new Vector2(4732, 7500), gameEntry.batch, 1, graph),
-                new Infiltrator(new Vector2(4732, 7800), gameEntry.batch, 1, graph),
-                new Infiltrator(new Vector2(4200, 7800), gameEntry.batch, 2, graph),
-                new Infiltrator(new Vector2(5400, 7800), gameEntry.batch, 2, graph)
+                new Infiltrator(new Vector2(4700, 2000), gameEntry.batch, 1, graph, 9f),
+                new Infiltrator(new Vector2(4800, 2300), gameEntry.batch, 2, graph, 9f),
+                new Infiltrator(new Vector2(5000, 7356), gameEntry.batch, 3, graph, 9f),
+                new Infiltrator(new Vector2(4732, 7000), gameEntry.batch, 4, graph, 9f),
+                new Infiltrator(new Vector2(4732, 7500), gameEntry.batch, 1, graph, 9f),
+                new Infiltrator(new Vector2(4732, 7800), gameEntry.batch, 1, graph, 9f),
+                new Infiltrator(new Vector2(4200, 7800), gameEntry.batch, 2, graph, 9f),
+                new Infiltrator(new Vector2(5400, 7800), gameEntry.batch, 2, graph, 9f)
         ));
+        NPCs = new ArrayList<NPC>(Arrays.asList(
+                new NPC(new Vector2(4700, 2000), gameEntry.batch, graph, 9f),
+                new NPC(new Vector2(4800, 2300), gameEntry.batch, graph, 9f),
+                new NPC(new Vector2(5000, 7356), gameEntry.batch, graph, 9f),
+                new NPC(new Vector2(4732, 7000), gameEntry.batch, graph, 9f),
+                new NPC(new Vector2(4732, 7500), gameEntry.batch, graph, 9f),
+                new NPC(new Vector2(4732, 7800), gameEntry.batch, graph, 9f),
+                new NPC(new Vector2(4200, 7800), gameEntry.batch, graph, 9f),
+                new NPC(new Vector2(5400, 7800), gameEntry.batch, graph, 9f)
+        ));
+        ;
 
 
         shipStage.addActor(player);
@@ -113,15 +126,19 @@ public class PlayScreen implements Screen {
             shipStage.addActor(enemy);
         }
 
+        for (NPC npc: NPCs){
+            shipStage.addActor(npc);
+        }
+
 
     }
 
     protected void createAuber() {
         //A different version of Auber is used for the player depending on if it's a demo or not
         if (!demo){
-            player = new Auber(new Vector2(450 * scale, 778 * scale), gameEntry.batch);
+            player = new Auber(new Vector2(450 * scale, 778 * scale), gameEntry.batch, 9f);
         }else {
-            player = new DemoAuber(new Vector2(450 * scale, 778 * scale), gameEntry.batch,graph);
+            player = new DemoAuber(new Vector2(450 * scale, 778 * scale), gameEntry.batch,graph, 9f);
         }
     }
 
@@ -177,13 +194,13 @@ public class PlayScreen implements Screen {
             return;
         }
         //switch to teleport menu
-        if (player.teleportCheck(tiles) && gameEntry.onTeleport == "false") {
+        if (player.teleportCheck(tiles) && gameEntry.teleporting == "false") {
             gameEntry.setScreen(new TeleportMenu(gameEntry));
         }
         //teleport auber
-        if (gameEntry.onTeleport != "true" && gameEntry.onTeleport != "false") {
+        if (gameEntry.teleporting != "true" && gameEntry.teleporting != "false") {
             teleportAuber();
-            gameEntry.onTeleport = "false";
+            gameEntry.teleporting = "false";
         }
     }
 
@@ -212,8 +229,8 @@ public class PlayScreen implements Screen {
      * Sets auber's position to selected teleporter's position
      */
     public void teleportAuber() {
-        float x = tiles.getTeleporters().get(gameEntry.onTeleport).x + 100;
-        float y = tiles.getTeleporters().get(gameEntry.onTeleport).y;
+        float x = tiles.getTeleporters().get(gameEntry.teleporting).x + 100;
+        float y = tiles.getTeleporters().get(gameEntry.teleporting).y;
         player.setPosition(x, y);
         player.movementSystem.updatePos(new Vector2(x, y));
         if(demo){

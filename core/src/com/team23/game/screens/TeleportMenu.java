@@ -77,12 +77,12 @@ public class TeleportMenu implements Screen {
             Vector3 clickPos= new Vector3(x,y,0);
             gamecam.unproject(clickPos);
             //check which button pressed
-            if (brigRect.contains(clickPos.x,clickPos.y)){game.onTeleport="brig";}
-            if (commandRect.contains(clickPos.x,clickPos.y)){game.onTeleport="command";}
-            if (crewRect.contains(clickPos.x,clickPos.y)){game.onTeleport="crew";}
-            if (engineRect.contains(clickPos.x,clickPos.y)){game.onTeleport="engine";}
-            if (infirmaryRect.contains(clickPos.x,clickPos.y)){game.onTeleport="infirmary";}
-            if (laboratoryRect.contains(clickPos.x,clickPos.y)){game.onTeleport="laboratory";}
+            if (brigRect.contains(clickPos.x,clickPos.y)){game.teleporting ="brig";}
+            if (commandRect.contains(clickPos.x,clickPos.y)){game.teleporting ="command";}
+            if (crewRect.contains(clickPos.x,clickPos.y)){game.teleporting ="crew";}
+            if (engineRect.contains(clickPos.x,clickPos.y)){game.teleporting ="engine";}
+            if (infirmaryRect.contains(clickPos.x,clickPos.y)){game.teleporting ="infirmary";}
+            if (laboratoryRect.contains(clickPos.x,clickPos.y)){game.teleporting ="laboratory";}
     }
 
     @Override
