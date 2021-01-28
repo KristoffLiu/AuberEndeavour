@@ -8,80 +8,61 @@ import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.team23.game.GameEntry;
+import com.team23.game.ui.Padding;
 import com.team23.game.ui.UIElement;
 import com.team23.game.ui.UIPage;
-import com.team23.game.ui.controls.Button;
-import com.team23.game.ui.controls.ButtonClickListener;
-import com.team23.game.ui.controls.Image;
+import com.team23.game.ui.controls.*;
 
 public class LoadAndSavePage extends UIPage {
     public LoadAndSavePage() {
         super();
 
-        Image createNewGameTitle = new Image(this, new TextureRegion(new Texture("ui/CreateNewGamePage/CreateNewGame.png")));
-        createNewGameTitle.setPosition(0, 550);
+        Image loadAndSavePage = new Image(this, new TextureRegion(new Texture("ui/LoadAndSavePage/LoadAndSave.png")));
+        loadAndSavePage.setPosition(0, this.getHeight() - loadAndSavePage.getHeight() - 90);
 
-        Image selectYourDifficultyTitle = new Image(this, new TextureRegion(new Texture("ui/CreateNewGamePage/SelectYourDifficulty.png")));
-        selectYourDifficultyTitle.setPosition(0, 450);
+        ListView listView = new ListView(this);
+        listView.setBackground("ui/LoadAndSavePage/SaveListBackground.png");
+        listView.setRelativePosition(40,200, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.topAlignment);
+        listView.padding = new Padding(20f,20f,20f,10f);
+        listView.add(new SaveListViewItem());
+        listView.add(new SaveListViewItem());
+        listView.add(new SaveListViewItem());
 
-        Button difficultButton = new Button(this);
-        difficultButton.setTextures(
-                "ui/CreateNewGamePage/difficultNormal.png",
-                "ui/CreateNewGamePage/difficultHovered.png",
-                "ui/CreateNewGamePage/difficultPressed.png",
+        Button loadButton = new Button(this);
+        loadButton.setTextures(
+                "ui/LoadAndSavePage/loadNormal.png",
+                "ui/LoadAndSavePage/loadHovered.png",
+                "ui/LoadAndSavePage/loadPressed.png",
                 "");
-        difficultButton.setPosition(0,375);
-        difficultButton.setClickListener(new ButtonClickListener(){
+        loadButton.setRelativePosition(500,175, UIElement.HorizontalAlignment.rightAlignment, UIElement.VerticalAlignment.bottomAlignment);
+        loadButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.
              * @see ButtonClickListener */
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                GameEntry.current.createPlayScreen(false);
-                GameEntry.current.gameState=0;
+                getParentFrame().goBack();
             }
         });
 
-        Button normalButton = new Button(this);
-        normalButton.setTextures(
-                "ui/CreateNewGamePage/normalNormal.png",
-                "ui/CreateNewGamePage/normalHovered.png",
-                "ui/CreateNewGamePage/normalPressed.png",
+        Button deleteButton = new Button(this);
+        deleteButton.setTextures(
+                "ui/LoadAndSavePage/deleteNormal.png",
+                "ui/LoadAndSavePage/deleteHovered.png",
+                "ui/LoadAndSavePage/deletePressed.png",
                 "");
-        normalButton.setPosition(0,300);
-        normalButton.setClickListener(new ButtonClickListener(){
+        deleteButton.setRelativePosition(200,175, UIElement.HorizontalAlignment.rightAlignment, UIElement.VerticalAlignment.bottomAlignment);
+        deleteButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.
              * @see ButtonClickListener */
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                GameEntry.current.createPlayScreen(false);
-                GameEntry.current.gameState=0;
+                getParentFrame().goBack();
             }
         });
-
-        Button simpleButton = new Button(this);
-        simpleButton.setTextures(
-                "ui/CreateNewGamePage/simpleNormal.png",
-                "ui/CreateNewGamePage/simpleHovered.png",
-                "ui/CreateNewGamePage/simplePressed.png",
-                "");
-        simpleButton.setPosition(0,225);
-        simpleButton.setClickListener(new ButtonClickListener(){
-            /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
-             * button or touch. The touchUp event is always {@link Event#handle() handled}.
-             * @see ButtonClickListener */
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                GameEntry.current.createPlayScreen(false);
-                GameEntry.current.gameState=0;
-            }
-        });
-
-
 
         Button backButton = new Button(this);
         backButton.setTextures(
@@ -89,7 +70,7 @@ public class LoadAndSavePage extends UIPage {
                 "ui/CreateNewGamePage/backHovered.png",
                 "ui/CreateNewGamePage/backPressed.png",
                 "");
-        backButton.setPosition(0,100);
+        backButton.setPosition(0,50);
         backButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.
@@ -104,7 +85,7 @@ public class LoadAndSavePage extends UIPage {
     }
 
     /***
-     * hide
+     *
      */
     @Override
     public void hide(){

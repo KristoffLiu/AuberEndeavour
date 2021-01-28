@@ -3,63 +3,84 @@ package com.team23.game.ui.controls;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Null;
+import com.team23.game.ui.UIElement;
 
-public class SelectableUIElement {
-    public TextureRegion normalTexture         ;
-    public TextureRegion hoveredTexture        ;
-    public TextureRegion pressedTexture        ;
-    public TextureRegion notActivatedTexture   ;
-    boolean isEnabled;
+public class SelectableUIElement extends UIElement {
+    public Container container;
 
-    SelectableUIElement clickableUIElementClickListener;
-    SelectableUIElement.ButtonUIState buttonUIState = com.team23.game.ui.controls.Button.ButtonUIState.normal;
+    public TextureRegion unselectedTexture          ;
+    public TextureRegion selectedTexture            ;
+    public TextureRegion unselectedHoveredTexture   ;
+    public TextureRegion unselectedPressedTexture   ;
+    public TextureRegion selectedHoveredTexture     ;
+    public TextureRegion selectedPressedTexture     ;
+    public TextureRegion notActivatedTexture        ;
 
-    public ClickableUIElement(Object uiParent) {
-        super(uiParent);
-        isEnabled = true;
+//    unselected,
+//    selected,
+//    unselectedHovered,
+//    unselectedPressed,
+//    selectedHovered,
+//    selectedPressed,
+//    notActivated
 
-        clickableUIElementClickListener = new ClickableUIElementClickListener();
-        this.addListener(clickableUIElementClickListener);
+    SelectableUIElementClickListener selectableUIElementClickListener;
+    SelectableUIState uiState = SelectableUIState.unselected;
+    SelectableState selectableState = SelectableState.unselected;
+
+    public SelectableUIElement() {
+        super();
+        uiState = SelectableUIState.unselected;
+        selectableUIElementClickListener = new SelectableUIElementClickListener();
+        this.addListener(selectableUIElementClickListener);
     }
 
-    public ClickableUIElement(Object uiParent,
-                              TextureRegion normalTexture, TextureRegion hoveredTexture,
-                              TextureRegion pressedTexture, TextureRegion notActivatedTexture) {
-        super(uiParent, normalTexture);
-
-        this.normalTexture = normalTexture;
-        this.hoveredTexture = hoveredTexture;
-        this.pressedTexture = pressedTexture;
-        this.notActivatedTexture = notActivatedTexture;
-        isEnabled = true;
-
-        clickableUIElementClickListener = new ClickableUIElementClickListener();
-        this.addListener(clickableUIElementClickListener);
+    public SelectableUIElement(Object uiParent) {
+        super(uiParent);
+        selectableUIElementClickListener = new SelectableUIElementClickListener();
+        this.addListener(selectableUIElementClickListener);
     }
 
     /**
      * set the texture of the button
      *
-     * @param normalTexturePath
-     * @param hoveredTexturePath
-     * @param pressedTexturePath
+     * @param unselectedTexturePath
+     * @param selectedTexturePath
+     * @param unselectedHoveredTexturePath
+     * @param unselectedHoveredTexturePath
+     * @param selectedHoveredTexturePath
+     * @param selectedPressedTexturePath
      * @param notActivatedTexturePath
      */
-    public void setTextures(String normalTexturePath, String hoveredTexturePath,
-                            String pressedTexturePath, @Null String notActivatedTexturePath){
-        this.normalTexture       = !normalTexturePath.isEmpty() ? new TextureRegion(new Texture(normalTexturePath)) : null;
-        this.hoveredTexture      = !hoveredTexturePath.isEmpty() ? new TextureRegion(new Texture(hoveredTexturePath)) : null;
-        this.pressedTexture      = !pressedTexturePath.isEmpty() ? new TextureRegion(new Texture(pressedTexturePath)) : null;
-        this.notActivatedTexture = !notActivatedTexturePath.isEmpty() ? new TextureRegion(new Texture(notActivatedTexturePath)) : null;
-        switch (this.buttonUIState){
-            case normal:
-                this.setTextureRegion(normalTexture);
+    public void setTextures(String unselectedTexturePath, String selectedTexturePath,
+                            String unselectedHoveredTexturePath, String unselectedPressedTexturePath,
+                            String selectedHoveredTexturePath, String selectedPressedTexturePath,
+                            @Null String notActivatedTexturePath){
+        this.unselectedTexture          = !unselectedTexturePath.isEmpty() ? new TextureRegion(new Texture(unselectedTexturePath)) : null;
+        this.selectedTexture            = !selectedTexturePath.isEmpty() ? new TextureRegion(new Texture(selectedTexturePath)) : null;
+        this.unselectedHoveredTexture   = !unselectedHoveredTexturePath.isEmpty() ? new TextureRegion(new Texture(unselectedHoveredTexturePath)) : null;
+        this.unselectedPressedTexture   = !unselectedPressedTexturePath.isEmpty() ? new TextureRegion(new Texture(unselectedPressedTexturePath)) : null;
+        this.selectedHoveredTexture     = !selectedHoveredTexturePath.isEmpty() ? new TextureRegion(new Texture(selectedHoveredTexturePath)) : null;
+        this.selectedPressedTexture     = !selectedPressedTexturePath.isEmpty() ? new TextureRegion(new Texture(selectedPressedTexturePath)) : null;
+        this.notActivatedTexture        = !notActivatedTexturePath.isEmpty() ? new TextureRegion(new Texture(notActivatedTexturePath)) : null;
+        switch (this.uiState){
+            case unselected:
+                this.setTextureRegion(unselectedTexture);
                 break;
-            case hovered:
-                this.setTextureRegion(hoveredTexture);
+            case selected:
+                this.setTextureRegion(selectedTexture);
                 break;
-            case pressed:
-                this.setTextureRegion(pressedTexture);
+            case unselectedHovered:
+                this.setTextureRegion(unselectedHoveredTexture);
+                break;
+            case unselectedPressed:
+                this.setTextureRegion(unselectedPressedTexture);
+                break;
+            case selectedHovered:
+                this.setTextureRegion(selectedHoveredTexture);
+                break;
+            case selectedPressed:
+                this.setTextureRegion(selectedPressedTexture);
                 break;
             case notActivated:
                 this.setTextureRegion(notActivatedTexture);
@@ -67,50 +88,80 @@ public class SelectableUIElement {
         }
     }
 
-    public void setClickListener(ClickableUIElementClickListener clickListener){
-        this.removeListener(clickableUIElementClickListener);
-        clickableUIElementClickListener = clickListener;
-        this.addListener(clickableUIElementClickListener);
+    public void setClickListener(SelectableUIElementClickListener clickListener){
+        this.removeListener(selectableUIElementClickListener);
+        selectableUIElementClickListener = clickListener;
+        this.addListener(selectableUIElementClickListener);
     }
 
-    public void isEnabled(boolean isEnabled){
-        this.isEnabled = isEnabled;
-        if(isEnabled){
-            setButtonUIState(ClickableUIElement.ButtonUIState.normal);
-        }
-        else {
-            setButtonUIState(ClickableUIElement.ButtonUIState.notActivated);
-        }
-    }
+//    public void isEnabled(boolean isEnabled){
+//        this.isEnabled = isEnabled;
+//        if(isEnabled){
+//            setButtonUIState(uiState.normal);
+//        }
+//        else {
+//            setButtonUIState(ClickableUIElement.ButtonUIState.notActivated);
+//        }
+//    }
 
     //Switches the texture of the button to be highlighted or not highlighted
-    public void setButtonUIState(com.team23.game.ui.controls.Button.ButtonUIState buttonUIStateInput){
-        if(buttonUIStateInput != this.buttonUIState){
+    public void setUIState(SelectableUIState selectableUIState){
+        if(selectableUIState != this.uiState){
             float previousWidth  = this.getWidth();
             float previousHeight = this.getHeight();
-            switch (buttonUIStateInput){
-                case normal:
-                    this.setTextureRegion(normalTexture);
+            switch (selectableUIState){
+                case unselected:
+                    this.setTextureRegion(unselectedTexture);
                     break;
-                case hovered:
-                    this.setTextureRegion(hoveredTexture);
+                case selected:
+                    this.setTextureRegion(selectedTexture);
                     break;
-                case pressed:
-                    this.setTextureRegion(pressedTexture);
+                case unselectedHovered:
+                    this.setTextureRegion(unselectedHoveredTexture);
+                    break;
+                case unselectedPressed:
+                    this.setTextureRegion(unselectedPressedTexture);
+                    break;
+                case selectedHovered:
+                    this.setTextureRegion(selectedHoveredTexture);
+                    break;
+                case selectedPressed:
+                    this.setTextureRegion(selectedPressedTexture);
                     break;
                 case notActivated:
                     this.setTextureRegion(notActivatedTexture);
                     break;
             }
-            this.buttonUIState = buttonUIStateInput;
+            this.uiState = selectableUIState;
             this.setWidth(previousWidth);
             this.setHeight(previousHeight);
         }
     }
 
-    public enum SelectableUIElementState{
+    public void setState(SelectableState selectableState){
+        if(selectableState != this.selectableState){
+            switch (selectableState){
+                case unselected:
+                    this.setTextureRegion(unselectedTexture);
+                    break;
+                case selected:
+                    this.setTextureRegion(selectedTexture);
+                    break;
+                case notActivated:
+                    this.setTextureRegion(notActivatedTexture);
+                    break;
+            }
+            this.selectableState = selectableState;
+        }
+    }
+
+    public void select(){
+
+    }
+
+    public enum SelectableUIState {
         unselected,
-        selected
+        selected,
         unselectedHovered,
         unselectedPressed,
         selectedHovered,
@@ -118,7 +169,7 @@ public class SelectableUIElement {
         notActivated
     }
 
-    public enum SelectionState{
+    public enum SelectableState {
         unselected, selected, notActivated
     }
 }

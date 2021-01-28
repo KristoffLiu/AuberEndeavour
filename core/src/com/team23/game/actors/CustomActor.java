@@ -93,6 +93,4 @@ public class CustomActor extends Actor {
                 getRotation()
         );
     }
-
-
 }

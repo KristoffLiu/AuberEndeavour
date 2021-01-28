@@ -6,7 +6,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.team23.game.GameEntry;
-import com.team23.game.ui.layouts.UIGroup;
 
 /***
  * the stage showing the user interfaces only.
@@ -31,14 +30,6 @@ public class UIPage extends Stage implements IUIStage{
     public void addUIElement(Actor uiElement) {
         super.addActor(uiElement);
         this.uiElements.add(uiElement);
-    }
-
-    /***
-     * add UI group
-     * @param uiGroup the ui group which will be the child
-     */
-    public void addUIGroup(UIGroup uiGroup) {
-        super.addActor(uiGroup);
     }
 
     /***

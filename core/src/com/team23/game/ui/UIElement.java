@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.*;
 import com.badlogic.gdx.utils.Null;
 import com.team23.game.actors.CustomActor;
-import com.team23.game.ui.layouts.UIGroup;
 
 /***
  * the actor showing the user-interface elements only.
@@ -19,6 +18,13 @@ public class UIElement extends CustomActor implements IUIElement{
 
     /***
      * add UI element
+     */
+    public UIElement() {
+        super();
+    }
+
+    /***
+     * add UI element
      * @param parent the actor which will be the child
      */
     public UIElement(Object parent) {
@@ -26,10 +32,6 @@ public class UIElement extends CustomActor implements IUIElement{
         setUIParent(parent);
         if(parent instanceof UIPage){
             UIPage _parent = (UIPage) parent;
-            _parent.addUIElement(this);
-        }
-        else if(parent instanceof UIGroup){
-            UIGroup _parent = (UIGroup) parent;
             _parent.addUIElement(this);
         }
     }
@@ -52,10 +54,6 @@ public class UIElement extends CustomActor implements IUIElement{
         setUIParent(parent);
         if(parent instanceof UIPage){
             UIPage _parent = (UIPage) parent;
-            _parent.addUIElement(this);
-        }
-        else if(parent instanceof UIGroup){
-            UIGroup _parent = (UIGroup) parent;
             _parent.addUIElement(this);
         }
     }
@@ -117,22 +115,6 @@ public class UIElement extends CustomActor implements IUIElement{
                         break;
                 }
             }
-            else if(uiParent instanceof UIGroup){
-                UIGroup _parent = (UIGroup) uiParent;
-                switch (this.horizontalAlignment){
-                    case leftAlignment:
-                        this.setX(offset + relativeX);
-                        break;
-                    case centreAlignment:
-                        offset = _parent.getWidth() / 2 - this.getWidth() / 2;
-                        this.setX(offset + relativeX);
-                        break;
-                    case rightAlignment:
-                        offset = _parent.getWidth() - this.getWidth();
-                        this.setX(offset - relativeX);
-                        break;
-                }
-            }
         }
         else{
             setX(relativeX);
@@ -149,22 +131,6 @@ public class UIElement extends CustomActor implements IUIElement{
             float offset = 0f;
             if(uiParent instanceof UIPage){
                 UIPage _parent = (UIPage) uiParent;
-                switch (this.verticalAlignment) {
-                    case topAlignment:
-                        offset = _parent.getHeight() - this.getHeight();
-                        this.setY(offset - relativeY);
-                        break;
-                    case centreAlignment:
-                        offset = _parent.getHeight() / 2 - this.getHeight() / 2;
-                        this.setY(offset + relativeY);
-                        break;
-                    case bottomAlignment:
-                        this.setY(offset + relativeY);
-                        break;
-                }
-            }
-            else if(uiParent instanceof UIGroup){
-                UIGroup _parent = (UIGroup) uiParent;
                 switch (this.verticalAlignment) {
                     case topAlignment:
                         offset = _parent.getHeight() - this.getHeight();
