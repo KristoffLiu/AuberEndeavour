@@ -8,9 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  */
 public class SelectableUIElementClickListener extends ClickListener {
 
-    boolean isStillOverAfterClicked = false;
-    boolean isStillPressed = false;
-
 
     /** Called any time the mouse cursor or a finger touch is moved over an actor. On the desktop, this event occurs even when no
      * mouse buttons are pressed (pointer will be -1).
@@ -30,7 +27,6 @@ public class SelectableUIElementClickListener extends ClickListener {
             case notActivated:
                 selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.notActivated);
         }
-        isStillOverAfterClicked = false;
     }
 
     /** Called any time the mouse cursor or a finger touch is moved out of an actor. On the desktop, this event occurs even when no
@@ -40,7 +36,7 @@ public class SelectableUIElementClickListener extends ClickListener {
     @Override
     public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
         super.exit(event, x, y, pointer, toActor);
-        if(isStillOverAfterClicked){
+        if(isOver() && isPressed()){
             enter(event, x, y, pointer, toActor);
         }else {
             SelectableUIElement selectableUIElement = (SelectableUIElement) event.getListenerActor();
