@@ -20,6 +20,7 @@ public class ClickableUIElement extends UIElement {
     ClickableUIElementClickListener clickableUIElementClickListener;
     ButtonUIState buttonUIState = com.team23.game.ui.controls.Button.ButtonUIState.normal;
 
+
     public ClickableUIElement(Object uiParent) {
         super(uiParent);
         isEnabled = true;

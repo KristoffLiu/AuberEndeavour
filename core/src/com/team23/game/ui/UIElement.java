@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.*;
 import com.badlogic.gdx.utils.Null;
 import com.team23.game.actors.CustomActor;
-import com.team23.game.ui.layouts.UIGroup;
 
 /***
  * the actor showing the user-interface elements only.
@@ -19,17 +18,20 @@ public class UIElement extends CustomActor implements IUIElement{
 
     /***
      * add UI element
+     */
+    public UIElement() {
+        super();
+    }
+
+    /***
+     * add UI element
      * @param parent the actor which will be the child
      */
     public UIElement(Object parent) {
         super();
         setUIParent(parent);
-        if(parent instanceof UIStage){
-            UIStage _parent = (UIStage) parent;
-            _parent.addUIElement(this);
-        }
-        else if(parent instanceof UIGroup){
-            UIGroup _parent = (UIGroup) parent;
+        if(parent instanceof UIPage){
+            UIPage _parent = (UIPage) parent;
             _parent.addUIElement(this);
         }
     }
@@ -50,12 +52,8 @@ public class UIElement extends CustomActor implements IUIElement{
     public UIElement(Object parent, TextureRegion textureRegion) {
         super(textureRegion);
         setUIParent(parent);
-        if(parent instanceof UIStage){
-            UIStage _parent = (UIStage) parent;
-            _parent.addUIElement(this);
-        }
-        else if(parent instanceof UIGroup){
-            UIGroup _parent = (UIGroup) parent;
+        if(parent instanceof UIPage){
+            UIPage _parent = (UIPage) parent;
             _parent.addUIElement(this);
         }
     }
@@ -101,24 +99,8 @@ public class UIElement extends CustomActor implements IUIElement{
     public void setRelativeX(float relativeX){
         if(uiParent != null){
             float offset = 0f;
-            if(uiParent instanceof UIStage){
-                UIStage _parent = (UIStage) uiParent;
-                switch (this.horizontalAlignment){
-                    case leftAlignment:
-                        this.setX(offset + relativeX);
-                        break;
-                    case centreAlignment:
-                        offset = _parent.getWidth() / 2 - this.getWidth() / 2;
-                        this.setX(offset + relativeX);
-                        break;
-                    case rightAlignment:
-                        offset = _parent.getWidth() - this.getWidth();
-                        this.setX(offset - relativeX);
-                        break;
-                }
-            }
-            else if(uiParent instanceof UIGroup){
-                UIGroup _parent = (UIGroup) uiParent;
+            if(uiParent instanceof UIPage){
+                UIPage _parent = (UIPage) uiParent;
                 switch (this.horizontalAlignment){
                     case leftAlignment:
                         this.setX(offset + relativeX);
@@ -147,24 +129,8 @@ public class UIElement extends CustomActor implements IUIElement{
     public void setRelativeY(float relativeY){
         if(uiParent != null){
             float offset = 0f;
-            if(uiParent instanceof UIStage){
-                UIStage _parent = (UIStage) uiParent;
-                switch (this.verticalAlignment) {
-                    case topAlignment:
-                        offset = _parent.getHeight() - this.getHeight();
-                        this.setY(offset - relativeY);
-                        break;
-                    case centreAlignment:
-                        offset = _parent.getHeight() / 2 - this.getHeight() / 2;
-                        this.setY(offset + relativeY);
-                        break;
-                    case bottomAlignment:
-                        this.setY(offset + relativeY);
-                        break;
-                }
-            }
-            else if(uiParent instanceof UIGroup){
-                UIGroup _parent = (UIGroup) uiParent;
+            if(uiParent instanceof UIPage){
+                UIPage _parent = (UIPage) uiParent;
                 switch (this.verticalAlignment) {
                     case topAlignment:
                         offset = _parent.getHeight() - this.getHeight();
@@ -270,8 +236,6 @@ public class UIElement extends CustomActor implements IUIElement{
 
     /***
      * hide this ui element immediately
-     * @param x set the x coordination for animation
-     * @param y set the x coordination for animation
      */
     public void hide(){
         AlphaAction uiElementAlphaAction = Actions.alpha(0f,0f);
@@ -339,7 +303,14 @@ public class UIElement extends CustomActor implements IUIElement{
      * fade out this ui element in a duration of time
      */
     public void fadeOut(float offset_x, float offset_y, float duration, @Null Interpolation interpolation){
-        fadeOut(animationOrigin_X, animationOrigin_Y, offset_x, offset_y, duration, interpolation);
+        if(this.isVisible()){
+            AlphaAction uiElementAlphaAction = Actions.alpha(0f, duration, interpolation);
+            MoveByAction uiElementMoveByAction = Actions.moveBy(offset_x, offset_y, duration, interpolation);
+            MoveByAction endingMoveByAction = Actions.moveBy(-offset_x,-offset_y,0f);
+            ParallelAction parallelAction = Actions.parallel(uiElementAlphaAction, uiElementMoveByAction);
+            SequenceAction sequenceAction = Actions.sequence(parallelAction,endingMoveByAction);
+            this.addAction(sequenceAction);
+        }
     }
 
     /***
@@ -382,7 +353,16 @@ public class UIElement extends CustomActor implements IUIElement{
      * fade in this ui element in a duration of time
      */
     public void fadeIn(float offset_x, float offset_y, float duration, @Null Interpolation interpolation){
-        fadeIn(animationOrigin_X, animationOrigin_Y, offset_x, offset_y, duration, interpolation);
+        if(this.isVisible()){
+            VisibleAction uiElementVisibleAction = Actions.visible(true);
+            MoveByAction beginningMoveToAction = Actions.moveBy(-offset_x, -offset_y,0f);
+            AlphaAction beginningAlphaAction = Actions.alpha(0f, 0);
+            AlphaAction uiElementAlphaAction = Actions.alpha(1f, duration, interpolation);
+            MoveByAction uiElementMoveByAction = Actions.moveBy(offset_x, offset_y, duration, interpolation);
+            ParallelAction parallelAction = Actions.parallel(uiElementAlphaAction, uiElementMoveByAction);
+            SequenceAction sequenceAction = Actions.sequence(uiElementVisibleAction,beginningMoveToAction,beginningAlphaAction,parallelAction);
+            this.addAction(sequenceAction);
+        }
     }
 
     /***
@@ -390,11 +370,13 @@ public class UIElement extends CustomActor implements IUIElement{
      */
     public void fadeIn(float x, float y, float offset_x, float offset_y, float duration, @Null Interpolation interpolation){
         if(this.isVisible()){
+            VisibleAction uiElementVisibleAction = Actions.visible(true);
             MoveToAction uiElementMoveToAction = Actions.moveTo(x - offset_x,y - offset_y,0f);
+            AlphaAction beginningAlphaAction = Actions.alpha(0f, 0);
             AlphaAction uiElementAlphaAction = Actions.alpha(1f, duration, interpolation);
             MoveByAction uiElementMoveByAction = Actions.moveBy(offset_x, offset_y, duration, interpolation);
             ParallelAction parallelAction = Actions.parallel(uiElementAlphaAction, uiElementMoveByAction);
-            SequenceAction sequenceAction = Actions.sequence(uiElementMoveToAction,parallelAction);
+            SequenceAction sequenceAction = Actions.sequence(uiElementVisibleAction,uiElementMoveToAction,beginningAlphaAction,parallelAction);
             this.addAction(sequenceAction);
         }
     }

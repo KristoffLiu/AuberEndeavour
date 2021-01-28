@@ -1,8 +1,7 @@
 package com.team23.game.ui.controls;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.team23.game.ui.UIStage;
+import com.team23.game.ui.UIPage;
 
 /**
  * A button class which extends from ClickableUIElement class
@@ -13,21 +12,21 @@ public class Button extends ClickableUIElement implements IButton{
      * Constructor of a Button
      * in this case, the texture parameter will be normalTexture, hoveringTexture, pressedTexture at the same time.
      *
-     * @param parentUIStage
+     * @param parentUIPage
      */
-    public Button(UIStage parentUIStage) {
-        super(parentUIStage);
+    public Button(UIPage parentUIPage) {
+        super(parentUIPage);
     }
 
     /**
      * Constructor of a Button
      * in this case, the texture parameter will be normalTexture, hoveringTexture, pressedTexture at the same time.
      *
-     * @param parentUIStage
+     * @param parentUIPage
      * @param texture
      */
-    public Button(UIStage parentUIStage, TextureRegion texture) {
-        super(parentUIStage, texture, texture, texture, texture);
+    public Button(UIPage parentUIPage, TextureRegion texture) {
+        super(parentUIPage, texture, texture, texture, texture);
     }
 
     /**
