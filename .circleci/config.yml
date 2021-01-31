@@ -40,6 +40,7 @@ jobs: # a collection of steps
             # Format the arguments to "./gradlew test"
             GRADLE_ARGS=$(echo $CLASSNAMES | awk '{for (i=1; i<=NF; i++) print "--tests",$i}')
             echo "Prepared arguments for Gradle: $GRADLE_ARGS"
+            sudo chmod +x gradlew
             ./gradlew test $GRADLE_ARGS
       - save_cache:
           paths:
