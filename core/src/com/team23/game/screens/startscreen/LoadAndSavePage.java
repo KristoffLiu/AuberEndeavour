@@ -6,27 +6,33 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.team23.game.GameEntry;
 import com.team23.game.ui.Padding;
 import com.team23.game.ui.UIElement;
 import com.team23.game.ui.UIPage;
 import com.team23.game.ui.controls.*;
+import com.team23.game.ui.controls.labels.LabelStyles;
 
 public class LoadAndSavePage extends UIPage {
+    Label saveTitle;
+
     public LoadAndSavePage() {
         super();
 
-        Image loadAndSavePage = new Image(this, new TextureRegion(new Texture("ui/LoadAndSavePage/LoadAndSave.png")));
-        loadAndSavePage.setPosition(0, this.getHeight() - loadAndSavePage.getHeight() - 90);
-
         ListView listView = new ListView(this);
         listView.setBackground("ui/LoadAndSavePage/SaveListBackground.png");
-        listView.setRelativePosition(40,200, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.topAlignment);
-        listView.padding = new Padding(20f,20f,20f,10f);
+        listView.setRelativePosition(20,50, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.topAlignment);
+        listView.padding = new Padding(20f,20f,150f,10f);
+
         listView.add(new SaveListViewItem());
         listView.add(new SaveListViewItem());
         listView.add(new SaveListViewItem());
+        listView.add(new SaveListViewItem());
+
+        Image loadAndSavePage = new Image(this, new TextureRegion(new Texture("ui/LoadAndSavePage/LoadAndSave.png")));
+        loadAndSavePage.setPosition(0, this.getHeight() - loadAndSavePage.getHeight() - 90);
 
         Button loadButton = new Button(this);
         loadButton.setTextures(
@@ -81,6 +87,9 @@ public class LoadAndSavePage extends UIPage {
                 getParentFrame().goBack();
             }
         });
+
+        saveTitle = new Label("Auber Game", LabelStyles.getGameTitleLabelStyle());
+        saveTitle.setPosition(this.getWidth()/2-this.getWidth()/2,800);
         this.hide();
     }
 

@@ -10,9 +10,9 @@ public class SaveListViewItem extends ListViewItem {
                 "ui/LoadAndSavePage/SaveListItemSelected.png",
                 "ui/LoadAndSavePage/SaveListItemUnselectedHovered.png",
                 "ui/LoadAndSavePage/SaveListItemUnselectedPressed.png",
-                "ui/LoadAndSavePage/SaveListItemUnselected.png",
-                "ui/LoadAndSavePage/SaveListItemUnselected.png",
-                "ui/LoadAndSavePage/SaveListItemUnselected.png");
+                "ui/LoadAndSavePage/SaveListItemSelectedHovered.png",
+                "ui/LoadAndSavePage/SaveListItemSelectedPressed.png",
+                "");
 
 
     }

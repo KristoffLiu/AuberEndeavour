@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class SaveManager {
     public static SaveManager current;
-    public Model model;
+    public JsonModel model;
     private String filePath;
 
     public SaveManager(String filePath){
@@ -16,11 +16,14 @@ public class SaveManager {
         loadFromFile();
     }
 
-    public class Model {
-        public ArrayList<Save> saves;
-    }
-
     public void add(Save newSave){
+        int maxId = 0;
+        for(Save save : model.saves){
+            if(save.id > maxId){
+                maxId = save.id;
+            }
+        }
+        newSave.id = maxId + 1;
         this.model.saves.add(newSave);
     }
 
@@ -34,15 +37,18 @@ public class SaveManager {
 
     public void loadFromFile(){
         Json json = new Json();
-        FileHandle file = Gdx.files.internal(filePath);
+        FileHandle file = Gdx.files.local(filePath);
         String jsonStr = file.readString();
-        model = json.fromJson(Model.class, jsonStr);
+        model = json.fromJson(JsonModel.class, jsonStr);
+        if(model == null){
+            model = new JsonModel();
+        }
     }
 
     public void saveToFile(){
         Json json = new Json();
-        String jsonStr = json.toJson(model);
-        FileHandle file = Gdx.files.internal(filePath);
+        String jsonStr = json.prettyPrint(model);
+        FileHandle file = Gdx.files.local(filePath);
         file.writeString(jsonStr,false);
     }
 }
