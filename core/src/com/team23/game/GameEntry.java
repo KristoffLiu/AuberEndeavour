@@ -3,6 +3,10 @@ package com.team23.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.team23.game.save.Player;
+import com.team23.game.save.Position;
+import com.team23.game.save.Save;
+import com.team23.game.save.SaveManager;
 import com.team23.game.screens.GameOverScreen;
 import com.team23.game.screens.startscreen.StartScreen;
 import com.team23.game.screens.PlayScreen;
@@ -16,6 +20,7 @@ import com.team23.game.screens.PlayScreen;
 public class GameEntry extends Game {
 	public static GameEntry current;
 	public SpriteBatch batch;
+	public static SaveManager saveManager;
 	public static final int VIEW_WIDTH = 1920;
 	public static final int VIEW_HEIGHT = 1080;
 	public static final int ZOOM = 12;
@@ -33,11 +38,23 @@ public class GameEntry extends Game {
 	public void create () {
 		current = this;
 		batch = new SpriteBatch();
+		saveManager = new SaveManager("Save/save.json");
 		introScreen = new StartScreen(this);
 		gameOverScreen = new GameOverScreen(this);
 		setScreen(introScreen);
 		onTeleport = "false";
 		gameState = -1;
+		testAddSave();
+	}
+
+	public void testAddSave(){
+		saveManager.loadFromFile();
+		Save demo = new Save("New Save");
+		Player player = new Player();
+		player.position = new Position(50,200);
+		demo.player = player;
+		saveManager.add(demo);
+		saveManager.saveToFile();
 	}
 
 	/**

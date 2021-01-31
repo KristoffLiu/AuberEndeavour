@@ -12,20 +12,16 @@ public class Save {
     public int id;
     public String name;
     public String dateTime;
+    public Player player;
 
-    public Save(int id, String name){
-        this.id = id;
+    public Save(String name){
         this.name = name;
         Date date = new Date();
         System.out.println(date.toString());
         this.dateTime = date.toString();
     }
 
-    public Save(int id, String name, String date){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        this.id = id;
-        this.name = name;
-        this.dateTime = date;
+    public Save(){
     }
 
 }

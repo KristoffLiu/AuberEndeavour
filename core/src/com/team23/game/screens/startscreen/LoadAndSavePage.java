@@ -90,7 +90,6 @@ public class LoadAndSavePage extends UIPage {
 
         saveTitle = new Label("Auber Game", LabelStyles.getGameTitleLabelStyle());
         saveTitle.setPosition(this.getWidth()/2-this.getWidth()/2,800);
-        this.addActor(saveTitle);
         this.hide();
     }
 
