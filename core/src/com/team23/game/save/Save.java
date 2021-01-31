@@ -4,6 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/***
+ * Save Class
+ * Save data including: Player position, NPC position, Sabotaged systems, Abilities on NPC and on player
+ */
 public class Save {
     public int id;
     public String name;
@@ -23,6 +27,7 @@ public class Save {
         this.name = name;
         this.dateTime = date;
     }
+
 }
 
 
