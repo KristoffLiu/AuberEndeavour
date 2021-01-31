@@ -24,7 +24,7 @@ public class GameEntry extends Game {
 	public static final int VIEW_WIDTH = 1920;
 	public static final int VIEW_HEIGHT = 1080;
 	public static final int ZOOM = 12;
-	public String onTeleport;
+	public String teleporting;
 	public Screen screen;
 	public boolean demo;
 	//game state -1= intro screen 0=exit startscreen 1=playing 2=win 3=lost
@@ -42,7 +42,7 @@ public class GameEntry extends Game {
 		introScreen = new StartScreen(this);
 		gameOverScreen = new GameOverScreen(this);
 		setScreen(introScreen);
-		onTeleport = "false";
+		teleporting = "false";
 		gameState = -1;
 		testAddSave();
 	}
@@ -79,7 +79,7 @@ public class GameEntry extends Game {
 			setScreen(gameOverScreen);
 		}
 
-		if (onTeleport!="true" && onTeleport!="false"){
+		if (teleporting !="true" && teleporting !="false"){
 			//exit teleport screen
 			setScreen(screen);
 		}

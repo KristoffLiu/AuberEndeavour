@@ -13,19 +13,19 @@ import java.util.List;
 
 public abstract class Character extends Actor {
 
-    //Constants
-    private final float MOV_SPEED = 8;
+    private float movSpeed;
 
     public Sprite sprite;
     public MovementSystem movementSystem;
     protected Batch batch;
 
-    public Character(Vector2 position,SpriteBatch batch){
+    public Character(Vector2 position,SpriteBatch batch, float movSpeed){
         this.batch = batch;
         sprite = new Sprite(getTexture());
         sprite.setSize(150, 170);
-        movementSystem = new MovementSystem(position, MOV_SPEED);
+        movementSystem = new MovementSystem(position, movSpeed);
         setBounds(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
+        this.movSpeed = movSpeed;
     }
 
     protected abstract Texture getTexture();

@@ -10,10 +10,11 @@ import com.team23.game.stages.Hud;
 import java.util.ArrayList;
 
 public class DemoAuber extends Auber{
+    private float movSpeed;
     private DemoAI ai;
 
-    public DemoAuber(Vector2 position, SpriteBatch batch, PathGraph graph) {
-        super(position, batch);
+    public DemoAuber(Vector2 position, SpriteBatch batch, PathGraph graph,float movSpeed) {
+        super(position, batch, movSpeed);
         ai = new DemoAI(graph);
     }
 

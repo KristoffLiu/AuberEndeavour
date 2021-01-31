@@ -41,6 +41,7 @@ jobs: # a collection of steps
             GRADLE_ARGS=$(echo $CLASSNAMES | awk '{for (i=1; i<=NF; i++) print "--tests",$i}')
             echo "Prepared arguments for Gradle: $GRADLE_ARGS"
             sudo chmod +x gradlew
+            
             ./gradlew test $GRADLE_ARGS
       - save_cache:
           paths:
@@ -52,6 +53,8 @@ jobs: # a collection of steps
           key: v1-gradle-cache-{{ checksum "build.gradle" }}
       - store_test_results:
           # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+
+      # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: build/test-results/test
       - store_artifacts: # Upload test results for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: build/test-results/test
@@ -71,4 +74,5 @@ workflows:
   version: 2
   workflow:
     jobs:
+    
       - build
