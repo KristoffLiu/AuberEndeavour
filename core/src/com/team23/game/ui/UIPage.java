@@ -27,9 +27,10 @@ public class UIPage extends Stage implements IUIStage{
      * @param uiElement the actor which will be the child
      */
     @Override
-    public void addUIElement(Actor uiElement) {
+    public void addUIElement(UIElement uiElement) {
         super.addActor(uiElement);
         this.uiElements.add(uiElement);
+        uiElement.setRootPage(this);
     }
 
     /***

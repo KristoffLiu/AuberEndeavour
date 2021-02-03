@@ -11,6 +11,9 @@ import com.team23.game.systems.MovementSystem;
 
 import java.util.List;
 
+/***
+ * Character class
+ */
 public abstract class Character extends Actor {
 
     private float movSpeed;

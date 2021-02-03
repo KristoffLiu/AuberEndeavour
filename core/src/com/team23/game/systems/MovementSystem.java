@@ -11,7 +11,7 @@ public class MovementSystem {
     Collider collider;
     float movementSpeed;
     private int direction;
-    private  boolean collided;
+    private boolean collided;
     //direction 1=left 2=right 3=up 4=down 5=upRight, 6=downRight, 7=downLeft, 8= upLeft
 
     /***

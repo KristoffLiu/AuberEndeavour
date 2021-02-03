@@ -3,6 +3,8 @@ package com.team23.game.save;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonValue;
+
 import java.util.ArrayList;
 
 public class SaveManager {
@@ -27,6 +29,10 @@ public class SaveManager {
         this.model.saves.add(newSave);
     }
 
+    public void saveCurrentGame(){
+        //this.load
+    }
+
     public void delete(int index){
         this.model.saves.remove(index);
     }
@@ -47,8 +53,13 @@ public class SaveManager {
 
     public void saveToFile(){
         Json json = new Json();
+        //JsonValue.PrettyPrintSettings settings = new JsonValue.PrettyPrintSettings();
         String jsonStr = json.prettyPrint(model);
         FileHandle file = Gdx.files.local(filePath);
         file.writeString(jsonStr,false);
+    }
+
+    public ArrayList<Save> getSaves(){
+        return model.saves;
     }
 }

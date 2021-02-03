@@ -18,11 +18,11 @@ public class StartPage extends UIPage {
 
     public StartPage() {
         super();
-        Image headLine = new Image(this, new TextureRegion(new Texture("font/Headline.png")));
+        Image headLine = new Image(new TextureRegion(new Texture("font/Headline.png")));
         headLine.setScale(0.7f);
-        headLine.setPosition(this.getWidth() - headLine.getWidth() + 550, this.getHeight() - headLine.getHeight() / 2 - 130);
+        headLine.setRelativePosition(50, 50, UIElement.HorizontalAlignment.rightAlignment, UIElement.VerticalAlignment.topAlignment);
 
-        Button playButton = new Button(this);
+        Button playButton = new Button();
         playButton.setTextures(
                 "ui/StartPage/playNormal.png",
                 "ui/StartPage/playHovered.png",
@@ -30,7 +30,7 @@ public class StartPage extends UIPage {
                 "");
         playButton.setWidth(playButton.getWidth()/2f);
         playButton.setHeight(playButton.getHeight()/2f);
-        playButton.setPosition(0,325);
+        playButton.setRelativePosition(0,325, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.bottomAlignment);
         playButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.
@@ -44,13 +44,13 @@ public class StartPage extends UIPage {
             }
         });
 
-        Button loadButton = new Button(this);
+        Button loadButton = new Button();
         loadButton.setTextures(
                 "ui/StartPage/loadNormal.png",
                 "ui/StartPage/loadHovered.png",
                 "ui/StartPage/loadPressed.png",
                 "");
-        loadButton.setPosition(0,250);
+        loadButton.setRelativePosition(0,250, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.bottomAlignment);
         loadButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.
@@ -61,13 +61,13 @@ public class StartPage extends UIPage {
             }
         });
 
-        Button demoButton = new Button(this);
+        Button demoButton = new Button();
         demoButton.setTextures(
                 "ui/StartPage/demoNormal.png",
                 "ui/StartPage/demoHovered.png",
                 "ui/StartPage/demoPressed.png",
                 "");
-        demoButton.setPosition(0,175);
+        demoButton.setRelativePosition(0,175, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.bottomAlignment);
         demoButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.
@@ -80,13 +80,13 @@ public class StartPage extends UIPage {
             }
         });
 
-        Button exitButton = new Button(this);
+        Button exitButton = new Button();
         exitButton.setTextures(
                 "ui/StartPage/exitNormal.png",
                 "ui/StartPage/exitHovered.png",
                 "ui/StartPage/exitPressed.png",
                 "");
-        exitButton.setPosition(0,100);
+        exitButton.setRelativePosition(0,100, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.bottomAlignment);
         exitButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.
@@ -97,6 +97,12 @@ public class StartPage extends UIPage {
                 Gdx.app.exit();
             }
         });
+
+        this.addUIElement(headLine);
+        this.addUIElement(playButton);
+        this.addUIElement(loadButton);
+        this.addUIElement(demoButton);
+        this.addUIElement(exitButton);
     }
 
     /***

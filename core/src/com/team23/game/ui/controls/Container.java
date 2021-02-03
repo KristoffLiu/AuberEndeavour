@@ -4,20 +4,18 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.team23.game.ui.UIElement;
+import com.team23.game.ui.UIPage;
 import com.team23.game.ui.controls.ListViewItem;
 
 import java.util.ArrayList;
 
 public class Container extends UIElement {
     public ArrayList<UIElement> children;
+    float virtualWidth;
+    float virtualHeight;
 
     public Container(){
         super();
-        children = new ArrayList<>();
-    }
-
-    public Container(Object object){
-        super(object);
         children = new ArrayList<>();
     }
 
@@ -29,9 +27,17 @@ public class Container extends UIElement {
      * add UI element
      * @param child the actor which will be the child
      */
-    public void add(ListViewItem child){
-        this.getParent().addActor(child);
+    public void add(UIElement child){
         children.add(child);
+        child.setUIParent(this);
+    }
+
+    @Override
+    public void setRootPage(UIPage rootPage) {
+        super.setRootPage(rootPage);
+        for(UIElement child : children){
+            child.setRootPage(rootPage);
+        }
     }
 
     /**

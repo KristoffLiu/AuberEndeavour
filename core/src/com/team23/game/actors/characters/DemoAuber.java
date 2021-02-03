@@ -9,6 +9,9 @@ import com.team23.game.stages.Hud;
 
 import java.util.ArrayList;
 
+/***
+ * Demo Auber class
+ */
 public class DemoAuber extends Auber{
     private float movSpeed;
     private DemoAI ai;

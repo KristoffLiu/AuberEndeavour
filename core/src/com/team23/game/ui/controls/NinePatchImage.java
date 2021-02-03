@@ -22,16 +22,7 @@ public class NinePatchImage extends UIElement {
      ***/
     public NinePatchImage(TextureRegion textureRegion,
                           int left, int right, int top, int bottom) {
-        super(textureRegion);
-        setImage(textureRegion, left, right, top, bottom);
-    }
-
-    /**
-     * constructor
-     ***/
-    public NinePatchImage(UIPage stage, TextureRegion textureRegion,
-                          int left, int right, int top, int bottom) {
-        super(stage, textureRegion);
+        super();
         setImage(textureRegion, left, right, top, bottom);
     }
 

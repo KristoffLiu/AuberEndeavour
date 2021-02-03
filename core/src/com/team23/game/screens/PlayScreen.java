@@ -77,13 +77,11 @@ public class PlayScreen implements Screen {
         //sets up stage and actors
         setupShipStage();
 
-
         tiles = new TileWorld(this);
 
         //Used for the infiltrator's hallucinate power
         hallucinateTexture = new Texture("hallucinateV2.png");
         hallucinate = false;
-
 
         hud = new Hud(gameEntry.batch, enemies, tiles.getSystems());
     }
@@ -117,8 +115,6 @@ public class PlayScreen implements Screen {
                 new NPC(new Vector2(4200, 7800), gameEntry.batch, graph, 9f),
                 new NPC(new Vector2(5400, 7800), gameEntry.batch, graph, 9f)
         ));
-        ;
-
 
         shipStage.addActor(player);
         //Adding infiltrators to stage

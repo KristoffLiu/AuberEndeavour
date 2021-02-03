@@ -11,6 +11,9 @@ import com.team23.game.ai.graph.PathGraph;
 import com.team23.game.screens.PlayScreen;
 //import org.graalvm.compiler.lir.aarch64.AArch64Move;
 
+/***
+ * N P C
+ */
 public class NPC extends Character {
 
     //Constants

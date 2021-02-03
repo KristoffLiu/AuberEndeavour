@@ -20,7 +20,7 @@ import com.team23.game.screens.PlayScreen;
 public class GameEntry extends Game {
 	public static GameEntry current;
 	public SpriteBatch batch;
-	public static SaveManager saveManager;
+	public SaveManager saveManager;
 	public static final int VIEW_WIDTH = 1920;
 	public static final int VIEW_HEIGHT = 1080;
 	public static final int ZOOM = 12;
@@ -33,7 +33,6 @@ public class GameEntry extends Game {
 	private GameOverScreen gameOverScreen;
 
 
-
 	@Override
 	public void create () {
 		current = this;
@@ -44,12 +43,12 @@ public class GameEntry extends Game {
 		setScreen(introScreen);
 		teleporting = "false";
 		gameState = -1;
-		testAddSave();
+		//testAddSave();
 	}
 
 	public void testAddSave(){
 		saveManager.loadFromFile();
-		Save demo = new Save("New Save");
+		Save demo = new Save("Save 2");
 		Player player = new Player();
 		player.position = new Position(50,200);
 		demo.player = player;

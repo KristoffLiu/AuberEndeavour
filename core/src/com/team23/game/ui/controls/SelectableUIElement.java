@@ -4,8 +4,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Null;
 import com.team23.game.ui.UIElement;
+import com.team23.game.ui.UIPage;
 
-public class SelectableUIElement extends UIElement {
+public class SelectableUIElement extends Container {
     public Container container;
 
     public TextureRegion unselectedTexture          ;
@@ -30,15 +31,17 @@ public class SelectableUIElement extends UIElement {
 
     public SelectableUIElement() {
         super();
+        container = new Container();
+        container.setUIParent(this);
         uiState = SelectableUIState.unselected;
         selectableUIElementClickListener = new SelectableUIElementClickListener();
         this.addListener(selectableUIElementClickListener);
     }
 
-    public SelectableUIElement(Object uiParent) {
-        super(uiParent);
-        selectableUIElementClickListener = new SelectableUIElementClickListener();
-        this.addListener(selectableUIElementClickListener);
+    @Override
+    public void setRootPage(UIPage rootPage) {
+        super.setRootPage(rootPage);
+        container.setRootPage(rootPage);
     }
 
     /**
@@ -136,6 +139,11 @@ public class SelectableUIElement extends UIElement {
             this.setWidth(previousWidth);
             this.setHeight(previousHeight);
         }
+    }
+
+    @Override
+    public void act(float delta){
+        super.act(delta);
     }
 
     public void setState(SelectableState selectableState){

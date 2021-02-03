@@ -3,6 +3,7 @@ package com.team23.game.ui.controls;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.team23.game.ui.Padding;
 import com.team23.game.ui.UIElement;
+import com.team23.game.ui.UIPage;
 
 import java.util.ArrayList;
 
@@ -14,21 +15,20 @@ public class ListView extends Container {
 
     /***
      * add UI element
-     * @param parent the actor which will be the child
      */
-    public ListView(Object parent) {
-        super(parent);
+    public ListView() {
+        super();
         children = new ArrayList<>();
     }
 
     public void updateLayout(){
-        int count = 1;
+        int count = 0;
         for(UIElement child : children){
             child.setWidth(itemWidth);
             child.setHeight(itemHeight);
-            child.setPosition(
-                    this.getX() + padding.left,
-                    this.getY() + this.getHeight() - count * itemHeight - (count-1) * itemSpacing - padding.top);
+            child.setRelativePosition(
+                    padding.left,
+                    count * (itemHeight + itemSpacing) + padding.top);
             count++;
         }
     }
@@ -39,6 +39,9 @@ public class ListView extends Container {
      */
     public void add(ListViewItem child){
         super.add(child);
+        if(this.getRootPage() != null){
+            child.setRootPage(this.getRootPage());
+        }
         child.parentListView = this;
         itemWidth = child.getWidth();
         itemHeight = child.getHeight();
@@ -46,7 +49,7 @@ public class ListView extends Container {
 
     /***
      * select item
-     * @param handle the event when a child is selected
+     * @param item the list view item
      */
     public void selectItem(ListViewItem item){
         for(UIElement ui_child : children){
@@ -61,9 +64,6 @@ public class ListView extends Container {
             }
         }
     }
-
-
-
 
     /**
      * logic handler of the actor

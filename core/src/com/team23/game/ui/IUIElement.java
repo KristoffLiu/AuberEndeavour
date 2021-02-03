@@ -10,8 +10,11 @@ public interface IUIElement {
     float relativeX = 0;
     float relativeY = 0;
 
-    void setUIParent(Object parentStage);
+    void setUIParent(UIElement _uiElement);
     Object getParent();
+
+    void setRootPage(UIPage rootPage);
+    UIPage getRootPage();
 
     float getRelativeX();
     float getRelativeY();

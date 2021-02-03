@@ -8,11 +8,12 @@ import com.team23.game.ui.UIElement;
  */
 public class Image extends UIElement {
 
-    public Image(TextureRegion textureRegion) {
-        super(textureRegion);
+    public Image() {
+        super();
     }
 
-    public Image(Object parent, TextureRegion textureRegion) {
-        super(parent, textureRegion);
+    public Image(TextureRegion textureRegion) {
+        super();
+        setTextureRegion(textureRegion);
     }
 }

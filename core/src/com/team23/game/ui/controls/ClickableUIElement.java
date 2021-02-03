@@ -20,24 +20,8 @@ public class ClickableUIElement extends UIElement {
     ClickableUIElementClickListener clickableUIElementClickListener;
     ButtonUIState buttonUIState = com.team23.game.ui.controls.Button.ButtonUIState.normal;
 
-
-    public ClickableUIElement(Object uiParent) {
-        super(uiParent);
-        isEnabled = true;
-
-        clickableUIElementClickListener = new ClickableUIElementClickListener();
-        this.addListener(clickableUIElementClickListener);
-    }
-
-    public ClickableUIElement(Object uiParent,
-                              TextureRegion normalTexture, TextureRegion hoveredTexture,
-                              TextureRegion pressedTexture, TextureRegion notActivatedTexture) {
-        super(uiParent, normalTexture);
-
-        this.normalTexture = normalTexture;
-        this.hoveredTexture = hoveredTexture;
-        this.pressedTexture = pressedTexture;
-        this.notActivatedTexture = notActivatedTexture;
+    public ClickableUIElement() {
+        super();
         isEnabled = true;
 
         clickableUIElementClickListener = new ClickableUIElementClickListener();
