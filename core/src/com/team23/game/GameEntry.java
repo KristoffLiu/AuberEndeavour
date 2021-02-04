@@ -41,9 +41,9 @@ public class GameEntry extends Game {
 		saveManager = new SaveManager("Save/save.json");
 		startScreen = new StartScreen(this);
 		gameOverScreen = new GameOverScreen(this);
-		setScreen(startScreen);
+		this.setGameState(PlayState.notStarted);
 		teleporting = "false";
-		state = PlayState.notStarted;
+
 		//testAddSave();
 	}
 
@@ -85,8 +85,6 @@ public class GameEntry extends Game {
 				case notStarted:
 					setScreen(startScreen);
 					break;
-				case start:
-					setScreen(playScreen);
 				case playing:
 					setScreen(playScreen);
 					break;

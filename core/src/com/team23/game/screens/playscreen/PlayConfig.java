@@ -14,22 +14,22 @@ public class PlayConfig {
     }
 
     public static PlayConfig simpleNewGame(){
-        return new PlayConfig(PlayMode.newGame, PlayDifficulty.simple, PlayState.start);
+        return new PlayConfig(PlayMode.newGame, PlayDifficulty.simple, PlayState.playing);
     }
 
     public static PlayConfig normalNewGame(){
-        return new PlayConfig(PlayMode.newGame, PlayDifficulty.normal, PlayState.start);
+        return new PlayConfig(PlayMode.newGame, PlayDifficulty.normal, PlayState.playing);
     }
 
     public static PlayConfig difficultNewGame(){
-        return new PlayConfig(PlayMode.newGame, PlayDifficulty.normal, PlayState.start);
+        return new PlayConfig(PlayMode.newGame, PlayDifficulty.normal, PlayState.playing);
     }
 
     public static PlayConfig loadedGame(){
-        return new PlayConfig(PlayMode.loadedGame, PlayDifficulty.normal, PlayState.start);
+        return new PlayConfig(PlayMode.loadedGame, PlayDifficulty.normal, PlayState.playing);
     }
 
     public static PlayConfig demoGame(){
-        return new PlayConfig(PlayMode.demoGame, PlayDifficulty.normal, PlayState.start);
+        return new PlayConfig(PlayMode.demoGame, PlayDifficulty.normal, PlayState.playing);
     }
 }
