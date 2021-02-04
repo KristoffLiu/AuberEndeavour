@@ -8,7 +8,7 @@ import com.team23.game.ShipSystem;
 import com.team23.game.ai.InfiltratorAI;
 import com.team23.game.ai.graph.PathGraph;
 
-import com.team23.game.screens.PlayScreen;
+import com.team23.game.screens.playscreen.PlayScreen;
 //import org.graalvm.compiler.lir.aarch64.AArch64Move;
 
 /***

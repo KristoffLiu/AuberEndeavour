@@ -7,11 +7,12 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.team23.game.GameEntry;
 import com.team23.game.save.Save;
+import com.team23.game.save.SaveManager;
+import com.team23.game.screens.playscreen.PlayConfig;
 import com.team23.game.ui.Padding;
-import com.team23.game.ui.UIElement;
+import com.team23.game.ui.controls.UIElement;
 import com.team23.game.ui.UIPage;
 import com.team23.game.ui.controls.*;
 import com.team23.game.ui.controls.labels.LabelStyles;
@@ -27,7 +28,7 @@ public class LoadAndSavePage extends UIPage {
         listView.setBackground("ui/LoadAndSavePage/SaveListBackground.png");
         listView.setRelativePosition(20,50, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.topAlignment);
         listView.padding = new Padding(20f,20f,150f,10f);
-        loadSaveList();
+        updateSaveList();
 
         Image loadAndSavePage = new Image(new TextureRegion(new Texture("ui/LoadAndSavePage/LoadAndSave.png")));
         loadAndSavePage.setRelativePosition(0, 100);
@@ -97,10 +98,12 @@ public class LoadAndSavePage extends UIPage {
     }
 
     public void loadSave(){
-
+        Save selectedSave = ((SaveListViewItem)listView.selectedItem).save;
+        SaveManager.current.setLoadedSave(selectedSave);
+        GameEntry.current.createPlayScreen(PlayConfig.demoGame());
     }
 
-    public void loadSaveList(){
+    public void updateSaveList(){
         for(Save save : GameEntry.current.saveManager.getSaves()){
             listView.add(new SaveListViewItem(save));
         }

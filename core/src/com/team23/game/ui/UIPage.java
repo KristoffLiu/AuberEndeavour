@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.team23.game.GameEntry;
+import com.team23.game.ui.controls.UIElement;
 
 /***
  * the stage showing the user interfaces only.

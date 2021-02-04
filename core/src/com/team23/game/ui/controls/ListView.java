@@ -2,8 +2,6 @@ package com.team23.game.ui.controls;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.team23.game.ui.Padding;
-import com.team23.game.ui.UIElement;
-import com.team23.game.ui.UIPage;
 
 import java.util.ArrayList;
 
@@ -12,6 +10,7 @@ public class ListView extends Container {
     public float itemHeight = 100f;
     public float itemSpacing = 20f;
     public Padding padding = new Padding(0);
+    public ListViewItem selectedItem;
 
     /***
      * add UI element
@@ -56,6 +55,7 @@ public class ListView extends Container {
             ListViewItem child = (ListViewItem)ui_child;
             if(child == item){
                 child.setState(SelectableUIElement.SelectableState.selected);
+                selectedItem = child;
             }
             else {
                 if(child.selectableState != SelectableUIElement.SelectableState.notActivated){

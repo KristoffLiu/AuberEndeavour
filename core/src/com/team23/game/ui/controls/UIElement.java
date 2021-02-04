@@ -1,10 +1,10 @@
-package com.team23.game.ui;
+package com.team23.game.ui.controls;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.*;
 import com.badlogic.gdx.utils.Null;
 import com.team23.game.actors.CustomActor;
+import com.team23.game.ui.UIPage;
 
 /***
  * the actor showing the user-interface elements only.

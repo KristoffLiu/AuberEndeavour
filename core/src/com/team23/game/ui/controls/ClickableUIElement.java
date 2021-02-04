@@ -3,7 +3,6 @@ package com.team23.game.ui.controls;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Null;
-import com.team23.game.ui.UIElement;
 
 /***
  * ClickableUIElement

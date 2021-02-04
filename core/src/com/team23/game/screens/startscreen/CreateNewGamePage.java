@@ -7,7 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.team23.game.GameEntry;
-import com.team23.game.ui.UIElement;
+import com.team23.game.screens.playscreen.PlayConfig;
+import com.team23.game.screens.playscreen.PlayState;
+import com.team23.game.ui.controls.UIElement;
 import com.team23.game.ui.UIPage;
 import com.team23.game.ui.controls.Button;
 import com.team23.game.ui.controls.ButtonClickListener;
@@ -41,12 +43,11 @@ public class CreateNewGamePage extends UIPage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                GameEntry.current.createPlayScreen(false);
-                GameEntry.current.gameState=0;
+                GameEntry.current.createPlayScreen(PlayConfig.difficultNewGame());
             }
         });
 
-        Button normalButton = new Button();
+        final Button normalButton = new Button();
         normalButton.setTextures(
                 "ui/CreateNewGamePage/normalNormal.png",
                 "ui/CreateNewGamePage/normalHovered.png",
@@ -60,8 +61,7 @@ public class CreateNewGamePage extends UIPage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                GameEntry.current.createPlayScreen(false);
-                GameEntry.current.gameState=0;
+                GameEntry.current.createPlayScreen(PlayConfig.normalNewGame());
             }
         });
 
@@ -79,12 +79,9 @@ public class CreateNewGamePage extends UIPage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                GameEntry.current.createPlayScreen(false);
-                GameEntry.current.gameState=0;
+                GameEntry.current.createPlayScreen(PlayConfig.simpleNewGame());
             }
         });
-
-
 
         Button backButton = new Button();
         backButton.setTextures(
@@ -105,7 +102,6 @@ public class CreateNewGamePage extends UIPage {
         });
 
         this.hide();
-
         this.addUIElement(headLine);
         this.addUIElement(createNewGameTitle);
         this.addUIElement(selectYourDifficultyTitle);

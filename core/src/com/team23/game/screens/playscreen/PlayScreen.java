@@ -1,4 +1,4 @@
-package com.team23.game.screens;
+package com.team23.game.screens.playscreen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -17,6 +17,7 @@ import com.team23.game.GameEntry;
 import com.team23.game.ShipSystem;
 import com.team23.game.TileWorld;
 import com.team23.game.actors.characters.NPC;
+import com.team23.game.screens.TeleportMenu;
 import com.team23.game.utils.Utility;
 import com.team23.game.actors.characters.Auber;
 import com.team23.game.actors.characters.DemoAuber;
@@ -31,6 +32,8 @@ import java.util.*;
 
 public class PlayScreen implements Screen {
     protected GameEntry gameEntry;
+    private PlayConfig config;
+
     private Hud hud;
     private OrthographicCamera gamecam;
     private Viewport gamePort;
@@ -41,8 +44,6 @@ public class PlayScreen implements Screen {
     public ArrayList<NPC> NPCs;
     //Graph used for AI pathfinding
     public PathGraph graph;
-    private boolean demo;
-
 
     //Scene2D
     protected Auber player;
@@ -58,9 +59,9 @@ public class PlayScreen implements Screen {
     protected int scale;
 
 
-    public PlayScreen(GameEntry gameEntry, boolean demo) {
+    public PlayScreen(GameEntry gameEntry, PlayConfig playConfig) {
         this.gameEntry = gameEntry;
-        this.demo = demo;
+        this.config = playConfig;
         this.scale = GameEntry.ZOOM;
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(GameEntry.VIEW_WIDTH, GameEntry.VIEW_HEIGHT, gamecam);
@@ -131,10 +132,16 @@ public class PlayScreen implements Screen {
 
     protected void createAuber() {
         //A different version of Auber is used for the player depending on if it's a demo or not
-        if (!demo){
-            player = new Auber(new Vector2(450 * scale, 778 * scale), gameEntry.batch, 9f);
-        }else {
-            player = new DemoAuber(new Vector2(450 * scale, 778 * scale), gameEntry.batch,graph, 9f);
+        switch (this.config.mode){
+            case newGame:
+                player = new Auber(new Vector2(450 * scale, 778 * scale), gameEntry.batch, 9f);
+                break;
+            case loadedGame:
+                player = new Auber(new Vector2(450 * scale, 778 * scale), gameEntry.batch, 9f);
+                break;
+            case demoGame:
+                player = new DemoAuber(new Vector2(450 * scale, 778 * scale), gameEntry.batch,graph, 9f);
+                break;
         }
     }
 
@@ -185,19 +192,24 @@ public class PlayScreen implements Screen {
     }
 
     private void teleportCheck(){
-        //teleport is disabled in demo mode, because the ai can't handle it
-        if(demo){
-            return;
+        switch (this.config.mode){
+            case newGame:
+            case loadedGame:
+                //switch to teleport menu
+                if (player.teleportCheck(tiles) && gameEntry.teleporting == "false") {
+                    gameEntry.setScreen(new TeleportMenu(gameEntry));
+                }
+                //teleport auber
+                if (gameEntry.teleporting != "true" && gameEntry.teleporting != "false") {
+                    teleportAuber();
+                    gameEntry.teleporting = "false";
+                }
+                break;
+            //teleport is disabled in demo mode, because the ai can't handle it
+            case demoGame:
+                return;
         }
-        //switch to teleport menu
-        if (player.teleportCheck(tiles) && gameEntry.teleporting == "false") {
-            gameEntry.setScreen(new TeleportMenu(gameEntry));
-        }
-        //teleport auber
-        if (gameEntry.teleporting != "true" && gameEntry.teleporting != "false") {
-            teleportAuber();
-            gameEntry.teleporting = "false";
-        }
+
     }
 
     /**
@@ -210,9 +222,7 @@ public class PlayScreen implements Screen {
         if (player.sprite.getBoundingRectangle().overlaps(tiles.getInfirmary())) {
             hud.showHallucinateLabel(false);
             hallucinate = false;
-
         }
-
     }
 
 
@@ -229,8 +239,13 @@ public class PlayScreen implements Screen {
         float y = tiles.getTeleporters().get(gameEntry.teleporting).y;
         player.setPosition(x, y);
         player.movementSystem.updatePos(new Vector2(x, y));
-        if(demo){
-            player.act(0);
+        switch (this.config.mode){
+            case newGame:
+            case loadedGame:
+                break;
+            case demoGame:
+                player.act(0);
+                break;
         }
     }
 
@@ -285,10 +300,10 @@ public class PlayScreen implements Screen {
      */
     private void checkGameState() {
         if (hud.getInfiltratorsRemaining() == 0) {
-            gameEntry.setGameState(2);
+            gameEntry.setGameState(PlayState.win);
         }
         if (hud.getSystemsUp() == 0) {
-            gameEntry.setGameState(3);
+            gameEntry.setGameState(PlayState.lost);
         }
     }
 

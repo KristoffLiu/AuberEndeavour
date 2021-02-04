@@ -10,6 +10,8 @@ import java.util.ArrayList;
 public class SaveManager {
     public static SaveManager current;
     public JsonModel model;
+
+    private Save loadedSave;
     private String filePath;
 
     public SaveManager(String filePath){
@@ -62,4 +64,13 @@ public class SaveManager {
     public ArrayList<Save> getSaves(){
         return model.saves;
     }
+
+    public Save getLoadedSave() {
+        return loadedSave;
+    }
+
+    public void setLoadedSave(Save loadedSave) {
+        this.loadedSave = loadedSave;
+    }
+
 }
