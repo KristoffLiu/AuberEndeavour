@@ -16,11 +16,9 @@ import com.badlogic.gdx.utils.viewport.*;
 import com.team23.game.GameEntry;
 import com.team23.game.ShipSystem;
 import com.team23.game.TileWorld;
-import com.team23.game.actors.characters.NPC;
+import com.team23.game.actors.characters.*;
+import com.team23.game.actors.items.PowerUp;
 import com.team23.game.utils.Utility;
-import com.team23.game.actors.characters.Auber;
-import com.team23.game.actors.characters.DemoAuber;
-import com.team23.game.actors.characters.Infiltrator;
 import com.team23.game.ai.graph.PathGraph;
 import com.team23.game.ai.graph.PathNode;
 import com.team23.game.stages.Hud;
@@ -39,6 +37,7 @@ public class PlayScreen implements Screen {
     private OrthogonalTiledMapRenderer renderer;
     public ArrayList<Infiltrator> enemies;
     public ArrayList<NPC> NPCs;
+    public ArrayList<PowerUp> powerups;
     //Graph used for AI pathfinding
     public PathGraph graph;
     private boolean demo;
@@ -119,6 +118,16 @@ public class PlayScreen implements Screen {
         ));
         ;
 
+        powerups = new ArrayList<PowerUp>(Arrays.asList(
+                new PowerUp(new Vector2(4732, 7800),gameEntry.batch,"Speed"),
+                new PowerUp(new Vector2(4200, 7800),gameEntry.batch,"Immunity"),
+                new PowerUp(new Vector2(5400, 7800),gameEntry.batch,"Highlight")
+
+        ));
+
+        for (PowerUp powerup: powerups){
+            shipStage.addActor(powerup);
+        }
 
         shipStage.addActor(player);
         //Adding infiltrators to stage
@@ -129,7 +138,6 @@ public class PlayScreen implements Screen {
         for (NPC npc: NPCs){
             shipStage.addActor(npc);
         }
-
 
     }
 
@@ -145,6 +153,7 @@ public class PlayScreen implements Screen {
     public void update(float dt) {
         shipStage.act(dt);
         player.arrest(enemies, hud);
+        player.usePowerUp(powerups,enemies);
     }
 
     @Override
@@ -161,6 +170,8 @@ public class PlayScreen implements Screen {
         //updates game
         checkGameState();
         update(delta);
+        //Resets infiltrator sprite after highlight has ended
+        resetInfiltratorSprite();
         updateInfiltrators(delta);
         teleportCheck();
         player.checkCollision(tiles.getCollisionBoxes());
@@ -211,7 +222,7 @@ public class PlayScreen implements Screen {
         gameEntry.batch.begin();
         gameEntry.batch.draw(hallucinateTexture, 0, 0);
         gameEntry.batch.end();
-        if (player.sprite.getBoundingRectangle().overlaps(tiles.getInfirmary())) {
+        if (player.sprite.getBoundingRectangle().overlaps(tiles.getInfirmary()) || player.getCurrentPower() == "Immunity") {
             hud.showHallucinateLabel(false);
             hallucinate = false;
 
@@ -329,8 +340,10 @@ public class PlayScreen implements Screen {
     }
 
     public void setHallucinate(boolean hallucinate) {
-        this.hallucinate = hallucinate;
-        hud.showHallucinateLabel(hallucinate);
+        if(player.getCurrentPower() != "Immunity") {
+            this.hallucinate = hallucinate;
+            hud.showHallucinateLabel(hallucinate);
+        }
     }
 
     public TiledMap getMap() {
@@ -355,6 +368,18 @@ public class PlayScreen implements Screen {
                 }
             }
         }
+    }
+
+    public void resetInfiltratorSprite(){
+        if(player.getCurrentPower() != "Highlight"){
+            for(Infiltrator infiltrator: enemies) {
+                if(infiltrator.isHighlighted()){
+                    infiltrator.setTexture(new Texture(Gdx.files.internal("Characters/infiltratorSprite.png")));
+                    infiltrator.setHighlighted(false);
+                }
+            }
+        }
+
     }
 
     @Override

@@ -72,6 +72,8 @@ public class TileWorld {
             Rectangle rect = magnifyRectange(((RectangleMapObject) object).getRectangle());
             collisionBoxes.add(rect);
         }
+
+        //create
     }
 
     /**
