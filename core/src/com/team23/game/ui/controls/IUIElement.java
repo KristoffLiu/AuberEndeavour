@@ -1,7 +1,8 @@
-package com.team23.game.ui;
+package com.team23.game.ui.controls;
 
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.Null;
+import com.team23.game.ui.UIPage;
 
 public interface IUIElement {
     Object uiParent = null;
@@ -10,8 +11,11 @@ public interface IUIElement {
     float relativeX = 0;
     float relativeY = 0;
 
-    void setUIParent(Object parentStage);
+    void setUIParent(UIElement _uiElement);
     Object getParent();
+
+    void setRootPage(UIPage rootPage);
+    UIPage getRootPage();
 
     float getRelativeX();
     float getRelativeY();

@@ -6,14 +6,13 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.team23.game.GameEntry;
-import com.team23.game.screens.playscreen.PlayState;
 
-public class GameOverScreen implements Screen {
+public class LostScreen implements Screen {
     private OrthographicCamera gamecam;
     private GameEntry game;
     private BitmapFont font;
 
-    public GameOverScreen(GameEntry game){
+    public LostScreen(GameEntry game){
         this.game=game;
 
         gamecam=new OrthographicCamera();

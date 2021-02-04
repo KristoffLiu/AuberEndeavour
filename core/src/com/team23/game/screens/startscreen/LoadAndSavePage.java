@@ -7,34 +7,33 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.team23.game.GameEntry;
+import com.team23.game.save.Save;
+import com.team23.game.save.SaveManager;
+import com.team23.game.screens.playscreen.PlayConfig;
 import com.team23.game.ui.Padding;
-import com.team23.game.ui.UIElement;
+import com.team23.game.ui.controls.UIElement;
 import com.team23.game.ui.UIPage;
 import com.team23.game.ui.controls.*;
 import com.team23.game.ui.controls.labels.LabelStyles;
 
 public class LoadAndSavePage extends UIPage {
     Label saveTitle;
+    ListView listView;
 
     public LoadAndSavePage() {
         super();
 
-        ListView listView = new ListView(this);
+        listView = new ListView();
         listView.setBackground("ui/LoadAndSavePage/SaveListBackground.png");
         listView.setRelativePosition(20,50, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.topAlignment);
         listView.padding = new Padding(20f,20f,150f,10f);
+        updateSaveList();
 
-        listView.add(new SaveListViewItem());
-        listView.add(new SaveListViewItem());
-        listView.add(new SaveListViewItem());
-        listView.add(new SaveListViewItem());
+        Image loadAndSavePage = new Image(new TextureRegion(new Texture("ui/LoadAndSavePage/LoadAndSave.png")));
+        loadAndSavePage.setRelativePosition(0, 100);
 
-        Image loadAndSavePage = new Image(this, new TextureRegion(new Texture("ui/LoadAndSavePage/LoadAndSave.png")));
-        loadAndSavePage.setPosition(0, this.getHeight() - loadAndSavePage.getHeight() - 90);
-
-        Button loadButton = new Button(this);
+        Button loadButton = new Button();
         loadButton.setTextures(
                 "ui/LoadAndSavePage/loadNormal.png",
                 "ui/LoadAndSavePage/loadHovered.png",
@@ -48,11 +47,11 @@ public class LoadAndSavePage extends UIPage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                getParentFrame().goBack();
+                loadSave();
             }
         });
 
-        Button deleteButton = new Button(this);
+        Button deleteButton = new Button();
         deleteButton.setTextures(
                 "ui/LoadAndSavePage/deleteNormal.png",
                 "ui/LoadAndSavePage/deleteHovered.png",
@@ -70,13 +69,13 @@ public class LoadAndSavePage extends UIPage {
             }
         });
 
-        Button backButton = new Button(this);
+        Button backButton = new Button();
         backButton.setTextures(
                 "ui/CreateNewGamePage/backNormal.png",
                 "ui/CreateNewGamePage/backHovered.png",
                 "ui/CreateNewGamePage/backPressed.png",
                 "");
-        backButton.setPosition(0,50);
+        backButton.setRelativePosition(0,50, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.bottomAlignment);
         backButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.
@@ -90,7 +89,24 @@ public class LoadAndSavePage extends UIPage {
 
         saveTitle = new Label("Auber Game", LabelStyles.getGameTitleLabelStyle());
         saveTitle.setPosition(this.getWidth()/2-this.getWidth()/2,800);
+        this.addUIElement(listView);
+        this.addUIElement(loadAndSavePage);
+        this.addUIElement(loadButton);
+        this.addUIElement(deleteButton);
+        this.addUIElement(backButton);
         this.hide();
+    }
+
+    public void loadSave(){
+        Save selectedSave = ((SaveListViewItem)listView.selectedItem).save;
+        SaveManager.current.setLoadedSave(selectedSave);
+        GameEntry.current.createPlayScreen(PlayConfig.demoGame());
+    }
+
+    public void updateSaveList(){
+        for(Save save : GameEntry.current.saveManager.getSaves()){
+            listView.add(new SaveListViewItem(save));
+        }
     }
 
     /***

@@ -3,7 +3,6 @@ package com.team23.game.ui.controls;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Null;
-import com.team23.game.ui.UIElement;
 
 /***
  * ClickableUIElement
@@ -20,24 +19,8 @@ public class ClickableUIElement extends UIElement {
     ClickableUIElementClickListener clickableUIElementClickListener;
     ButtonUIState buttonUIState = com.team23.game.ui.controls.Button.ButtonUIState.normal;
 
-
-    public ClickableUIElement(Object uiParent) {
-        super(uiParent);
-        isEnabled = true;
-
-        clickableUIElementClickListener = new ClickableUIElementClickListener();
-        this.addListener(clickableUIElementClickListener);
-    }
-
-    public ClickableUIElement(Object uiParent,
-                              TextureRegion normalTexture, TextureRegion hoveredTexture,
-                              TextureRegion pressedTexture, TextureRegion notActivatedTexture) {
-        super(uiParent, normalTexture);
-
-        this.normalTexture = normalTexture;
-        this.hoveredTexture = hoveredTexture;
-        this.pressedTexture = pressedTexture;
-        this.notActivatedTexture = notActivatedTexture;
+    public ClickableUIElement() {
+        super();
         isEnabled = true;
 
         clickableUIElementClickListener = new ClickableUIElementClickListener();

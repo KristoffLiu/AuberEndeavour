@@ -2,14 +2,29 @@
 saves: [
 	{
 		id: 1
-		name: New Save
-		dateTime: Sun Jan 31 19:57:11 CST 2021
-		player: {
+		name: Save 2
+		dateTime: Thu Feb 04 18:07:54 CST 2021
+		playerInfo: {
 			position: {
 				x: 50
 				y: 200
 			}
 		}
+		npcsInfoList: []
+		systemInfoList: []
+	}
+	{
+		id: 2
+		name: Save 3
+		dateTime: Thu Feb 04 18:08:05 CST 2021
+		playerInfo: {
+			position: {
+				x: 50
+				y: 200
+			}
+		}
+		npcsInfoList: []
+		systemInfoList: []
 	}
 ]
 }

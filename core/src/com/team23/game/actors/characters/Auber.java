@@ -12,6 +12,10 @@ import com.team23.game.stages.Hud;
 
 import java.util.ArrayList;
 
+
+/***
+ * Auber class
+ */
 public class Auber extends Character {
 
     private float movSpeed;

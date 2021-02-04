@@ -24,6 +24,22 @@ public class LabelStylesHelper {
         return labelStyle;
     }
 
+    public static LabelStyle generateLabelStyle(String path,
+                                                boolean isClearer,
+                                                float scale,
+                                                Color color){
+        BitmapFont bitmapFont = getBitmapFontFromAssets(path);
+        if (isClearer) {
+            bitmapFont.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        }
+        bitmapFont.getData().setScale(scale);
+
+        LabelStyle labelStyle = new LabelStyle();
+        labelStyle.font = bitmapFont;
+        labelStyle.fontColor = color;
+        return labelStyle;
+    }
+
     public static BitmapFont getBitmapFontFromAssets(String path){
         return new BitmapFont(Gdx.files.internal("font/ImpactFont.fnt"));
     }

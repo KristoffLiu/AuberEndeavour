@@ -1,4 +1,4 @@
-package com.team23.game.screens;
+package com.team23.game.screens.playscreen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -29,22 +29,24 @@ import java.util.*;
 
 public class PlayScreen implements Screen {
     protected GameEntry gameEntry;
+    private PlayConfig config;
+
     private Hud hud;
     private OrthographicCamera gamecam;
     private Viewport gamePort;
     private TmxMapLoader mapLoader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
+
+    public Auber player;
     public ArrayList<Infiltrator> enemies;
     public ArrayList<NPC> NPCs;
     public ArrayList<PowerUp> powerups;
     //Graph used for AI pathfinding
     public PathGraph graph;
-    private boolean demo;
-
 
     //Scene2D
-    protected Auber player;
+
     private Stage shipStage;
 
     //Used for the infiltrator's hallucinate power
@@ -57,9 +59,9 @@ public class PlayScreen implements Screen {
     protected int scale;
 
 
-    public PlayScreen(GameEntry gameEntry, boolean demo) {
+    public PlayScreen(GameEntry gameEntry, PlayConfig playConfig) {
         this.gameEntry = gameEntry;
-        this.demo = demo;
+        this.config = playConfig;
         this.scale = GameEntry.ZOOM;
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(GameEntry.VIEW_WIDTH, GameEntry.VIEW_HEIGHT, gamecam);
@@ -76,13 +78,11 @@ public class PlayScreen implements Screen {
         //sets up stage and actors
         setupShipStage();
 
-
         tiles = new TileWorld(this);
 
         //Used for the infiltrator's hallucinate power
         hallucinateTexture = new Texture("hallucinateV2.png");
         hallucinate = false;
-
 
         hud = new Hud(gameEntry.batch, enemies, tiles.getSystems());
     }
@@ -143,10 +143,16 @@ public class PlayScreen implements Screen {
 
     protected void createAuber() {
         //A different version of Auber is used for the player depending on if it's a demo or not
-        if (!demo){
-            player = new Auber(new Vector2(450 * scale, 778 * scale), gameEntry.batch, 9f);
-        }else {
-            player = new DemoAuber(new Vector2(450 * scale, 778 * scale), gameEntry.batch,graph, 9f);
+        switch (this.config.mode){
+            case newGame:
+                player = new Auber(new Vector2(450 * scale, 778 * scale), gameEntry.batch, 9f);
+                break;
+            case loadedGame:
+                player = new Auber(new Vector2(450 * scale, 778 * scale), gameEntry.batch, 9f);
+                break;
+            case demoGame:
+                player = new DemoAuber(new Vector2(450 * scale, 778 * scale), gameEntry.batch,graph, 9f);
+                break;
         }
     }
 
@@ -200,19 +206,24 @@ public class PlayScreen implements Screen {
     }
 
     private void teleportCheck(){
-        //teleport is disabled in demo mode, because the ai can't handle it
-        if(demo){
-            return;
+        switch (this.config.mode){
+            case newGame:
+            case loadedGame:
+                //switch to teleport menu
+                if (player.teleportCheck(tiles) && gameEntry.teleporting == "false") {
+                    gameEntry.setScreen(new TeleportMenu(gameEntry));
+                }
+                //teleport auber
+                if (gameEntry.teleporting != "true" && gameEntry.teleporting != "false") {
+                    teleportAuber();
+                    gameEntry.teleporting = "false";
+                }
+                break;
+            //teleport is disabled in demo mode, because the ai can't handle it
+            case demoGame:
+                return;
         }
-        //switch to teleport menu
-        if (player.teleportCheck(tiles) && gameEntry.teleporting == "false") {
-            gameEntry.setScreen(new TeleportMenu(gameEntry));
-        }
-        //teleport auber
-        if (gameEntry.teleporting != "true" && gameEntry.teleporting != "false") {
-            teleportAuber();
-            gameEntry.teleporting = "false";
-        }
+
     }
 
     /**
@@ -225,9 +236,7 @@ public class PlayScreen implements Screen {
         if (player.sprite.getBoundingRectangle().overlaps(tiles.getInfirmary()) || player.getCurrentPower() == "Immunity") {
             hud.showHallucinateLabel(false);
             hallucinate = false;
-
         }
-
     }
 
 
@@ -244,8 +253,13 @@ public class PlayScreen implements Screen {
         float y = tiles.getTeleporters().get(gameEntry.teleporting).y;
         player.setPosition(x, y);
         player.movementSystem.updatePos(new Vector2(x, y));
-        if(demo){
-            player.act(0);
+        switch (this.config.mode){
+            case newGame:
+            case loadedGame:
+                break;
+            case demoGame:
+                player.act(0);
+                break;
         }
     }
 
@@ -300,10 +314,10 @@ public class PlayScreen implements Screen {
      */
     private void checkGameState() {
         if (hud.getInfiltratorsRemaining() == 0) {
-            gameEntry.setGameState(2);
+            gameEntry.setGameState(PlayState.win);
         }
         if (hud.getSystemsUp() == 0) {
-            gameEntry.setGameState(3);
+            gameEntry.setGameState(PlayState.lost);
         }
     }
 

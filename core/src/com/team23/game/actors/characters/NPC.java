@@ -4,21 +4,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.team23.game.ShipSystem;
 import com.team23.game.ai.InfiltratorAI;
 import com.team23.game.ai.graph.PathGraph;
-
-import com.team23.game.screens.PlayScreen;
 //import org.graalvm.compiler.lir.aarch64.AArch64Move;
 
+/***
+ * N P C
+ */
 public class NPC extends Character {
 
     //Constants
     private float movSpeed;
-
     private InfiltratorAI ai;
     private boolean facingRight;
-
 
     public NPC(Vector2 position, SpriteBatch batch, PathGraph graph, float movSpeed) {
         super(position, batch, movSpeed);

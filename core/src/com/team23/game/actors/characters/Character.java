@@ -8,9 +8,13 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.team23.game.systems.MovementSystem;
+import com.team23.game.utils.Position;
 
 import java.util.List;
 
+/***
+ * Character class
+ */
 public abstract class Character extends Actor {
 
     private float movSpeed;
@@ -69,6 +73,10 @@ public abstract class Character extends Actor {
             }
         }
         return false;
+    }
+
+    public Position getPositionForSaving(){
+        return new Position(this.getX(),this.getY());
     }
 
 }
