@@ -28,6 +28,7 @@ public class Infiltrator extends Character {
     private ShipSystem destroyingSystem=null;
     private float destructionTimer = 0;
     private boolean facingRight;
+    private boolean highlighted;
 
 
     public Infiltrator(Vector2 position, SpriteBatch batch, int power, PathGraph graph, float movSpeed) {
@@ -39,6 +40,7 @@ public class Infiltrator extends Character {
         powerCoolDown=0;
         ai = new InfiltratorAI(graph);
         facingRight=true;
+        highlighted = false;
     }
 
     @Override
@@ -65,6 +67,10 @@ public class Infiltrator extends Character {
         if (power==2&&room!="infirmary"){screen.setHallucinate(true);}
         if (power==3){sprite.setTexture(new Texture(Gdx.files.internal("Characters/infiltratorShapeshift.png")));}
         if (power==4){movementSystem.setSpeed(20f);}
+    }
+
+    public void setTexture(Texture texture){
+        sprite.setTexture(texture);
     }
 
     private void resetPower(){
@@ -162,6 +168,11 @@ public class Infiltrator extends Character {
 
     public boolean getIsArrested(){return isArrested;}
 
+    public boolean isHighlighted() {
+        return highlighted;
+    }
 
-
+    public void setHighlighted(boolean highlighted) {
+        this.highlighted = highlighted;
+    }
 }

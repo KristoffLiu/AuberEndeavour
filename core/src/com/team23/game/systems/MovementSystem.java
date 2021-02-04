@@ -38,6 +38,10 @@ public class MovementSystem {
         movementSpeed = speed;
     }
 
+    public float getSpeed(){
+        return movementSpeed;
+    }
+
     /**
      * Calculates the position of a character after a left move
      * @return The new position of the character
