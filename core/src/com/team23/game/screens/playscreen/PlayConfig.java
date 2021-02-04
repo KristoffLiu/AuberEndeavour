@@ -22,7 +22,7 @@ public class PlayConfig {
     }
 
     public static PlayConfig difficultNewGame(){
-        return new PlayConfig(PlayMode.newGame, PlayDifficulty.normal, PlayState.playing);
+        return new PlayConfig(PlayMode.newGame, PlayDifficulty.difficult, PlayState.playing);
     }
 
     public static PlayConfig loadedGame(){

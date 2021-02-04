@@ -15,10 +15,8 @@ public class NPC extends Character {
 
     //Constants
     private float movSpeed;
-
     private InfiltratorAI ai;
     private boolean facingRight;
-
 
     public NPC(Vector2 position, SpriteBatch batch, PathGraph graph, float movSpeed) {
         super(position, batch, movSpeed);

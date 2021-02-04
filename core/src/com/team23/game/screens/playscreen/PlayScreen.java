@@ -40,13 +40,16 @@ public class PlayScreen implements Screen {
     private TmxMapLoader mapLoader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
+
+    public Auber player;
     public ArrayList<Infiltrator> enemies;
     public ArrayList<NPC> NPCs;
+
     //Graph used for AI pathfinding
     public PathGraph graph;
 
     //Scene2D
-    protected Auber player;
+
     private Stage shipStage;
 
     //Used for the infiltrator's hallucinate power

@@ -1,7 +1,6 @@
 package com.team23.game.save;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /***
@@ -12,19 +11,24 @@ public class Save {
     public int id;
     public String name;
     public String dateTime;
-    public Player player;
+    public CharacterInfo playerInfo;
+    public ArrayList<CharacterInfo> npcsInfoList;
+    public ArrayList<CharacterInfo> enemiesInfoList;
+    public ArrayList<SystemInfo> systemInfoList;
 
     public Save(String name){
         this.name = name;
         Date date = new Date();
         System.out.println(date.toString());
         this.dateTime = date.toString();
+        playerInfo = new CharacterInfo();
+        npcsInfoList = new ArrayList<>();
+        systemInfoList = new ArrayList<>();
     }
 
     public Save(){
 
     }
-
 }
 
 

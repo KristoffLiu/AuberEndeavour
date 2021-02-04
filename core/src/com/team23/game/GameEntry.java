@@ -1,10 +1,9 @@
 package com.team23.game;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.team23.game.save.Player;
-import com.team23.game.save.Position;
+import com.team23.game.save.CharacterInfo;
+import com.team23.game.utils.Position;
 import com.team23.game.save.Save;
 import com.team23.game.save.SaveManager;
 import com.team23.game.screens.GameOverScreen;
@@ -49,10 +48,10 @@ public class GameEntry extends Game {
 
 	public void testAddSave(){
 		saveManager.loadFromFile();
-		Save demo = new Save("Save 2");
-		Player player = new Player();
-		player.position = new Position(50,200);
-		demo.player = player;
+		Save demo = new Save("Save 3");
+		CharacterInfo playerInfo = new CharacterInfo();
+		playerInfo.position = new Position(50,200);
+		demo.playerInfo = playerInfo;
 		saveManager.add(demo);
 		saveManager.saveToFile();
 	}

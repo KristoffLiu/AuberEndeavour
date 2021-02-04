@@ -3,7 +3,7 @@ package com.team23.game.save;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonValue;
+import com.team23.game.GameEntry;
 
 import java.util.ArrayList;
 
@@ -31,8 +31,11 @@ public class SaveManager {
         this.model.saves.add(newSave);
     }
 
-    public void saveCurrentGame(){
-        //this.load
+    public void saveCurrentGame(String saveName){
+        Save currentSave = new Save(saveName);
+        currentSave.playerInfo.position = GameEntry.current.playScreen.player.getPositionForSaving();
+        //currentSave.NPCsInfoList.add()
+        //currentSave.systemInfoList.abilities
     }
 
     public void delete(int index){
