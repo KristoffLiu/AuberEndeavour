@@ -70,4 +70,6 @@ workflows:
   version: 2
   workflow:
     jobs:
-    - build 
+    - build
+- store_test_results:
+    path: test-results
