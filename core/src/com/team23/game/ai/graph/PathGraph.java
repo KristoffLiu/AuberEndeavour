@@ -18,7 +18,7 @@ public class PathGraph {
     }
 
     public PathGraph(PathNode[] initNodes){
-        super();
+        nodes = new ArrayList<PathNode>();
         for(PathNode node:initNodes){
             addNode(node);
         }
