@@ -41,7 +41,7 @@ public class PlayScreen implements Screen {
 
     public Auber player;
     public ArrayList<Infiltrator> enemies;
-    public ArrayList<NPC> NPCs;
+    public ArrayList<NPC> npcs;
     public ArrayList<PowerUp> powerups;
     //Graph used for AI pathfinding
     public PathGraph graph;
@@ -107,7 +107,7 @@ public class PlayScreen implements Screen {
                 new Infiltrator(new Vector2(4200, 7800), gameEntry.batch, 2, graph, 9f),
                 new Infiltrator(new Vector2(5400, 7800), gameEntry.batch, 2, graph, 9f)
         ));
-        NPCs = new ArrayList<NPC>(Arrays.asList(
+        npcs = new ArrayList<NPC>(Arrays.asList(
                 new NPC(new Vector2(4700, 2000), gameEntry.batch, graph, 9f),
                 new NPC(new Vector2(4800, 2300), gameEntry.batch, graph, 9f),
                 new NPC(new Vector2(5000, 7356), gameEntry.batch, graph, 9f),
@@ -122,8 +122,9 @@ public class PlayScreen implements Screen {
         powerups = new ArrayList<PowerUp>(Arrays.asList(
                 new PowerUp(new Vector2(4732, 7800),gameEntry.batch,"Speed"),
                 new PowerUp(new Vector2(4200, 7800),gameEntry.batch,"Immunity"),
-                new PowerUp(new Vector2(5400, 7800),gameEntry.batch,"Highlight")
-
+                new PowerUp(new Vector2(5400, 7800),gameEntry.batch,"Highlight"),
+                new PowerUp(new Vector2(5400, 7500),gameEntry.batch,"Freeze"),
+                new PowerUp(new Vector2(4732, 7500),gameEntry.batch,"Teleport")
         ));
 
         for (PowerUp powerup: powerups){
@@ -136,7 +137,7 @@ public class PlayScreen implements Screen {
             shipStage.addActor(enemy);
         }
 
-        for (NPC npc: NPCs){
+        for (NPC npc: npcs){
             shipStage.addActor(npc);
         }
 
@@ -160,7 +161,7 @@ public class PlayScreen implements Screen {
     public void update(float dt) {
         shipStage.act(dt);
         player.arrest(enemies, hud);
-        player.usePowerUp(powerups,enemies);
+        player.usePowerUp(powerups,enemies, npcs);
     }
 
     @Override
@@ -178,7 +179,7 @@ public class PlayScreen implements Screen {
         checkGameState();
         update(delta);
         //Resets infiltrator sprite after highlight has ended
-        resetInfiltratorSprite();
+        resetAfterPowerup();
         updateInfiltrators(delta);
         teleportCheck();
         player.checkCollision(tiles.getCollisionBoxes());
@@ -214,6 +215,12 @@ public class PlayScreen implements Screen {
                 if (player.teleportCheck(tiles) && gameEntry.teleporting == "false") {
                     gameEntry.setScreen(new TeleportMenu(gameEntry));
                 }
+
+                else if(player.isTeleportPowerUp()){
+                    gameEntry.setScreen(new TeleportMenu(gameEntry));
+                    player.setTeleportPowerUp(false);
+                }
+
                 //teleport auber
                 if (gameEntry.teleporting != "true" && gameEntry.teleporting != "false") {
                     teleportAuber();
@@ -385,12 +392,26 @@ public class PlayScreen implements Screen {
         }
     }
 
-    public void resetInfiltratorSprite(){
+    //Resets the infiltrators and NPCs after powerups have ended
+    public void resetAfterPowerup(){
         if(player.getCurrentPower() != "Highlight"){
             for(Infiltrator infiltrator: enemies) {
                 if(infiltrator.isHighlighted()){
                     infiltrator.setTexture(new Texture(Gdx.files.internal("Characters/infiltratorSprite.png")));
                     infiltrator.setHighlighted(false);
+                }
+            }
+        }
+        if(player.getCurrentPower()!="Freeze"){
+            for(Infiltrator infiltrator: enemies) {
+                if(infiltrator.isFrozen()){
+                    infiltrator.setFrozen(false);
+                }
+            }
+
+            for(NPC npc: npcs){
+                if(npc.isFrozen()){
+                    npc.setFrozen(false);
                 }
             }
         }
