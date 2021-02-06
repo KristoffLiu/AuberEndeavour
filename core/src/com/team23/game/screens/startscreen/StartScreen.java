@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.team23.game.GameEntry;
-import com.team23.game.ui.UIFrame;
+import com.team23.game.ui.frame.Frame;
 
 /***
  * Start Screen
@@ -18,7 +18,7 @@ public class StartScreen implements Screen {
     private GameEntry gameEntry;
     public StartPage startPage;
     public CreateNewGamePage createNewGamePage;
-    public UIFrame uiFrame;
+    public Frame frame;
     private Texture introTexture;
 
 
@@ -32,10 +32,10 @@ public class StartScreen implements Screen {
         this.gameEntry = gameEntry;
         introTexture = new Texture("IntroV2.png");
 
-        uiFrame = new UIFrame();
+        frame = new Frame();
         startPage = new StartPage();
         createNewGamePage = new CreateNewGamePage();
-        uiFrame.navigate(startPage);
+        frame.navigate(startPage);
 
         int background_frameCols = 2;
         int background_frameRows = 2;
@@ -79,7 +79,7 @@ public class StartScreen implements Screen {
         backgroundBatch.draw(currentFrame, 0, 0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         backgroundBatch.end();
 
-        uiFrame.render();
+        frame.render();
     }
 
 

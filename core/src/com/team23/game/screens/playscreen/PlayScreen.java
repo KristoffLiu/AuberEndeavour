@@ -18,7 +18,10 @@ import com.team23.game.ShipSystem;
 import com.team23.game.TileWorld;
 import com.team23.game.actors.characters.*;
 import com.team23.game.actors.items.PowerUp;
+import com.team23.game.save.CharacterInfo;
+import com.team23.game.save.Save;
 import com.team23.game.screens.TeleportMenu;
+import com.team23.game.utils.Position;
 import com.team23.game.utils.Utility;
 import com.team23.game.ai.graph.PathGraph;
 import com.team23.game.ai.graph.PathNode;
@@ -77,7 +80,7 @@ public class PlayScreen implements Screen {
         //create ai pathing graph
         graph = createPathGraph("csv/nodes.csv", "csv/edges.csv");
         //sets up stage and actors
-        setupShipStage();
+        load();
 
         tiles = new TileWorld(this);
 
@@ -88,43 +91,20 @@ public class PlayScreen implements Screen {
         hud = new Hud(gameEntry.batch, enemies, tiles.getSystems());
     }
 
-    /**
-     * Creates stage and adds characters (auber and infiltrators) to it
-     */
-    private void setupShipStage() {
+    public void load(){
         shipStage = new Stage(new StretchViewport(GameEntry.VIEW_WIDTH, GameEntry.VIEW_HEIGHT, gamecam));
         createAuber();
-        player.sprite.setPosition(450 * scale, 778 * scale);
-
-        //Creating and placing infiltrators
-        enemies = new ArrayList<Infiltrator>(Arrays.asList(
-                new Infiltrator(new Vector2(4700, 2000), gameEntry.batch, 1, graph, 9f),
-                new Infiltrator(new Vector2(4800, 2300), gameEntry.batch, 2, graph, 9f),
-                new Infiltrator(new Vector2(5000, 7356), gameEntry.batch, 3, graph, 9f),
-                new Infiltrator(new Vector2(4732, 7000), gameEntry.batch, 4, graph, 9f),
-                new Infiltrator(new Vector2(4732, 7500), gameEntry.batch, 1, graph, 9f),
-                new Infiltrator(new Vector2(4732, 7800), gameEntry.batch, 1, graph, 9f),
-                new Infiltrator(new Vector2(4200, 7800), gameEntry.batch, 2, graph, 9f),
-                new Infiltrator(new Vector2(5400, 7800), gameEntry.batch, 2, graph, 9f)
-        ));
-        NPCs = new ArrayList<NPC>(Arrays.asList(
-                new NPC(new Vector2(4700, 2000), gameEntry.batch, graph, 9f),
-                new NPC(new Vector2(4800, 2300), gameEntry.batch, graph, 9f),
-                new NPC(new Vector2(5000, 7356), gameEntry.batch, graph, 9f),
-                new NPC(new Vector2(4732, 7000), gameEntry.batch, graph, 9f),
-                new NPC(new Vector2(4732, 7500), gameEntry.batch, graph, 9f),
-                new NPC(new Vector2(4732, 7800), gameEntry.batch, graph, 9f),
-                new NPC(new Vector2(4200, 7800), gameEntry.batch, graph, 9f),
-                new NPC(new Vector2(5400, 7800), gameEntry.batch, graph, 9f)
-        ));
-        ;
-
-        powerups = new ArrayList<PowerUp>(Arrays.asList(
-                new PowerUp(new Vector2(4732, 7800),gameEntry.batch,"Speed"),
-                new PowerUp(new Vector2(4200, 7800),gameEntry.batch,"Immunity"),
-                new PowerUp(new Vector2(5400, 7800),gameEntry.batch,"Highlight")
-
-        ));
+        switch (this.config.mode){
+            case newGame:
+                createSimpleGame();
+                break;
+            case loadedGame:
+                player = new Auber(new Vector2(450 * scale, 778 * scale), gameEntry.batch, 9f);
+                break;
+            case demoGame:
+                player = new DemoAuber(new Vector2(450 * scale, 778 * scale), gameEntry.batch,graph, 9f);
+                break;
+        }
 
         for (PowerUp powerup: powerups){
             shipStage.addActor(powerup);
@@ -139,22 +119,76 @@ public class PlayScreen implements Screen {
         for (NPC npc: NPCs){
             shipStage.addActor(npc);
         }
+    }
 
+    public void createSimpleGame(){
+        player = new Auber(new Vector2(450 * scale, 778 * scale), gameEntry.batch, 9f);
+        player.sprite.setPosition(450 * scale, 778 * scale);
+
+        //Creating and placing infiltrators
+        enemies = new ArrayList<Infiltrator>(Arrays.asList(
+                new Infiltrator(new Vector2(4700, 2000), gameEntry.batch, 1, graph, 9f),
+                new Infiltrator(new Vector2(4800, 2300), gameEntry.batch, 2, graph, 9f),
+                new Infiltrator(new Vector2(5000, 7356), gameEntry.batch, 3, graph, 9f),
+                new Infiltrator(new Vector2(4732, 7000), gameEntry.batch, 4, graph, 9f),
+                new Infiltrator(new Vector2(4732, 7500), gameEntry.batch, 1, graph, 9f),
+                new Infiltrator(new Vector2(4732, 7800), gameEntry.batch, 1, graph, 9f),
+                new Infiltrator(new Vector2(4200, 7800), gameEntry.batch, 2, graph, 9f),
+                new Infiltrator(new Vector2(5400, 7800), gameEntry.batch, 2, graph, 9f)
+        ));
+
+        NPCs = new ArrayList<NPC>(Arrays.asList(
+                new NPC(new Vector2(4700, 2000), gameEntry.batch, graph, 9f),
+                new NPC(new Vector2(4800, 2300), gameEntry.batch, graph, 9f),
+                new NPC(new Vector2(5000, 7356), gameEntry.batch, graph, 9f),
+                new NPC(new Vector2(4732, 7000), gameEntry.batch, graph, 9f),
+                new NPC(new Vector2(4732, 7500), gameEntry.batch, graph, 9f),
+                new NPC(new Vector2(4732, 7800), gameEntry.batch, graph, 9f),
+                new NPC(new Vector2(4200, 7800), gameEntry.batch, graph, 9f),
+                new NPC(new Vector2(5400, 7800), gameEntry.batch, graph, 9f)
+        ));
+
+        powerups = new ArrayList<PowerUp>(Arrays.asList(
+                new PowerUp(new Vector2(4732, 7800),gameEntry.batch,"Speed"),
+                new PowerUp(new Vector2(4200, 7800),gameEntry.batch,"Immunity"),
+                new PowerUp(new Vector2(5400, 7800),gameEntry.batch,"Highlight")
+        ));
+    }
+
+    public void createNormalGame(){
+
+    }
+
+    public void createDifficultGame(){
+
+    }
+
+    public void loadedGame(){
+
+    }
+
+    public void demoGame(){
+
+    }
+
+    public void save() {
+        Save currentSave = new Save();
+        currentSave.playerInfo.position = player.getPositionForSaving();
+        for (Infiltrator infiltrator : enemies) {
+            CharacterInfo enemiesInfo = new CharacterInfo();
+            enemiesInfo.position = infiltrator.getPositionForSaving();
+            currentSave.enemiesInfoList.add(enemiesInfo);
+        }
+        for (NPC npc : NPCs) {
+            CharacterInfo npcInfo = new CharacterInfo();
+            npcInfo.position = npc.getPositionForSaving();
+            currentSave.npcsInfoList.add(npcInfo);
+        }
     }
 
     protected void createAuber() {
         //A different version of Auber is used for the player depending on if it's a demo or not
-        switch (this.config.mode){
-            case newGame:
-                player = new Auber(new Vector2(450 * scale, 778 * scale), gameEntry.batch, 9f);
-                break;
-            case loadedGame:
-                player = new Auber(new Vector2(450 * scale, 778 * scale), gameEntry.batch, 9f);
-                break;
-            case demoGame:
-                player = new DemoAuber(new Vector2(450 * scale, 778 * scale), gameEntry.batch,graph, 9f);
-                break;
-        }
+
     }
 
     public void update(float dt) {
@@ -420,5 +454,6 @@ public class PlayScreen implements Screen {
         gameEntry.batch.dispose();
 
     }
+
 }
 

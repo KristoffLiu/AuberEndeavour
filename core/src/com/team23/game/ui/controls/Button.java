@@ -1,8 +1,5 @@
 package com.team23.game.ui.controls;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.team23.game.ui.UIPage;
-
 /**
  * A button class which extends from ClickableUIElement class
  */

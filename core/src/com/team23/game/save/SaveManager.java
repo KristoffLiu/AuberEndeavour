@@ -31,11 +31,9 @@ public class SaveManager {
         this.model.saves.add(newSave);
     }
 
-    public void saveCurrentGame(String saveName){
-        Save currentSave = new Save(saveName);
-        currentSave.playerInfo.position = GameEntry.current.playScreen.player.getPositionForSaving();
-        //currentSave.NPCsInfoList.add()
-        //currentSave.systemInfoList.abilities
+    public void saveCurrentGame(Save save){
+        this.add(save);
+        this.saveToFile();
     }
 
     public void delete(int index){

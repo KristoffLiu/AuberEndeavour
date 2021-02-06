@@ -1,14 +1,15 @@
-package com.team23.game.ui;
+package com.team23.game.ui.frame;
 
 import com.badlogic.gdx.Gdx;
+import com.team23.game.ui.pages.UIPage;
 
 import java.util.Stack;
 
-public class UIFrame{
+public class Frame {
     public Stack<UIPage> history;
     public UIPage currentPage;
 
-    public UIFrame(){
+    public Frame(){
         history = new Stack<>();
     }
 

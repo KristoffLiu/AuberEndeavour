@@ -1,4 +1,4 @@
-package com.team23.game.ui;
+package com.team23.game.ui.basics;
 
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;

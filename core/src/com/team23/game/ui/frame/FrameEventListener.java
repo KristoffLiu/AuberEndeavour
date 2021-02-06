@@ -1,4 +1,4 @@
-package com.team23.game.ui.uistages;
+package com.team23.game.ui.frame;
 
 import java.util.EventListener;
 

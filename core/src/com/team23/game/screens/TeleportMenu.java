@@ -35,8 +35,8 @@ public class TeleportMenu implements Screen {
      * Constructor
      */
     public TeleportMenu(GameEntry game){
-        this.game=game;
-        gamecam=new OrthographicCamera();
+        this.game = game;
+        gamecam = new OrthographicCamera();
 
         gamecam.setToOrtho(false, GameEntry.VIEW_WIDTH, GameEntry.VIEW_HEIGHT);
         //get button textures

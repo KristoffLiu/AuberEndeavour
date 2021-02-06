@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.*;
 import com.badlogic.gdx.utils.Null;
 import com.team23.game.actors.CustomActor;
-import com.team23.game.ui.UIPage;
+import com.team23.game.ui.pages.UIPage;
 
 /***
  * the actor showing the user-interface elements only.

@@ -27,6 +27,7 @@ public abstract class Character extends Actor {
         this.batch = batch;
         sprite = new Sprite(getTexture());
         sprite.setSize(150, 170);
+
         movementSystem = new MovementSystem(position, movSpeed);
         setBounds(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
         this.movSpeed = movSpeed;

@@ -2,7 +2,7 @@ package com.team23.game.ui.controls;
 
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.Null;
-import com.team23.game.ui.UIPage;
+import com.team23.game.ui.pages.UIPage;
 
 public interface IUIElement {
     Object uiParent = null;

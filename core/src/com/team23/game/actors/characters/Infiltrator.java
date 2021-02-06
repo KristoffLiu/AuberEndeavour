@@ -94,6 +94,7 @@ public class Infiltrator extends Character {
     public float getPowerDuration(){return powerDuration;}
     public float getPowerCooldown(){return powerCoolDown;}
 
+
     @Override
     protected Texture getTexture(){
         return new Texture(Gdx.files.internal("Characters/infiltratorSprite.png"));

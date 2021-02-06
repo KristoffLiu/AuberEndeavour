@@ -11,9 +11,9 @@ import com.team23.game.GameEntry;
 import com.team23.game.save.Save;
 import com.team23.game.save.SaveManager;
 import com.team23.game.screens.playscreen.PlayConfig;
-import com.team23.game.ui.Padding;
+import com.team23.game.ui.basics.Padding;
 import com.team23.game.ui.controls.UIElement;
-import com.team23.game.ui.UIPage;
+import com.team23.game.ui.pages.UIPage;
 import com.team23.game.ui.controls.*;
 import com.team23.game.ui.controls.labels.LabelStyles;
 

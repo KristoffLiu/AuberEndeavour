@@ -1,7 +1,7 @@
 package com.team23.game.ui.controls;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.team23.game.ui.Padding;
+import com.team23.game.ui.basics.Padding;
 
 import java.util.ArrayList;
 

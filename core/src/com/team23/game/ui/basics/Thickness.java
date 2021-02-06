@@ -1,4 +1,4 @@
-package com.team23.game.ui;
+package com.team23.game.ui.basics;
 
 public class Thickness {
     public float left;

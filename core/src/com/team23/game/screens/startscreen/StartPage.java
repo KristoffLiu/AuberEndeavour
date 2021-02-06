@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.team23.game.GameEntry;
 import com.team23.game.screens.playscreen.PlayConfig;
 import com.team23.game.ui.controls.UIElement;
-import com.team23.game.ui.UIPage;
+import com.team23.game.ui.pages.UIPage;
 import com.team23.game.ui.controls.Button;
 import com.team23.game.ui.controls.ButtonClickListener;
 import com.team23.game.ui.controls.Image;

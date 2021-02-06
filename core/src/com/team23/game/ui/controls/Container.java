@@ -3,7 +3,7 @@ package com.team23.game.ui.controls;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.team23.game.ui.UIPage;
+import com.team23.game.ui.pages.UIPage;
 
 import java.util.ArrayList;
 

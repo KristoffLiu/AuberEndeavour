@@ -1,4 +1,4 @@
-package com.team23.game.ui;
+package com.team23.game.ui.pages;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -6,13 +6,14 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.team23.game.GameEntry;
+import com.team23.game.ui.frame.Frame;
 import com.team23.game.ui.controls.UIElement;
 
 /***
  * the stage showing the user interfaces only.
  */
-public class UIPage extends Stage implements IUIStage{
-    private UIFrame parentFrame = null;
+public class UIPage extends Stage implements IUIPage {
+    private Frame parentFrame = null;
     Array<Actor> uiElements = new Array<Actor>();
 
     public UIPage() {
@@ -72,11 +73,11 @@ public class UIPage extends Stage implements IUIStage{
         }
     }
 
-    public UIFrame getParentFrame(){
+    public Frame getParentFrame(){
         return this.parentFrame;
     }
 
-    public void setParentFrame(UIFrame uiFrame){
-        this.parentFrame = uiFrame;
+    public void setParentFrame(Frame frame){
+        this.parentFrame = frame;
     }
 }

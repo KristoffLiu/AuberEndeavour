@@ -1,4 +1,4 @@
-package com.team23.game.ui.uistages;
+package com.team23.game.ui.frame;
 
 public class FrameNavigationEventListener implements FrameEventListener{
     @Override
