@@ -9,7 +9,6 @@ import com.team23.game.ai.InfiltratorAI;
 import com.team23.game.ai.graph.PathGraph;
 
 import com.team23.game.screens.playscreen.PlayScreen;
-//import org.graalvm.compiler.lir.aarch64.AArch64Move;
 
 /***
  * Infiltrator class
@@ -32,6 +31,7 @@ public class Infiltrator extends Character {
     private float destructionTimer = 0;
     private boolean facingRight;
     private boolean highlighted;
+    private boolean frozen;
 
 
     public Infiltrator(Vector2 position, SpriteBatch batch, int power, PathGraph graph, float movSpeed) {
@@ -44,6 +44,7 @@ public class Infiltrator extends Character {
         ai = new InfiltratorAI(graph);
         facingRight=true;
         highlighted = false;
+        frozen = false;
     }
 
     @Override
@@ -101,29 +102,31 @@ public class Infiltrator extends Character {
 
     @Override
     protected void handleMovement() {
-        if(ai.left(new Vector2(getX(),getY()),isArrested)){
-            Vector2 pos = movementSystem.left();
-            setPosition(pos.x, pos.y);
-            if (facingRight==true){
-                sprite.flip(true,false);
-                facingRight=false;
+        if(!isFrozen()) {
+            if (ai.left(new Vector2(getX(), getY()), isArrested)) {
+                Vector2 pos = movementSystem.left();
+                setPosition(pos.x, pos.y);
+                if (facingRight == true) {
+                    sprite.flip(true, false);
+                    facingRight = false;
+                }
             }
-        }
-        if(ai.right(new Vector2(getX(),getY()),isArrested)){
-            Vector2 pos = movementSystem.right();
-            setPosition(pos.x, pos.y);
-            if (facingRight==false){
-                sprite.flip(true,false);
-                facingRight=true;
+            if (ai.right(new Vector2(getX(), getY()), isArrested)) {
+                Vector2 pos = movementSystem.right();
+                setPosition(pos.x, pos.y);
+                if (facingRight == false) {
+                    sprite.flip(true, false);
+                    facingRight = true;
+                }
             }
-        }
-        if(ai.up(new Vector2(getX(),getY()),isArrested)){
-            Vector2 pos = movementSystem.up();
-            setPosition(pos.x, pos.y);
-        }
-        if(ai.down(new Vector2(getX(),getY()),isArrested)){
-            Vector2 pos = movementSystem.down();
-            setPosition(pos.x, pos.y);
+            if (ai.up(new Vector2(getX(), getY()), isArrested)) {
+                Vector2 pos = movementSystem.up();
+                setPosition(pos.x, pos.y);
+            }
+            if (ai.down(new Vector2(getX(), getY()), isArrested)) {
+                Vector2 pos = movementSystem.down();
+                setPosition(pos.x, pos.y);
+            }
         }
     }
 
@@ -177,5 +180,13 @@ public class Infiltrator extends Character {
 
     public void setHighlighted(boolean highlighted) {
         this.highlighted = highlighted;
+    }
+
+    public boolean isFrozen() {
+        return frozen;
+    }
+
+    public void setFrozen(boolean frozen) {
+        this.frozen = frozen;
     }
 }
