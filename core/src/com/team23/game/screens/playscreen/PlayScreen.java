@@ -110,7 +110,7 @@ public class PlayScreen implements Screen {
             shipStage.addActor(enemy);
         }
 
-        for (NPC npc: NPCs){
+        for (NPC npc: npcs){
             shipStage.addActor(npc);
         }
 
@@ -138,7 +138,7 @@ public class PlayScreen implements Screen {
                 new Infiltrator(new Vector2(5400, 7800), 2, graph, 9f)
         ));
 
-        NPCs = new ArrayList<NPC>(Arrays.asList(
+        npcs = new ArrayList<NPC>(Arrays.asList(
                 new NPC(new Vector2(4700, 2000), graph, 9f),
                 new NPC(new Vector2(4800, 2300), graph, 9f),
                 new NPC(new Vector2(5000, 7356), graph, 9f),
@@ -150,11 +150,11 @@ public class PlayScreen implements Screen {
         ));
 
         powerups = new ArrayList<PowerUp>(Arrays.asList(
-            new PowerUp(new Vector2(4732, 7800),gameEntry.batch,"Speed"),
-            new PowerUp(new Vector2(4200, 7800),gameEntry.batch,"Immunity"),
-            new PowerUp(new Vector2(5400, 7800),gameEntry.batch,"Highlight"),
-            new PowerUp(new Vector2(5400, 7500),gameEntry.batch,"Freeze"),
-            new PowerUp(new Vector2(4732, 7500),gameEntry.batch,"Teleport")
+            new PowerUp(new Vector2(4732, 7800), "Speed"),
+            new PowerUp(new Vector2(4200, 7800), "Immunity"),
+            new PowerUp(new Vector2(5400, 7800), "Highlight"),
+            new PowerUp(new Vector2(5400, 7500), "Freeze"),
+            new PowerUp(new Vector2(4732, 7500), "Teleport")
         ));
     }
 
@@ -174,7 +174,7 @@ public class PlayScreen implements Screen {
                 new Infiltrator(new Vector2(5400, 7800), 2, graph, 9f)
         ));
 
-        NPCs = new ArrayList<NPC>(Arrays.asList(
+        npcs    = new ArrayList<NPC>(Arrays.asList(
                 new NPC(new Vector2(4700, 2000), graph, 9f),
                 new NPC(new Vector2(4800, 2300), graph, 9f),
                 new NPC(new Vector2(5000, 7356), graph, 9f),
@@ -186,11 +186,11 @@ public class PlayScreen implements Screen {
         ));
 
         powerups = new ArrayList<PowerUp>(Arrays.asList(
-            new PowerUp(new Vector2(4732, 7800),gameEntry.batch,"Speed"),
-            new PowerUp(new Vector2(4200, 7800),gameEntry.batch,"Immunity"),
-            new PowerUp(new Vector2(5400, 7800),gameEntry.batch,"Highlight"),
-            new PowerUp(new Vector2(5400, 7500),gameEntry.batch,"Freeze"),
-            new PowerUp(new Vector2(4732, 7500),gameEntry.batch,"Teleport")
+            new PowerUp(new Vector2(4732, 7800), "Speed"),
+            new PowerUp(new Vector2(4200, 7800), "Immunity"),
+            new PowerUp(new Vector2(5400, 7800), "Highlight"),
+            new PowerUp(new Vector2(5400, 7500), "Freeze"),
+            new PowerUp(new Vector2(4732, 7500), "Teleport")
         ));
     }
 
@@ -210,7 +210,7 @@ public class PlayScreen implements Screen {
                 new Infiltrator(new Vector2(5400, 7800), 2, graph, 9f)
         ));
 
-        NPCs = new ArrayList<NPC>(Arrays.asList(
+        npcs = new ArrayList<NPC>(Arrays.asList(
                 new NPC(new Vector2(4700, 2000), graph, 9f),
                 new NPC(new Vector2(4800, 2300), graph, 9f),
                 new NPC(new Vector2(5000, 7356), graph, 9f),
@@ -222,11 +222,11 @@ public class PlayScreen implements Screen {
         ));
 
         powerups = new ArrayList<PowerUp>(Arrays.asList(
-            new PowerUp(new Vector2(4732, 7800),gameEntry.batch,"Speed"),
-            new PowerUp(new Vector2(4200, 7800),gameEntry.batch,"Immunity"),
-            new PowerUp(new Vector2(5400, 7800),gameEntry.batch,"Highlight"),
-            new PowerUp(new Vector2(5400, 7500),gameEntry.batch,"Freeze"),
-            new PowerUp(new Vector2(4732, 7500),gameEntry.batch,"Teleport")
+            new PowerUp(new Vector2(4732, 7800), "Speed"),
+            new PowerUp(new Vector2(4200, 7800), "Immunity"),
+            new PowerUp(new Vector2(5400, 7800), "Highlight"),
+            new PowerUp(new Vector2(5400, 7500), "Freeze"),
+            new PowerUp(new Vector2(4732, 7500), "Teleport")
         ));
     }
 
@@ -234,7 +234,7 @@ public class PlayScreen implements Screen {
         Save loadedSave = SaveManager.current.getLoadedSave();
         this.player = loadedSave.getAuber();
         this.enemies = loadedSave.getEnemyList(this.graph);
-        this.NPCs = loadedSave.getNPCsList(this.graph);
+        this.npcs = loadedSave.getNPCsList(this.graph);
     }
 
     public void createDemoGame(){
@@ -245,7 +245,7 @@ public class PlayScreen implements Screen {
         Save currentSave = new Save();
         currentSave.setAuberInfo(this.player);
         currentSave.setEnemiesInfoList(this.enemies);
-        currentSave.setNpcsInfoList(this.NPCs);
+        currentSave.setNpcsInfoList(this.npcs);
     }
 
     public void update(float dt) {
