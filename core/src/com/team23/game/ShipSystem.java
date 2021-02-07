@@ -2,6 +2,7 @@ package com.team23.game;
 
 import com.badlogic.gdx.math.Vector2;
 import com.team23.game.ai.graph.PathGraph;
+import com.team23.game.save.ShipSystemInfo;
 
 /***
  * Ship System
@@ -10,11 +11,11 @@ import com.team23.game.ai.graph.PathGraph;
  * @author Zhikang Liu
  */
 public class ShipSystem {
-    private float x;
-    private float y;
-    private int state;
-    private String room;
-    private PathGraph graph;
+    public float x;
+    public float y;
+    public int state;
+    public String room;
+    public PathGraph graph;
 
     /**
      * constructor
@@ -29,6 +30,11 @@ public class ShipSystem {
         this.room=room;
         this.state=0;
         this.graph = graph;
+    }
+
+    public ShipSystem(ShipSystemInfo shipSystemInfo, PathGraph graph) {
+        this(shipSystemInfo.x, shipSystemInfo.y, shipSystemInfo.room, graph);
+        this.state = shipSystemInfo.state;
     }
 
     /**
@@ -51,7 +57,7 @@ public class ShipSystem {
 
     /***
      * Creates all objects that the sprites can interactive with
-     * @param screen the main game screen
+     * @param the main game screen
      */
     public void destroy(){
         state = 2;

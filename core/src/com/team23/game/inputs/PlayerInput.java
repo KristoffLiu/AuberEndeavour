@@ -20,7 +20,6 @@ public class PlayerInput {
         if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) { return 3; }
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) { return 4; }
         return 0;
-
     }
 
     /**

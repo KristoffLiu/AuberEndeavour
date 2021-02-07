@@ -5,12 +5,17 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.team23.game.ai.InfiltratorAI;
+import com.team23.game.save.PowerUpInfo;
 
 public class PowerUp extends item {
 
     private InfiltratorAI ai;
     private String name;
     private boolean activated;
+
+    public PowerUp(PowerUpInfo powerUpInfo) {
+        this(powerUpInfo.position.toVector2(), powerUpInfo.name);
+    }
 
 
     public PowerUp(Vector2 position, String name) {
@@ -32,12 +37,10 @@ public class PowerUp extends item {
         }
     }
 
-
     @Override
     protected Texture getTexture(String spriteName){
         return new Texture(Gdx.files.internal("PowerUps/"+spriteName+".png"));
     }
-
 
     public String getName(){
         return name;

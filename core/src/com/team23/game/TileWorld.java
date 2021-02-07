@@ -76,6 +76,10 @@ public class TileWorld {
         //create
     }
 
+    public void setShipSystems(ArrayList<ShipSystem> arrayList){
+        this.shipSystems = arrayList;
+    }
+
     /**
      * Sets rectangle bounds for each room
      * @param map The game's tile map

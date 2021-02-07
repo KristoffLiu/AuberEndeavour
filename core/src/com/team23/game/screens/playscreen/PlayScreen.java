@@ -79,6 +79,7 @@ public class PlayScreen implements Screen {
         graph = createPathGraph("csv/nodes.csv", "csv/edges.csv");
 
         //sets up stage and actors
+        tiles = new TileWorld(this);
         shipStage = new Stage(new StretchViewport(GameEntry.VIEW_WIDTH, GameEntry.VIEW_HEIGHT, gamecam));
         switch (this.config.mode){
             case newGame:
@@ -114,7 +115,7 @@ public class PlayScreen implements Screen {
             shipStage.addActor(npc);
         }
 
-        tiles = new TileWorld(this);
+
 
         //Used for the infiltrator's hallucinate power
         hallucinateTexture = new Texture("hallucinateV2.png");
@@ -235,10 +236,43 @@ public class PlayScreen implements Screen {
         this.player = loadedSave.getAuber();
         this.enemies = loadedSave.getEnemyList(this.graph);
         this.npcs = loadedSave.getNPCsList(this.graph);
+        this.powerups = loadedSave.getPowerUpList();
+        this.tiles.setShipSystems(loadedSave.getSystemList(graph));
     }
 
     public void createDemoGame(){
         player = new DemoAuber(new Vector2(450 * scale, 778 * scale), graph, 9f);
+
+        //Creating and placing infiltrators
+        enemies = new ArrayList<Infiltrator>(Arrays.asList(
+                new Infiltrator(new Vector2(4700, 2000), 1, graph, 9f),
+                new Infiltrator(new Vector2(4800, 2300), 2, graph, 9f),
+                new Infiltrator(new Vector2(5000, 7356), 3, graph, 9f),
+                new Infiltrator(new Vector2(4732, 7000), 4, graph, 9f),
+                new Infiltrator(new Vector2(4732, 7500), 1, graph, 9f),
+                new Infiltrator(new Vector2(4732, 7800), 1, graph, 9f),
+                new Infiltrator(new Vector2(4200, 7800), 2, graph, 9f),
+                new Infiltrator(new Vector2(5400, 7800), 2, graph, 9f)
+        ));
+
+        npcs    = new ArrayList<NPC>(Arrays.asList(
+                new NPC(new Vector2(4700, 2000), graph, 9f),
+                new NPC(new Vector2(4800, 2300), graph, 9f),
+                new NPC(new Vector2(5000, 7356), graph, 9f),
+                new NPC(new Vector2(4732, 7000), graph, 9f),
+                new NPC(new Vector2(4732, 7500), graph, 9f),
+                new NPC(new Vector2(4732, 7800), graph, 9f),
+                new NPC(new Vector2(4200, 7800), graph, 9f),
+                new NPC(new Vector2(5400, 7800), graph, 9f)
+        ));
+
+        powerups = new ArrayList<PowerUp>(Arrays.asList(
+                new PowerUp(new Vector2(4732, 7800), "Speed"),
+                new PowerUp(new Vector2(4200, 7800), "Immunity"),
+                new PowerUp(new Vector2(5400, 7800), "Highlight"),
+                new PowerUp(new Vector2(5400, 7500), "Freeze"),
+                new PowerUp(new Vector2(4732, 7500), "Teleport")
+        ));
     }
 
     public void save() {
