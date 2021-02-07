@@ -18,7 +18,7 @@ public class PathGraph {
     }
 
     public PathGraph(PathNode[] initNodes){
-        super();
+        nodes = new ArrayList<PathNode>();
         for(PathNode node:initNodes){
             addNode(node);
         }
@@ -169,7 +169,7 @@ public class PathGraph {
      */
     public PathNode getMostEdgesAdjacentNode(PathNode node){
         PathNode[] adjacent = node.getAdjacentNodes();
-        PathNode mostEdges = new PathNode(new Vector2(100,100),false);
+        PathNode mostEdges = new PathNode(new Vector2(-1,-1),false);
         for(PathNode adjNode:adjacent){
             if(adjNode.getAdjacentNodes().length>mostEdges.getAdjacentNodes().length){
                 mostEdges = adjNode;

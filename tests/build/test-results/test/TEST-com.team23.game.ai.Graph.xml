@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.team23.game.ai.Graph" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-02-05T01:39:53" hostname="CUBE" time="0.009">
+  <properties/>
+  <testcase name="getNodeWithMostEdges" classname="com.team23.game.ai.Graph" time="0.009"/>
+  <system-out><![CDATA[(21.0,9.0) working
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
