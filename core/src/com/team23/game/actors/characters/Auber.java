@@ -25,6 +25,7 @@ public class Auber extends Character {
     protected boolean facingRight;
     private int powerDuration;
     private String currentPower;
+    private boolean teleportPowerUp;
 
     public Auber(AuberInfo info){
         this(info.position.toVector2(), info.moveSpeed);
@@ -38,6 +39,7 @@ public class Auber extends Character {
         shuffle();
         movementSystem.setSpeed(movSpeed);
         facingRight=true;
+        teleportPowerUp = false;
     }
 
     @Override
@@ -133,7 +135,7 @@ public class Auber extends Character {
         }
     }
 
-    public void usePowerUp(ArrayList<PowerUp> powerups, ArrayList<Infiltrator> infiltrators){
+    public void usePowerUp(ArrayList<PowerUp> powerups, ArrayList<Infiltrator> infiltrators, ArrayList<NPC> npcs){
         if(PlayerInput.arrest() && powerDuration == 0) {
             for (PowerUp powerup : powerups) {
                 if(!powerup.isActivated()) {
@@ -155,6 +157,23 @@ public class Auber extends Character {
                                 infiltrator.setTexture(new Texture(Gdx.files.internal("Characters/infiltratorSpriteHighlighted.png")));
                                 infiltrator.setHighlighted(true);
                             }
+                            powerup.activate();
+                            powerDuration = 300;
+                        }
+                        else if(powerup.getName() == "Freeze"){
+                            currentPower = powerup.getName();
+                            for(Infiltrator infiltrator : infiltrators){
+                                infiltrator.setFrozen(true);
+                            }
+                            for(NPC npc : npcs){
+                                npc.setFrozen(true);
+                            }
+                            powerup.activate();
+                            powerDuration = 300;
+                        }
+                        else if(powerup.getName() == "Teleport"){
+                            currentPower = powerup.getName();
+                            teleportPowerUp = true;
                             powerup.activate();
                             powerDuration = 300;
                         }
@@ -192,6 +211,14 @@ public class Auber extends Character {
 
     public String getCurrentPower() {
         return currentPower;
+    }
+
+    public boolean isTeleportPowerUp() {
+        return teleportPowerUp;
+    }
+
+    public void setTeleportPowerUp(boolean teleportPowerUp) {
+        this.teleportPowerUp = teleportPowerUp;
     }
 }
 

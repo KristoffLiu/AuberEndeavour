@@ -18,6 +18,7 @@ public class NPC extends Character {
     private float movSpeed;
     private InfiltratorAI ai;
     private boolean facingRight;
+    private boolean frozen;
 
     public NPC(NPCInfo info, PathGraph pathGraph) {
         this(info.position.toVector2(), pathGraph, info.moveSpeed);
@@ -29,6 +30,7 @@ public class NPC extends Character {
         setPosition(position.x, position.y);
         ai = new InfiltratorAI(graph);
         facingRight=true;
+        frozen = true;
     }
 
     @Override
@@ -44,29 +46,31 @@ public class NPC extends Character {
 
     @Override
     protected void handleMovement() {
-        if(ai.left(new Vector2(getX(),getY()),false)){
-            Vector2 pos = movementSystem.left();
-            setPosition(pos.x, pos.y);
-            if (facingRight==true){
-                this.getTextureRegion().flip(true,false);
-                facingRight=false;
+        if (!isFrozen()) {
+            if (ai.left(new Vector2(getX(), getY()), false)) {
+                Vector2 pos = movementSystem.left();
+                setPosition(pos.x, pos.y);
+                if (facingRight == true) {
+                    this.getTextureRegion().flip(true, false);
+                    facingRight = false;
+                }
             }
-        }
-        if(ai.right(new Vector2(getX(),getY()),false)){
-            Vector2 pos = movementSystem.right();
-            setPosition(pos.x, pos.y);
-            if (facingRight==false){
-                this.getTextureRegion().flip(true,false);
-                facingRight=true;
+            if (ai.right(new Vector2(getX(), getY()), false)) {
+                Vector2 pos = movementSystem.right();
+                setPosition(pos.x, pos.y);
+                if (facingRight == false) {
+                    this.getTextureRegion().flip(true, false);
+                    facingRight = true;
+                }
             }
-        }
-        if(ai.up(new Vector2(getX(),getY()),false)){
-            Vector2 pos = movementSystem.up();
-            setPosition(pos.x, pos.y);
-        }
-        if(ai.down(new Vector2(getX(),getY()),false)){
-            Vector2 pos = movementSystem.down();
-            setPosition(pos.x, pos.y);
+            if (ai.up(new Vector2(getX(), getY()), false)) {
+                Vector2 pos = movementSystem.up();
+                setPosition(pos.x, pos.y);
+            }
+            if (ai.down(new Vector2(getX(), getY()), false)) {
+                Vector2 pos = movementSystem.down();
+                setPosition(pos.x, pos.y);
+            }
         }
     }
 
@@ -75,4 +79,11 @@ public class NPC extends Character {
         this.getTextureRegion().setTexture(getTexture());
     }
 
+    public boolean isFrozen() {
+        return frozen;
+    }
+
+    public void setFrozen(boolean frozen) {
+        this.frozen = frozen;
+    }
 }
