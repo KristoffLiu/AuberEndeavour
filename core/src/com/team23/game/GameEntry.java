@@ -1,11 +1,16 @@
 package com.team23.game;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.team23.game.save.CharacterInfo;
+import com.team23.game.utils.Position;
+import com.team23.game.save.Save;
+import com.team23.game.save.SaveManager;
 import com.team23.game.screens.GameOverScreen;
+import com.team23.game.screens.playscreen.PlayConfig;
+import com.team23.game.screens.playscreen.PlayState;
 import com.team23.game.screens.startscreen.StartScreen;
-import com.team23.game.screens.PlayScreen;
+import com.team23.game.screens.playscreen.PlayScreen;
 
 /***
  * Game Entry
@@ -16,64 +21,85 @@ import com.team23.game.screens.PlayScreen;
 public class GameEntry extends Game {
 	public static GameEntry current;
 	public SpriteBatch batch;
+	public SaveManager saveManager;
 	public static final int VIEW_WIDTH = 1920;
 	public static final int VIEW_HEIGHT = 1080;
 	public static final int ZOOM = 12;
 	public String teleporting;
-	public Screen screen;
 	public boolean demo;
-	//game state -1= intro screen 0=exit startscreen 1=playing 2=win 3=lost
-	public int gameState;
-	private Screen introScreen;
-	private GameOverScreen gameOverScreen;
+	private PlayState state;
 
-
+	public StartScreen startScreen;
+	public PlayScreen playScreen;
+	public GameOverScreen gameOverScreen;
 
 	@Override
 	public void create () {
 		current = this;
 		batch = new SpriteBatch();
-		introScreen = new StartScreen(this);
+		saveManager = new SaveManager("Save/save.json");
+		startScreen = new StartScreen(this);
 		gameOverScreen = new GameOverScreen(this);
-		setScreen(introScreen);
+		this.setGameState(PlayState.notStarted);
 		teleporting = "false";
-		gameState = -1;
+
+		//testAddSave();
+	}
+
+	public void testAddSave(){
+		saveManager.loadFromFile();
+		Save demo = new Save("Save 3");
+		CharacterInfo playerInfo = new CharacterInfo();
+		playerInfo.position = new Position(50,200);
+		demo.playerInfo = playerInfo;
+		saveManager.add(demo);
+		saveManager.saveToFile();
 	}
 
 	/**
 	 * Initialises the game's play screen
-	 * @param demo If the screen should be in demo mode or not
+	 * @param config the type of game we are going to play, including new game, loaded game and demo game.
 	 */
-	public void createPlayScreen(boolean demo){
-		screen = new PlayScreen(this,demo);
+	public void createPlayScreen(PlayConfig config){
+		playScreen = new PlayScreen(this, config);
+		setGameState(config.state);
 	}
 
 	@Override
 	public void render () {
 		super.render();
-		//exit intro screen and start game
-		if (gameState==0||gameState==4){
-			setScreen(screen);
-			gameState=1;
-		}
-
-		//when game over go to gameoverscreen
-		if (gameState==2 || gameState==3){
-			setScreen(gameOverScreen);
-		}
-
 		if (teleporting !="true" && teleporting !="false"){
 			//exit teleport screen
 			setScreen(screen);
 		}
 	}
 
+	public PlayState getState(){
+		return this.state;
+	}
+
+	public void setGameState(PlayState state){
+		if(this.state != state){
+			switch (state){
+				case notStarted:
+					setScreen(startScreen);
+					break;
+				case playing:
+					setScreen(playScreen);
+					break;
+				case win:
+					setScreen(gameOverScreen);
+					break;
+				case lost:
+					setScreen(gameOverScreen);
+					break;
+			}
+			this.state = state;
+		}
+	}
+
 	@Override
 	public void dispose () {
 		batch.dispose();
-	}
-
-	public void setGameState(int gameState){
-		this.gameState=gameState;
 	}
 }

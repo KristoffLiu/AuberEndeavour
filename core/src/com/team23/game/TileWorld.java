@@ -4,7 +4,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
-import com.team23.game.screens.PlayScreen;
+import com.team23.game.screens.playscreen.PlayScreen;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -72,6 +72,8 @@ public class TileWorld {
             Rectangle rect = magnifyRectange(((RectangleMapObject) object).getRectangle());
             collisionBoxes.add(rect);
         }
+
+        //create
     }
 
     /**

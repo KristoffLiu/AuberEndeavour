@@ -6,21 +6,30 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.team23.game.TileWorld;
+import com.team23.game.actors.items.PowerUp;
 import com.team23.game.inputs.PlayerInput;
 import com.team23.game.stages.Hud;
 
 import java.util.ArrayList;
 
+
+/***
+ * Auber class
+ */
 public class Auber extends Character {
 
     private float movSpeed;
     protected boolean facingRight;
+    private int powerDuration;
+    private String currentPower;
+    private boolean teleportPowerUp;
 
     public Auber(Vector2 position, SpriteBatch batch, float movSpeed) {
         super(position,batch, movSpeed);
         shuffle();
         movementSystem.setSpeed(movSpeed);
         facingRight=true;
+        teleportPowerUp = false;
     }
 
     @Override
@@ -115,11 +124,91 @@ public class Auber extends Character {
             }
         }
     }
+
+    public void usePowerUp(ArrayList<PowerUp> powerups, ArrayList<Infiltrator> infiltrators, ArrayList<NPC> npcs){
+        if(PlayerInput.arrest() && powerDuration == 0) {
+            for (PowerUp powerup : powerups) {
+                if(!powerup.isActivated()) {
+                    if (Math.abs(powerup.getX() - this.getX()) < 100 && Math.abs(powerup.getY() - this.getY()) < 100) {
+                        if (powerup.getName() == "Speed") {
+                            currentPower = powerup.getName();
+                            setMovSpeed(movementSystem.getSpeed() * 2);
+                            powerup.activate();
+                            powerDuration = 300;
+                        }
+                        else if(powerup.getName() == "Immunity"){
+                            currentPower = powerup.getName();
+                            powerup.activate();
+                            powerDuration = 300;
+                        }
+                        else if(powerup.getName() == "Highlight"){
+                            currentPower = powerup.getName();
+                            for(Infiltrator infiltrator : infiltrators){
+                                infiltrator.setTexture(new Texture(Gdx.files.internal("Characters/infiltratorSpriteHighlighted.png")));
+                                infiltrator.setHighlighted(true);
+                            }
+                            powerup.activate();
+                            powerDuration = 300;
+                        }
+                        else if(powerup.getName() == "Freeze"){
+                            currentPower = powerup.getName();
+                            for(Infiltrator infiltrator : infiltrators){
+                                infiltrator.setFrozen(true);
+                            }
+                            for(NPC npc : npcs){
+                                npc.setFrozen(true);
+                            }
+                            powerup.activate();
+                            powerDuration = 300;
+                        }
+                        else if(powerup.getName() == "Teleport"){
+                            currentPower = powerup.getName();
+                            teleportPowerUp = true;
+                            powerup.activate();
+                            powerDuration = 300;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void setMovSpeed(float newMovSpeed) {
+        movementSystem.setSpeed(newMovSpeed);
+    }
+
     //moves the camera to the auber when game starts
     public void shuffle(){
         Vector2 position = movementSystem.left();
         setPosition(position.x,position.y);
     }
 
+    public void act(float delta){
+        if(powerDuration != 0) {
+            powerDuration -= delta;
+        }
+        if(powerDuration <= 0){
+            if(currentPower == "Speed"){
+                setMovSpeed(movementSystem.getSpeed() / 2);
+            }
+            powerDuration = 0;
+            currentPower = "";
+
+        }
+
+        handleMovement();
+    }
+
+    public String getCurrentPower() {
+        return currentPower;
+    }
+
+    public boolean isTeleportPowerUp() {
+        return teleportPowerUp;
+    }
+
+    public void setTeleportPowerUp(boolean teleportPowerUp) {
+        this.teleportPowerUp = teleportPowerUp;
+    }
 }
 

@@ -1,4 +1,4 @@
-package com.team23.game.screens;
+package com.team23.game.screens.playscreen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -16,11 +16,10 @@ import com.badlogic.gdx.utils.viewport.*;
 import com.team23.game.GameEntry;
 import com.team23.game.ShipSystem;
 import com.team23.game.TileWorld;
-import com.team23.game.actors.characters.NPC;
+import com.team23.game.actors.characters.*;
+import com.team23.game.actors.items.PowerUp;
+import com.team23.game.screens.TeleportMenu;
 import com.team23.game.utils.Utility;
-import com.team23.game.actors.characters.Auber;
-import com.team23.game.actors.characters.DemoAuber;
-import com.team23.game.actors.characters.Infiltrator;
 import com.team23.game.ai.graph.PathGraph;
 import com.team23.game.ai.graph.PathNode;
 import com.team23.game.stages.Hud;
@@ -31,21 +30,24 @@ import java.util.*;
 
 public class PlayScreen implements Screen {
     protected GameEntry gameEntry;
+    private PlayConfig config;
+
     private Hud hud;
     private OrthographicCamera gamecam;
     private Viewport gamePort;
     private TmxMapLoader mapLoader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
+
+    public Auber player;
     public ArrayList<Infiltrator> enemies;
-    public ArrayList<NPC> NPCs;
+    public ArrayList<NPC> npcs;
+    public ArrayList<PowerUp> powerups;
     //Graph used for AI pathfinding
     public PathGraph graph;
-    private boolean demo;
-
 
     //Scene2D
-    protected Auber player;
+
     private Stage shipStage;
 
     //Used for the infiltrator's hallucinate power
@@ -58,9 +60,9 @@ public class PlayScreen implements Screen {
     protected int scale;
 
 
-    public PlayScreen(GameEntry gameEntry, boolean demo) {
+    public PlayScreen(GameEntry gameEntry, PlayConfig playConfig) {
         this.gameEntry = gameEntry;
-        this.demo = demo;
+        this.config = playConfig;
         this.scale = GameEntry.ZOOM;
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(GameEntry.VIEW_WIDTH, GameEntry.VIEW_HEIGHT, gamecam);
@@ -77,13 +79,11 @@ public class PlayScreen implements Screen {
         //sets up stage and actors
         setupShipStage();
 
-
         tiles = new TileWorld(this);
 
         //Used for the infiltrator's hallucinate power
         hallucinateTexture = new Texture("hallucinateV2.png");
         hallucinate = false;
-
 
         hud = new Hud(gameEntry.batch, enemies, tiles.getSystems());
     }
@@ -107,7 +107,7 @@ public class PlayScreen implements Screen {
                 new Infiltrator(new Vector2(4200, 7800), gameEntry.batch, 2, graph, 9f),
                 new Infiltrator(new Vector2(5400, 7800), gameEntry.batch, 2, graph, 9f)
         ));
-        NPCs = new ArrayList<NPC>(Arrays.asList(
+        npcs = new ArrayList<NPC>(Arrays.asList(
                 new NPC(new Vector2(4700, 2000), gameEntry.batch, graph, 9f),
                 new NPC(new Vector2(4800, 2300), gameEntry.batch, graph, 9f),
                 new NPC(new Vector2(5000, 7356), gameEntry.batch, graph, 9f),
@@ -119,6 +119,17 @@ public class PlayScreen implements Screen {
         ));
         ;
 
+        powerups = new ArrayList<PowerUp>(Arrays.asList(
+                new PowerUp(new Vector2(4732, 7800),gameEntry.batch,"Speed"),
+                new PowerUp(new Vector2(4200, 7800),gameEntry.batch,"Immunity"),
+                new PowerUp(new Vector2(5400, 7800),gameEntry.batch,"Highlight"),
+                new PowerUp(new Vector2(5400, 7500),gameEntry.batch,"Freeze"),
+                new PowerUp(new Vector2(4732, 7500),gameEntry.batch,"Teleport")
+        ));
+
+        for (PowerUp powerup: powerups){
+            shipStage.addActor(powerup);
+        }
 
         shipStage.addActor(player);
         //Adding infiltrators to stage
@@ -126,25 +137,31 @@ public class PlayScreen implements Screen {
             shipStage.addActor(enemy);
         }
 
-        for (NPC npc: NPCs){
+        for (NPC npc: npcs){
             shipStage.addActor(npc);
         }
-
 
     }
 
     protected void createAuber() {
         //A different version of Auber is used for the player depending on if it's a demo or not
-        if (!demo){
-            player = new Auber(new Vector2(450 * scale, 778 * scale), gameEntry.batch, 9f);
-        }else {
-            player = new DemoAuber(new Vector2(450 * scale, 778 * scale), gameEntry.batch,graph, 9f);
+        switch (this.config.mode){
+            case newGame:
+                player = new Auber(new Vector2(450 * scale, 778 * scale), gameEntry.batch, 9f);
+                break;
+            case loadedGame:
+                player = new Auber(new Vector2(450 * scale, 778 * scale), gameEntry.batch, 9f);
+                break;
+            case demoGame:
+                player = new DemoAuber(new Vector2(450 * scale, 778 * scale), gameEntry.batch,graph, 9f);
+                break;
         }
     }
 
     public void update(float dt) {
         shipStage.act(dt);
         player.arrest(enemies, hud);
+        player.usePowerUp(powerups,enemies, npcs);
     }
 
     @Override
@@ -161,6 +178,8 @@ public class PlayScreen implements Screen {
         //updates game
         checkGameState();
         update(delta);
+        //Resets infiltrator sprite after highlight has ended
+        resetAfterPowerup();
         updateInfiltrators(delta);
         teleportCheck();
         player.checkCollision(tiles.getCollisionBoxes());
@@ -189,19 +208,30 @@ public class PlayScreen implements Screen {
     }
 
     private void teleportCheck(){
-        //teleport is disabled in demo mode, because the ai can't handle it
-        if(demo){
-            return;
+        switch (this.config.mode){
+            case newGame:
+            case loadedGame:
+                //switch to teleport menu
+                if (player.teleportCheck(tiles) && gameEntry.teleporting == "false") {
+                    gameEntry.setScreen(new TeleportMenu(gameEntry));
+                }
+
+                else if(player.isTeleportPowerUp()){
+                    gameEntry.setScreen(new TeleportMenu(gameEntry));
+                    player.setTeleportPowerUp(false);
+                }
+
+                //teleport auber
+                if (gameEntry.teleporting != "true" && gameEntry.teleporting != "false") {
+                    teleportAuber();
+                    gameEntry.teleporting = "false";
+                }
+                break;
+            //teleport is disabled in demo mode, because the ai can't handle it
+            case demoGame:
+                return;
         }
-        //switch to teleport menu
-        if (player.teleportCheck(tiles) && gameEntry.teleporting == "false") {
-            gameEntry.setScreen(new TeleportMenu(gameEntry));
-        }
-        //teleport auber
-        if (gameEntry.teleporting != "true" && gameEntry.teleporting != "false") {
-            teleportAuber();
-            gameEntry.teleporting = "false";
-        }
+
     }
 
     /**
@@ -211,12 +241,10 @@ public class PlayScreen implements Screen {
         gameEntry.batch.begin();
         gameEntry.batch.draw(hallucinateTexture, 0, 0);
         gameEntry.batch.end();
-        if (player.sprite.getBoundingRectangle().overlaps(tiles.getInfirmary())) {
+        if (player.sprite.getBoundingRectangle().overlaps(tiles.getInfirmary()) || player.getCurrentPower() == "Immunity") {
             hud.showHallucinateLabel(false);
             hallucinate = false;
-
         }
-
     }
 
 
@@ -233,8 +261,13 @@ public class PlayScreen implements Screen {
         float y = tiles.getTeleporters().get(gameEntry.teleporting).y;
         player.setPosition(x, y);
         player.movementSystem.updatePos(new Vector2(x, y));
-        if(demo){
-            player.act(0);
+        switch (this.config.mode){
+            case newGame:
+            case loadedGame:
+                break;
+            case demoGame:
+                player.act(0);
+                break;
         }
     }
 
@@ -289,10 +322,10 @@ public class PlayScreen implements Screen {
      */
     private void checkGameState() {
         if (hud.getInfiltratorsRemaining() == 0) {
-            gameEntry.setGameState(2);
+            gameEntry.setGameState(PlayState.win);
         }
         if (hud.getSystemsUp() == 0) {
-            gameEntry.setGameState(3);
+            gameEntry.setGameState(PlayState.lost);
         }
     }
 
@@ -329,8 +362,10 @@ public class PlayScreen implements Screen {
     }
 
     public void setHallucinate(boolean hallucinate) {
-        this.hallucinate = hallucinate;
-        hud.showHallucinateLabel(hallucinate);
+        if(player.getCurrentPower() != "Immunity") {
+            this.hallucinate = hallucinate;
+            hud.showHallucinateLabel(hallucinate);
+        }
     }
 
     public TiledMap getMap() {
@@ -355,6 +390,32 @@ public class PlayScreen implements Screen {
                 }
             }
         }
+    }
+
+    //Resets the infiltrators and NPCs after powerups have ended
+    public void resetAfterPowerup(){
+        if(player.getCurrentPower() != "Highlight"){
+            for(Infiltrator infiltrator: enemies) {
+                if(infiltrator.isHighlighted()){
+                    infiltrator.setTexture(new Texture(Gdx.files.internal("Characters/infiltratorSprite.png")));
+                    infiltrator.setHighlighted(false);
+                }
+            }
+        }
+        if(player.getCurrentPower()!="Freeze"){
+            for(Infiltrator infiltrator: enemies) {
+                if(infiltrator.isFrozen()){
+                    infiltrator.setFrozen(false);
+                }
+            }
+
+            for(NPC npc: npcs){
+                if(npc.isFrozen()){
+                    npc.setFrozen(false);
+                }
+            }
+        }
+
     }
 
     @Override

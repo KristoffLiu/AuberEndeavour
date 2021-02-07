@@ -1,4 +1,4 @@
-package com.team23.game.actors.characters;
+package com.team23.game.actors.items;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -7,32 +7,23 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.team23.game.systems.MovementSystem;
-import com.team23.game.utils.Position;
 
 import java.util.List;
 
-/***
- * Character class
- */
-public abstract class Character extends Actor {
-
-    private float movSpeed;
+public abstract class item extends Actor {
 
     public Sprite sprite;
-    public MovementSystem movementSystem;
     protected Batch batch;
+    private String spriteName;
 
-    public Character(Vector2 position,SpriteBatch batch, float movSpeed){
+    public item(Vector2 position,SpriteBatch batch,String spriteName){
         this.batch = batch;
-        sprite = new Sprite(getTexture());
+        sprite = new Sprite(getTexture(spriteName));
         sprite.setSize(150, 170);
-        movementSystem = new MovementSystem(position, movSpeed);
         setBounds(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
-        this.movSpeed = movSpeed;
     }
 
-    protected abstract Texture getTexture();
+    protected abstract Texture getTexture(String spriteName);
 
     public Vector2 getPosition(){
         return new Vector2(getX(),getY());
@@ -40,16 +31,12 @@ public abstract class Character extends Actor {
 
     @Override
     public void act(float delta) {
-        handleMovement();
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         sprite.draw(batch);
     }
-
-
-    protected abstract void handleMovement();
 
     @Override
     protected void positionChanged() {
@@ -67,16 +54,10 @@ public abstract class Character extends Actor {
             //System.out.println(sprite.getBoundingRectangle());
             //System.out.println(wall);
             if(sprite.getBoundingRectangle().overlaps(collisionBox)){
-                movementSystem.getDirection();
-                movementSystem.setCollided(true);
                 return true;
             }
         }
         return false;
-    }
-
-    public Position getPositionForSaving(){
-        return new Position(this.getX(),this.getY());
     }
 
 }

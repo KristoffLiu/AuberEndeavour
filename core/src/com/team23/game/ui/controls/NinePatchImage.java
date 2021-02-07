@@ -3,8 +3,6 @@ package com.team23.game.ui.controls;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.team23.game.ui.UIElement;
-import com.team23.game.ui.UIPage;
 
 /***
  * class of a Nine Patch Image, which is inherited from a UI Element.
@@ -22,16 +20,7 @@ public class NinePatchImage extends UIElement {
      ***/
     public NinePatchImage(TextureRegion textureRegion,
                           int left, int right, int top, int bottom) {
-        super(textureRegion);
-        setImage(textureRegion, left, right, top, bottom);
-    }
-
-    /**
-     * constructor
-     ***/
-    public NinePatchImage(UIPage stage, TextureRegion textureRegion,
-                          int left, int right, int top, int bottom) {
-        super(stage, textureRegion);
+        super();
         setImage(textureRegion, left, right, top, bottom);
     }
 

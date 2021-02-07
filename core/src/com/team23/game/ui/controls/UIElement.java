@@ -1,18 +1,19 @@
-package com.team23.game.ui;
+package com.team23.game.ui.controls;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.*;
 import com.badlogic.gdx.utils.Null;
 import com.team23.game.actors.CustomActor;
+import com.team23.game.ui.UIPage;
 
 /***
  * the actor showing the user-interface elements only.
  */
 public class UIElement extends CustomActor implements IUIElement{
-    Object uiParent = null;
+    UIElement uiParent = null;
+    UIPage rootPage = null;
     HorizontalAlignment horizontalAlignment = HorizontalAlignment.leftAlignment;
-    VerticalAlignment verticalAlignment = VerticalAlignment.bottomAlignment;
+    VerticalAlignment verticalAlignment = VerticalAlignment.topAlignment;
     float relativeX = 0;
     float relativeY = 0;
 
@@ -24,45 +25,10 @@ public class UIElement extends CustomActor implements IUIElement{
     }
 
     /***
-     * add UI element
-     * @param parent the actor which will be the child
-     */
-    public UIElement(Object parent) {
-        super();
-        setUIParent(parent);
-        if(parent instanceof UIPage){
-            UIPage _parent = (UIPage) parent;
-            _parent.addUIElement(this);
-        }
-    }
-
-    /***
-     * texture region of the ui element
-     * @param textureRegion texture region of the ui element.
-     */
-    public UIElement(TextureRegion textureRegion) {
-        super(textureRegion);
-    }
-
-    /***
-     * texture region of the ui element
-     * @param parent ui parent of the ui element.
-     * @param textureRegion texture region of the ui element.
-     */
-    public UIElement(Object parent, TextureRegion textureRegion) {
-        super(textureRegion);
-        setUIParent(parent);
-        if(parent instanceof UIPage){
-            UIPage _parent = (UIPage) parent;
-            _parent.addUIElement(this);
-        }
-    }
-
-    /***
      * set the UI Parent
      * @param _uiParent parent of the ui
      */
-    public void setUIParent(Object _uiParent){
+    public void setUIParent(UIElement _uiParent){
         this.uiParent = _uiParent;
     }
 
@@ -70,8 +36,21 @@ public class UIElement extends CustomActor implements IUIElement{
      * set the UI Parent
      * @return return the parent of this ui
      */
-    public Object getUIParent() {
+    public UIElement getUIParent() {
         return uiParent;
+    }
+
+    @Override
+    public void setRootPage(UIPage rootPage) {
+        if(this.rootPage != rootPage){
+            this.rootPage = rootPage;
+            rootPage.addUIElement(this);
+        }
+    }
+
+    @Override
+    public UIPage getRootPage() {
+        return this.rootPage;
     }
 
     /***
@@ -97,23 +76,34 @@ public class UIElement extends CustomActor implements IUIElement{
      * @param relativeX the relative coordination of X
      */
     public void setRelativeX(float relativeX){
-        if(uiParent != null){
+        if(this.rootPage != null){
+            float x_UIParent = 0;
+            float width_UIParent = 0;
             float offset = 0f;
-            if(uiParent instanceof UIPage){
-                UIPage _parent = (UIPage) uiParent;
-                switch (this.horizontalAlignment){
-                    case leftAlignment:
-                        this.setX(offset + relativeX);
-                        break;
-                    case centreAlignment:
-                        offset = _parent.getWidth() / 2 - this.getWidth() / 2;
-                        this.setX(offset + relativeX);
-                        break;
-                    case rightAlignment:
-                        offset = _parent.getWidth() - this.getWidth();
-                        this.setX(offset - relativeX);
-                        break;
-                }
+            float parentWidth = this.getRootPage().getWidth();
+
+            if(uiParent == null){
+
+            }
+            else{
+                x_UIParent = uiParent.getX();
+                width_UIParent = uiParent.getWidth();
+                offset += x_UIParent;
+                parentWidth = this.getParent().getWidth();
+            }
+
+            switch (this.horizontalAlignment){
+                case leftAlignment:
+                    this.setX(offset + relativeX);
+                    break;
+                case centreAlignment:
+                    offset += parentWidth / 2 - this.getWidth() * this.getScaleX() / 2;
+                    this.setX(offset + relativeX);
+                    break;
+                case rightAlignment:
+                    offset += parentWidth - this.getWidth() * this.getScaleX();
+                    this.setX(offset - relativeX);
+                    break;
             }
         }
         else{
@@ -127,27 +117,39 @@ public class UIElement extends CustomActor implements IUIElement{
      * @param relativeY the relative coordination of Y
      */
     public void setRelativeY(float relativeY){
-        if(uiParent != null){
+        if(this.rootPage != null){
+            float y_UIParent = 0;
+            float height_UIParent = 0;
             float offset = 0f;
-            if(uiParent instanceof UIPage){
-                UIPage _parent = (UIPage) uiParent;
-                switch (this.verticalAlignment) {
-                    case topAlignment:
-                        offset = _parent.getHeight() - this.getHeight();
-                        this.setY(offset - relativeY);
-                        break;
-                    case centreAlignment:
-                        offset = _parent.getHeight() / 2 - this.getHeight() / 2;
-                        this.setY(offset + relativeY);
-                        break;
-                    case bottomAlignment:
-                        this.setY(offset + relativeY);
-                        break;
-                }
+            float parentHeight = 0f;
+            parentHeight = this.getRootPage().getHeight();
+
+            if(uiParent == null){
+
+            }
+            else{
+                y_UIParent = uiParent.getY() + uiParent.getHeight();
+                height_UIParent = uiParent.getHeight();
+                offset += y_UIParent;
+                parentHeight = this.getParent().getHeight();
+            }
+
+            switch (this.verticalAlignment) {
+                case topAlignment:
+                    offset += (parentHeight - this.getHeight() * this.getScaleY());
+                    this.setY(offset - relativeY);
+                    break;
+                case centreAlignment:
+                    offset += parentHeight / 2 - (this.getHeight() * this.getScaleY()) / 2;
+                    this.setY(offset + relativeY);
+                    break;
+                case bottomAlignment:
+                    this.setY(offset + relativeY);
+                    break;
             }
         }
         else{
-            setY(relativeY);
+            setX(relativeY);
         }
         this.relativeY = relativeY;
     }
@@ -186,6 +188,18 @@ public class UIElement extends CustomActor implements IUIElement{
     public void setVerticalAlignment(VerticalAlignment alignment){
         verticalAlignment = alignment;
         setRelativeY(relativeY);
+    }
+
+    /***
+     * set the set relative position
+     * @param relativeX set the relative coordination of X
+     * @param relativeY set the relative coordination of Y
+     */
+    public void setRelativePosition(float relativeX, float relativeY) {
+        this.relativeX = relativeX;
+        this.relativeY = relativeY;
+        setHorizontalAlignment(this.horizontalAlignment);
+        setVerticalAlignment(this.verticalAlignment);
     }
 
     /***
@@ -379,5 +393,13 @@ public class UIElement extends CustomActor implements IUIElement{
             SequenceAction sequenceAction = Actions.sequence(uiElementVisibleAction,uiElementMoveToAction,beginningAlphaAction,parallelAction);
             this.addAction(sequenceAction);
         }
+    }
+
+    @Override
+    public void act(float delta){
+        this.relativeX = relativeX;
+        this.relativeY = relativeY;
+        setHorizontalAlignment(horizontalAlignment);
+        setVerticalAlignment(verticalAlignment);
     }
 }
