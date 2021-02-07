@@ -3,11 +3,13 @@ package com.team23.game.actors.characters;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.team23.game.ShipSystem;
 import com.team23.game.ai.InfiltratorAI;
 import com.team23.game.ai.graph.PathGraph;
 
+import com.team23.game.save.EnemyInfo;
 import com.team23.game.screens.playscreen.PlayScreen;
 //import org.graalvm.compiler.lir.aarch64.AArch64Move;
 
@@ -33,16 +35,21 @@ public class Infiltrator extends Character {
     private boolean facingRight;
     private boolean highlighted;
 
+    public Infiltrator(EnemyInfo enemyInfo, PathGraph graph) {
+        this(enemyInfo.position.toVector2(), enemyInfo.power, graph, enemyInfo.moveSpeed);
+    }
 
-    public Infiltrator(Vector2 position, SpriteBatch batch, int power, PathGraph graph, float movSpeed) {
-        super(position, batch, movSpeed);
+    public Infiltrator(Vector2 position, int power, PathGraph graph, float movSpeed) {
+        super(position, movSpeed);
+        this.setSize(150, 170);
+        this.setTextureRegion(new TextureRegion(getTexture()));
         setPosition(position.x,position.y);
-        this.power=power;
-        powerOn=false;
-        powerDuration=0;
-        powerCoolDown=0;
+        this.power = power;
+        powerOn = false;
+        powerDuration = 0;
+        powerCoolDown = 0;
         ai = new InfiltratorAI(graph);
-        facingRight=true;
+        facingRight = true;
         highlighted = false;
     }
 
@@ -66,14 +73,14 @@ public class Infiltrator extends Character {
 
     public void usePower(PlayScreen screen,String room){
         resetPower();
-        if (power==1){sprite.setTexture(new Texture(Gdx.files.internal("Characters/infiltratorInvisibleSprite.png")));}
+        if (power==1){this.getTextureRegion().setTexture(new Texture(Gdx.files.internal("Characters/infiltratorInvisibleSprite.png")));}
         if (power==2&&room!="infirmary"){screen.setHallucinate(true);}
-        if (power==3){sprite.setTexture(new Texture(Gdx.files.internal("Characters/infiltratorShapeshift.png")));}
+        if (power==3){this.getTextureRegion().setTexture(new Texture(Gdx.files.internal("Characters/infiltratorShapeshift.png")));}
         if (power==4){movementSystem.setSpeed(20f);}
     }
 
     public void setTexture(Texture texture){
-        sprite.setTexture(texture);
+        this.getTextureRegion().setTexture(texture);
     }
 
     private void resetPower(){
@@ -106,7 +113,7 @@ public class Infiltrator extends Character {
             Vector2 pos = movementSystem.left();
             setPosition(pos.x, pos.y);
             if (facingRight==true){
-                sprite.flip(true,false);
+                this.getTextureRegion().flip(true,false);
                 facingRight=false;
             }
         }
@@ -114,7 +121,7 @@ public class Infiltrator extends Character {
             Vector2 pos = movementSystem.right();
             setPosition(pos.x, pos.y);
             if (facingRight==false){
-                sprite.flip(true,false);
+                this.getTextureRegion().flip(true,false);
                 facingRight=true;
             }
         }
@@ -143,7 +150,7 @@ public class Infiltrator extends Character {
         powerCoolDown=0;
         powerDuration=0;
         powerOn=true;
-        sprite.setTexture(getTexture());
+        this.getTextureRegion().setTexture(getTexture());
     }
 
 
@@ -178,5 +185,9 @@ public class Infiltrator extends Character {
 
     public void setHighlighted(boolean highlighted) {
         this.highlighted = highlighted;
+    }
+
+    public int getPower(){
+        return this.power;
     }
 }

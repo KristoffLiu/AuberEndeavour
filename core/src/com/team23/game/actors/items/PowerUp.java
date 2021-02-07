@@ -13,8 +13,8 @@ public class PowerUp extends item {
     private boolean activated;
 
 
-    public PowerUp(Vector2 position, SpriteBatch batch,String name) {
-        super(position, batch, name);
+    public PowerUp(Vector2 position, String name) {
+        super(position, name);
         this.name = name;
         setPosition(position.x,position.y);
         activated = false;
@@ -28,7 +28,7 @@ public class PowerUp extends item {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         if(!activated) {
-            sprite.draw(batch);
+            super.draw(batch,parentAlpha);
         }
     }
 

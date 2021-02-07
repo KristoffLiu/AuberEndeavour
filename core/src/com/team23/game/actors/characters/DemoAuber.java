@@ -16,8 +16,9 @@ public class DemoAuber extends Auber{
     private float movSpeed;
     private DemoAI ai;
 
-    public DemoAuber(Vector2 position, SpriteBatch batch, PathGraph graph,float movSpeed) {
-        super(position, batch, movSpeed);
+    public DemoAuber(Vector2 position, PathGraph graph,float movSpeed) {
+        super(position, movSpeed);
+        this.setSize(150, 170);
         ai = new DemoAI(graph);
     }
 
@@ -39,7 +40,7 @@ public class DemoAuber extends Auber{
             Vector2 position = movementSystem.left();
             setPosition(position.x,position.y);
             if (facingRight==true){
-                sprite.flip(true,false);
+                this.getTextureRegion().flip(true,false);
                 facingRight=false;
             }
         }
@@ -48,7 +49,7 @@ public class DemoAuber extends Auber{
             Vector2 position = movementSystem.right();
             setPosition(position.x,position.y);
             if (facingRight==false){
-                sprite.flip(true,false);
+                this.getTextureRegion().flip(true,false);
                 facingRight=true;
             }
         }

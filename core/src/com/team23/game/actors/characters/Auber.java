@@ -2,12 +2,15 @@ package com.team23.game.actors.characters;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.team23.game.TileWorld;
 import com.team23.game.actors.items.PowerUp;
 import com.team23.game.inputs.PlayerInput;
+import com.team23.game.save.AuberInfo;
 import com.team23.game.stages.Hud;
 
 import java.util.ArrayList;
@@ -23,8 +26,15 @@ public class Auber extends Character {
     private int powerDuration;
     private String currentPower;
 
-    public Auber(Vector2 position, SpriteBatch batch, float movSpeed) {
-        super(position,batch, movSpeed);
+    public Auber(AuberInfo info){
+        this(info.position.toVector2(), info.moveSpeed);
+    }
+
+    public Auber(Vector2 position, float movSpeed) {
+        super(position, movSpeed);
+        this.setSize(150, 170);
+        this.setTextureRegion(new TextureRegion(getTexture()));
+        this.setPosition(position.x, position.y);
         shuffle();
         movementSystem.setSpeed(movSpeed);
         facingRight=true;
@@ -42,7 +52,7 @@ public class Auber extends Character {
             Vector2 position = movementSystem.left();
             setPosition(position.x,position.y);
             if (facingRight==true){
-                sprite.flip(true,false);
+                this.getTextureRegion().flip(true,false);
                 facingRight=false;
             }
         }
@@ -51,7 +61,7 @@ public class Auber extends Character {
             Vector2 position = movementSystem.right();
             setPosition(position.x,position.y);
             if (facingRight==false){
-                sprite.flip(true,false);
+                this.getTextureRegion().flip(true,false);
                 facingRight=true;
             }
         }
@@ -99,7 +109,7 @@ public class Auber extends Character {
     public boolean teleportCheck(TileWorld tiles){
         //check if standing on teleporter
         for ( Rectangle rect : tiles.getTeleporters().values()) {
-            if(sprite.getBoundingRectangle().contains(rect)){
+            if(this.getBounds().contains(rect)){
                 return true;
             }
         }

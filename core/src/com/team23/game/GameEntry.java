@@ -2,6 +2,7 @@ package com.team23.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.team23.game.save.AuberInfo;
 import com.team23.game.save.CharacterInfo;
 import com.team23.game.utils.Position;
 import com.team23.game.save.Save;
@@ -49,9 +50,9 @@ public class GameEntry extends Game {
 	public void testAddSave(){
 		saveManager.loadFromFile();
 		Save demo = new Save("Save 3");
-		CharacterInfo playerInfo = new CharacterInfo();
+		AuberInfo playerInfo = new AuberInfo();
 		playerInfo.position = new Position(50,200);
-		demo.playerInfo = playerInfo;
+		demo.auberInfo = playerInfo;
 		saveManager.add(demo);
 		saveManager.saveToFile();
 	}

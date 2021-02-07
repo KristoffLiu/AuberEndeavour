@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.team23.game.actors.CustomActor;
+import com.team23.game.save.CharacterInfo;
 import com.team23.game.systems.MovementSystem;
 import com.team23.game.utils.Position;
 
@@ -15,21 +17,19 @@ import java.util.List;
 /***
  * Character class
  */
-public abstract class Character extends Actor {
+public abstract class Character extends CustomActor {
 
     private float movSpeed;
-
-    public Sprite sprite;
     public MovementSystem movementSystem;
-    protected Batch batch;
 
-    public Character(Vector2 position,SpriteBatch batch, float movSpeed){
-        this.batch = batch;
-        sprite = new Sprite(getTexture());
-        sprite.setSize(150, 170);
+    public Character(CharacterInfo info){
+        this(info.position.toVector2(), info.moveSpeed);
+    }
 
+    public Character(Vector2 position, float movSpeed){
+        super();
         movementSystem = new MovementSystem(position, movSpeed);
-        setBounds(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
+        setBounds(this.getX(), this.getY(), this.getWidth(), this.getHeight());
         this.movSpeed = movSpeed;
     }
 
@@ -41,22 +41,25 @@ public abstract class Character extends Actor {
 
     @Override
     public void act(float delta) {
-        handleMovement();
+        super.act(delta);
+        if(this.getTextureRegion()!=null){
+            handleMovement();
+        }
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        sprite.draw(batch);
+        super.draw(batch, parentAlpha);
     }
 
 
     protected abstract void handleMovement();
 
-    @Override
-    protected void positionChanged() {
-        super.positionChanged();
-        sprite.setPosition(getX(),getY());
-    }
+//    @Override
+//    protected void positionChanged() {
+//        super.positionChanged();
+//        sprite.setPosition(getX(),getY());
+//    }
 
     /**
      * Checks if the character is colliding with any of the collision boxes
@@ -67,7 +70,7 @@ public abstract class Character extends Actor {
         for (Rectangle collisionBox: collisionBoxes){
             //System.out.println(sprite.getBoundingRectangle());
             //System.out.println(wall);
-            if(sprite.getBoundingRectangle().overlaps(collisionBox)){
+            if(this.getBounds().overlaps(collisionBox)){
                 movementSystem.getDirection();
                 movementSystem.setCollided(true);
                 return true;
@@ -78,6 +81,10 @@ public abstract class Character extends Actor {
 
     public Position getPositionForSaving(){
         return new Position(this.getX(),this.getY());
+    }
+
+    public float getMovSpeed(){
+        return this.movSpeed;
     }
 
 }

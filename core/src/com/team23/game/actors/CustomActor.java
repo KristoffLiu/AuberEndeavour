@@ -43,7 +43,10 @@ public class CustomActor extends Actor {
     public void setTextureRegion(TextureRegion textureRegion) {
         this.textureRegion = textureRegion;
         // reset the width and height after resetting the texture region.
-        setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
+
+        if(this.getWidth() == 0 && this.getHeight() == 0){
+            setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
+        }
     }
 
     /**
@@ -77,6 +80,9 @@ public class CustomActor extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         if (textureRegion == null || !isVisible()) {
+            return;
+        }
+        else if (textureRegion.getTexture() == null){
             return;
         }
 
