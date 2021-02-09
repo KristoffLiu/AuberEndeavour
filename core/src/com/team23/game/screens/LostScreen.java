@@ -84,7 +84,7 @@ public class LostScreen implements Screen {
     }
 
     /***
-     *
+     * hide
      */
     @Override
     public void hide() {
@@ -92,7 +92,7 @@ public class LostScreen implements Screen {
     }
 
     /***
-     * 
+     * dispose
      */
     @Override
     public void dispose() {

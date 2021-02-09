@@ -38,6 +38,9 @@ public class MovementSystem {
         movementSpeed = speed;
     }
 
+    /***
+     * return speed
+     */
     public float getSpeed(){
         return movementSpeed;
     }

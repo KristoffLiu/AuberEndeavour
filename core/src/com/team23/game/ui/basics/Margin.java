@@ -1,5 +1,8 @@
 package com.team23.game.ui.basics;
 
+/***
+ * Margin
+ */
 public class Margin extends Thickness{
 
     public Margin(float uniformLength) {

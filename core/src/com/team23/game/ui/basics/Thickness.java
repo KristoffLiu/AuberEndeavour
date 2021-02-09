@@ -1,5 +1,8 @@
 package com.team23.game.ui.basics;
 
+/***
+ * Thickness
+ */
 public class Thickness {
     public float left;
     public float right;

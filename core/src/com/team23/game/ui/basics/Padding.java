@@ -1,5 +1,8 @@
 package com.team23.game.ui.basics;
 
+/***
+ * Padding
+ */
 public class Padding extends Thickness{
 
     public Padding(float uniformLength) {
