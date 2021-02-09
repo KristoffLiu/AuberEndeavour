@@ -98,9 +98,11 @@ public class LoadAndSavePage extends UIPage {
     }
 
     public void loadSave(){
-        Save selectedSave = ((SaveListViewItem)listView.selectedItem).save;
-        SaveManager.current.setLoadedSave(selectedSave);
-        GameEntry.current.createPlayScreen(PlayConfig.loadedGame());
+        if(listView.selectedItem != null){
+            Save selectedSave = ((SaveListViewItem)listView.selectedItem).save;
+            SaveManager.current.setLoadedSave(selectedSave);
+            GameEntry.current.createPlayScreen(PlayConfig.loadedGame());
+        }
     }
 
     public void deleteSave(){
