@@ -150,10 +150,9 @@ public class Hud extends UIPage {
     /**
      * Updates the HUD to decrease the amount of infiltrators
      */
-    public void infiltratorCaught(){
+    public void infiltratorCaught(ArrayList<Infiltrator> infiltrators){
         infiltratorsRemaining-=1;
-        infiltratorLabel.setText(String.format("%d / 8",infiltratorsRemaining));
-    }
+        infiltratorLabel.setText(String.format("%d / %s",infiltratorsRemaining,infiltrators.size()));    }
 
     /**
      * Sets the HUD's hallucination warning off or on
@@ -192,8 +191,4 @@ public class Hud extends UIPage {
     }
     public int getInfiltratorsRemaining(){return infiltratorsRemaining;}
     public int getSystemsUp(){return systemsUp;}
-
-    public void save(){
-
-    }
 }
