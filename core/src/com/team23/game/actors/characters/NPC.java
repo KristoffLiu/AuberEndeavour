@@ -2,20 +2,16 @@ package com.team23.game.actors.characters;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.team23.game.ai.InfiltratorAI;
 import com.team23.game.ai.graph.PathGraph;
 import com.team23.game.save.NPCInfo;
-//import org.graalvm.compiler.lir.aarch64.AArch64Move;
-
 /***
  * N P C
  */
 public class NPC extends Character {
 
     //Constants
-    private float movSpeed;
     private InfiltratorAI ai;
     private boolean facingRight;
     private boolean frozen;
@@ -35,7 +31,7 @@ public class NPC extends Character {
 
     @Override
     public void act(float delta) {
-        ai.update(delta, new Vector2(getX(), getY()));
+        ai.update(new Vector2(getX(), getY()));
         super.act(delta);
     }
 
@@ -50,7 +46,7 @@ public class NPC extends Character {
             if (ai.left(new Vector2(getX(), getY()), false)) {
                 Vector2 pos = movementSystem.left();
                 setPosition(pos.x, pos.y);
-                if (facingRight == true) {
+                if (facingRight) {
                     this.getTextureRegion().flip(true, false);
                     facingRight = false;
                 }
@@ -58,7 +54,7 @@ public class NPC extends Character {
             if (ai.right(new Vector2(getX(), getY()), false)) {
                 Vector2 pos = movementSystem.right();
                 setPosition(pos.x, pos.y);
-                if (facingRight == false) {
+                if (!facingRight) {
                     this.getTextureRegion().flip(true, false);
                     facingRight = true;
                 }

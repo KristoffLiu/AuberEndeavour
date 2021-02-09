@@ -18,7 +18,7 @@ public class InfiltratorAI {
         movAI = new MovementAI();
     }
 
-    public void update(float dt,Vector2 position) {
+    public void update(Vector2 position) {
         //If the AI does not have a goal a new goal is generated, if the player is at the generated goal a new one will be generated
         //An appropriate destination is then set
         if (goal==null) {
@@ -44,9 +44,9 @@ public class InfiltratorAI {
      * @return A node that either represents a working system, or is a default node
      */
     protected PathNode generateNewGoal(){
-        PathNode goal = graph.getRandomWorkingSystem();
-        if(goal!=null){
-            return goal;
+        PathNode newGoal = graph.getRandomWorkingSystem();
+        if(newGoal!=null){
+            return newGoal;
         }
         return restingPosition;
     }
@@ -79,10 +79,7 @@ public class InfiltratorAI {
      * @return True if the agent should move left, false otherwise
      */
     public boolean left(Vector2 position,boolean arrested){
-        if(!arrested && movAI.left(position)){
-            return true;
-        }
-        return false;
+        return !arrested && movAI.left(position);
     }
 
     /**
@@ -92,10 +89,7 @@ public class InfiltratorAI {
      * @return True if the agent should move right, false otherwise
      */
     public boolean right(Vector2 position,boolean arrested){
-        if(!arrested && movAI.right(position)){
-            return true;
-        }
-        return false;
+        return !arrested && movAI.right(position);
     }
 
     /**
@@ -105,10 +99,7 @@ public class InfiltratorAI {
      * @return True if the agent should move up, false otherwise
      */
     public boolean up(Vector2 position,boolean arrested){
-        if(!arrested && movAI.up(position)){
-            return true;
-        }
-        return false;
+        return !arrested && movAI.up(position);
     }
 
     /**
@@ -118,9 +109,6 @@ public class InfiltratorAI {
      * @return True if the agent should move down, false otherwise
      */
     public boolean down(Vector2 position,boolean arrested){
-        if(!arrested && movAI.down(position)){
-            return true;
-        }
-        return false;
+            return !arrested && movAI.down(position);
     }
 }

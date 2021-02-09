@@ -53,20 +53,4 @@ public class Container extends UIElement {
             child.act(delta);
         }
     }
-
-    /**
-     * RenderActor
-     *
-     * @param batch
-     *
-     * @param parentAlpha
-     * 		The Sprite Batch, is used to render the texture of actor encapsulation.
-     *
-     * @param parentAlpha
-     * 		the transparent of parent
-     */
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
-    }
 }

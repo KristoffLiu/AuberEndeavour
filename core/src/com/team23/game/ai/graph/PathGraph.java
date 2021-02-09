@@ -9,16 +9,16 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class PathGraph {
-    private final int VERY_LARGE = 2147483647;
+    private static final int VERY_LARGE = 2147483647;
 
     private ArrayList<PathNode> nodes;
 
     public PathGraph(){
-        nodes = new ArrayList<PathNode>();
+        nodes = new ArrayList<>();
     }
 
     public PathGraph(PathNode[] initNodes){
-        nodes = new ArrayList<PathNode>();
+        nodes = new ArrayList<>();
         for(PathNode node:initNodes){
             addNode(node);
         }
@@ -67,7 +67,7 @@ public class PathGraph {
      * @return A node representing an operational system
      */
     public PathNode getRandomWorkingSystem(){
-        LinkedList<PathNode> workingSystems = new LinkedList<PathNode>();
+        LinkedList<PathNode> workingSystems = new LinkedList<>();
         for(PathNode node:nodes){
             if(node.isWorkingSystem()){
                 workingSystems.add(node);
@@ -82,7 +82,7 @@ public class PathGraph {
      * @return A node that does not represent a system
      */
     public PathNode getRandomNonSystem(){
-        LinkedList<PathNode> nonSystems = new LinkedList<PathNode>();
+        LinkedList<PathNode> nonSystems = new LinkedList<>();
         for(PathNode node:nodes){
             if(node.isNonSystem()){
                 nonSystems.add(node);

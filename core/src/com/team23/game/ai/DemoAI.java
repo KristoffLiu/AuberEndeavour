@@ -29,10 +29,7 @@ public class DemoAI extends InfiltratorAI {
      * @return True if the agent should move left, false otherwise
      */
     public boolean left(Vector2 position) {
-        if (movAI.left(position)) {
-            return true;
-        }
-        return false;
+        return movAI.left(position);
     }
 
     /**
@@ -41,10 +38,7 @@ public class DemoAI extends InfiltratorAI {
      * @return True if the agent should move right, false otherwise
      */
     public boolean right(Vector2 position) {
-        if (movAI.right(position)) {
-            return true;
-        }
-        return false;
+        return movAI.right(position);
     }
 
     /**
@@ -53,10 +47,7 @@ public class DemoAI extends InfiltratorAI {
      * @return True if the agent should move up, false otherwise
      */
     public boolean up(Vector2 position) {
-        if (movAI.up(position)) {
-            return true;
-        }
-        return false;
+        return movAI.up(position);
     }
 
     /**
@@ -65,9 +56,6 @@ public class DemoAI extends InfiltratorAI {
      * @return True if the agent should move down, false otherwise
      */
     public boolean down(Vector2 position) {
-        if (movAI.down(position)) {
-            return true;
-        }
-        return false;
+        return movAI.down(position);
     }
 }

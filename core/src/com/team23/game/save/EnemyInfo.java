@@ -1,10 +1,7 @@
 package com.team23.game.save;
 
-import com.team23.game.actors.characters.Auber;
 import com.team23.game.actors.characters.Infiltrator;
 import com.team23.game.utils.Position;
-
-import java.util.ArrayList;
 
 public class EnemyInfo extends CharacterInfo {
     public int power;

@@ -26,7 +26,7 @@ public class LoadAndSavePage extends UIPage {
 
         listView = new ListView();
         listView.setBackground("ui/LoadAndSavePage/SaveListBackground.png");
-        listView.setRelativePosition(20,50, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.topAlignment);
+        listView.setRelativePosition(20,50, UIElement.HorizontalAlignment.LEFT_ALIGNMENT, UIElement.VerticalAlignment.TOP_ALIGNMENT);
         listView.padding = new Padding(20f,20f,150f,10f);
         updateSaveList();
 
@@ -39,7 +39,7 @@ public class LoadAndSavePage extends UIPage {
                 "ui/LoadAndSavePage/loadHovered.png",
                 "ui/LoadAndSavePage/loadPressed.png",
                 "");
-        loadButton.setRelativePosition(500,175, UIElement.HorizontalAlignment.rightAlignment, UIElement.VerticalAlignment.bottomAlignment);
+        loadButton.setRelativePosition(500,175, UIElement.HorizontalAlignment.RIGHT_ALIGNMENT, UIElement.VerticalAlignment.BOTTOM_ALIGNMENT);
         loadButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.
@@ -57,7 +57,7 @@ public class LoadAndSavePage extends UIPage {
                 "ui/LoadAndSavePage/deleteHovered.png",
                 "ui/LoadAndSavePage/deletePressed.png",
                 "");
-        deleteButton.setRelativePosition(200,175, UIElement.HorizontalAlignment.rightAlignment, UIElement.VerticalAlignment.bottomAlignment);
+        deleteButton.setRelativePosition(200,175, UIElement.HorizontalAlignment.RIGHT_ALIGNMENT, UIElement.VerticalAlignment.BOTTOM_ALIGNMENT);
         deleteButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.
@@ -75,7 +75,7 @@ public class LoadAndSavePage extends UIPage {
                 "ui/CreateNewGamePage/backHovered.png",
                 "ui/CreateNewGamePage/backPressed.png",
                 "");
-        backButton.setRelativePosition(0,50, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.bottomAlignment);
+        backButton.setRelativePosition(0,50, UIElement.HorizontalAlignment.LEFT_ALIGNMENT, UIElement.VerticalAlignment.BOTTOM_ALIGNMENT);
         backButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.

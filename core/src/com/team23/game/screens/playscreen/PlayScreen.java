@@ -466,7 +466,7 @@ public class PlayScreen implements Screen {
             }
             //the infiltrator will stop their power when it's gone on past it's limit
             if (enemy.getPowerDuration() > 1000) {
-                enemy.stopPower(this);
+                enemy.stopPower();
             }
         }
         checkInfiltratorsSystems();

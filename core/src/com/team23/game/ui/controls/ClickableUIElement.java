@@ -17,7 +17,7 @@ public class ClickableUIElement extends UIElement {
     boolean isEnabled;
 
     ClickableUIElementClickListener clickableUIElementClickListener;
-    ButtonUIState buttonUIState = com.team23.game.ui.controls.Button.ButtonUIState.normal;
+    ButtonUIState buttonUIState = com.team23.game.ui.controls.Button.ButtonUIState.NORMAL;
 
     public ClickableUIElement() {
         super();
@@ -42,16 +42,16 @@ public class ClickableUIElement extends UIElement {
         this.pressedTexture      = !pressedTexturePath.isEmpty() ? new TextureRegion(new Texture(pressedTexturePath)) : null;
         this.notActivatedTexture = !notActivatedTexturePath.isEmpty() ? new TextureRegion(new Texture(notActivatedTexturePath)) : null;
         switch (this.buttonUIState){
-            case normal:
+            case NORMAL:
                 this.setTextureRegion(normalTexture);
                 break;
-            case hovered:
+            case HOVERED:
                 this.setTextureRegion(hoveredTexture);
                 break;
-            case pressed:
+            case PRESSED:
                 this.setTextureRegion(pressedTexture);
                 break;
-            case notActivated:
+            case NOTACTIVATED:
                 this.setTextureRegion(notActivatedTexture);
                 break;
         }
@@ -66,10 +66,10 @@ public class ClickableUIElement extends UIElement {
     public void isEnabled(boolean isEnabled){
         this.isEnabled = isEnabled;
         if(isEnabled){
-            setButtonUIState(ButtonUIState.normal);
+            setButtonUIState(ButtonUIState.NORMAL);
         }
         else {
-            setButtonUIState(ButtonUIState.notActivated);
+            setButtonUIState(ButtonUIState.NOTACTIVATED);
         }
     }
 
@@ -79,16 +79,16 @@ public class ClickableUIElement extends UIElement {
             float previousWidth  = this.getWidth();
             float previousHeight = this.getHeight();
             switch (buttonUIStateInput){
-                case normal:
+                case NORMAL:
                     this.setTextureRegion(normalTexture);
                     break;
-                case hovered:
+                case HOVERED:
                     this.setTextureRegion(hoveredTexture);
                     break;
-                case pressed:
+                case PRESSED:
                     this.setTextureRegion(pressedTexture);
                     break;
-                case notActivated:
+                case NOTACTIVATED:
                     this.setTextureRegion(notActivatedTexture);
                     break;
             }
@@ -99,7 +99,7 @@ public class ClickableUIElement extends UIElement {
     }
 
     public enum ButtonUIState{
-        normal, hovered, pressed, notActivated
+        NORMAL, HOVERED, PRESSED, NOTACTIVATED
     }
 }
 

@@ -1,16 +1,11 @@
 package com.team23.game.actors.characters;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.team23.game.actors.CustomActor;
 import com.team23.game.save.CharacterInfo;
 import com.team23.game.systems.MovementSystem;
-import com.team23.game.utils.Position;
 
 import java.util.List;
 
@@ -18,15 +13,14 @@ import java.util.List;
  * Character class
  */
 public abstract class Character extends CustomActor {
-    private String texture;
-    private float movSpeed;
-    public MovementSystem movementSystem;
+    private final float movSpeed;
+    public final MovementSystem movementSystem;
 
     /***
      * Constructor - create the Character object when it is loaded from the save
      * @param info the Character instance which is loaded from the save
      */
-    public Character(CharacterInfo info){
+    protected Character(CharacterInfo info){
         this(info.position.toVector2(), info.moveSpeed);
     }
 
@@ -35,7 +29,7 @@ public abstract class Character extends CustomActor {
      * @param position the position
      * @param movSpeed the movement speed
      */
-    public Character(Vector2 position, float movSpeed){
+    protected Character(Vector2 position, float movSpeed){
         super();
         movementSystem = new MovementSystem(position, movSpeed);
         setBounds(this.getX(), this.getY(), this.getWidth(), this.getHeight());
@@ -66,16 +60,6 @@ public abstract class Character extends CustomActor {
         }
     }
 
-    /***
-     * get the movement speed.
-     * @return the current movement speed as a float value.
-     */
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
-    }
-
-
     /**
      * Checks if the character is colliding with any of the collision boxes
      */
@@ -88,8 +72,6 @@ public abstract class Character extends CustomActor {
      */
     public boolean checkCollision(List<Rectangle> collisionBoxes){
         for (Rectangle collisionBox: collisionBoxes){
-            //System.out.println(sprite.getBoundingRectangle());
-            //System.out.println(wall);
             if(this.getBounds().overlaps(collisionBox)){
                 movementSystem.getDirection();
                 movementSystem.setCollided(true);

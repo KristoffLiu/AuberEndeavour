@@ -3,7 +3,6 @@ package com.team23.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.team23.game.save.AuberInfo;
-import com.team23.game.save.CharacterInfo;
 import com.team23.game.screens.teleportscreen.TeleportScreen;
 import com.team23.game.utils.Position;
 import com.team23.game.save.Save;
@@ -46,16 +45,15 @@ public class GameEntry extends Game {
 		this.setGameState(PlayState.notStarted);
 		teleporting = "false";
 
-		//testAddSave();
 	}
 
 	public void testAddSave(){
 		saveManager.loadFromFile();
-		Save demo = new Save("Save 3");
+		Save demoSave = new Save("Save 3");
 		AuberInfo playerInfo = new AuberInfo();
 		playerInfo.position = new Position(50,200);
-		demo.auberInfo = playerInfo;
-		saveManager.add(demo);
+		demoSave.auberInfo = playerInfo;
+		saveManager.add(demoSave);
 		saveManager.saveToFile();
 	}
 
@@ -66,11 +64,6 @@ public class GameEntry extends Game {
 	public void createPlayScreen(PlayConfig config){
 		playScreen = new PlayScreen(this, config);
 		setGameState(config.state);
-	}
-
-	@Override
-	public void render () {
-		super.render();
 	}
 
 	public PlayState getState(){
@@ -94,6 +87,8 @@ public class GameEntry extends Game {
 					break;
 				case lost:
 					setScreen(gameOverScreen);
+					break;
+				default:
 					break;
 			}
 			this.state = state;

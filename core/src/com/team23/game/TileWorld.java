@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.team23.game.screens.playscreen.PlayScreen;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /***
  * TileWorld
@@ -17,7 +17,7 @@ import java.util.Hashtable;
  * @author Zhikang Liu
  */
 public class TileWorld {
-    private Hashtable<String,Rectangle> teleporters;
+    private HashMap<String,Rectangle> teleporters;
     private ArrayList<ShipSystem> shipSystems;
     private ArrayList<Rectangle> collisionBoxes;
 
@@ -59,7 +59,7 @@ public class TileWorld {
         }
 
         //create teleporters
-        teleporters = new Hashtable<String,Rectangle>();
+        teleporters = new HashMap<>();
         for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             rect.x=rect.x*scale+rect.width*scale/2;
@@ -93,7 +93,7 @@ public class TileWorld {
      * @param map The game's tile map
      */
     private void createRooms(TiledMap map){
-        MapObject roomObj=new MapObject();
+        MapObject roomObj;
         roomObj=map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class).get(0);
         infirmary = magnifyRectange(((RectangleMapObject) roomObj).getRectangle());
         roomObj=map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class).get(0);
@@ -125,7 +125,7 @@ public class TileWorld {
      * get the teleporters.
      * @return the
      */
-    public Hashtable<String, Rectangle> getTeleporters(){
+    public HashMap<String, Rectangle> getTeleporters(){
         return teleporters;
     }
 
@@ -136,7 +136,6 @@ public class TileWorld {
     public Rectangle getTeleporterRectangle(String name){
         Rectangle rectangle = new Rectangle();
         for(RectangleMapObject mapObject : this.teleporterRectangleMapObjects){
-            String mapObjectName = mapObject.getName();
             if(mapObject.getName().equals(name)){
                 rectangle = mapObject.getRectangle();
             }

@@ -1,6 +1,5 @@
 package com.team23.game.save;
 
-import com.team23.game.actors.characters.Infiltrator;
 import com.team23.game.actors.characters.NPC;
 import com.team23.game.utils.Position;
 

@@ -1,17 +1,10 @@
 package com.team23.game.screens.playscreen;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.team23.game.GameEntry;
 import com.team23.game.ShipSystem;
 import com.team23.game.actors.characters.Infiltrator;
 import com.team23.game.ui.controls.Button;
@@ -19,7 +12,6 @@ import com.team23.game.ui.controls.ButtonClickListener;
 import com.team23.game.ui.controls.TextBlock;
 import com.team23.game.ui.controls.UIElement;
 import com.team23.game.ui.pages.UIPage;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,33 +65,33 @@ public class Hud extends UIPage {
         systemTextLabel.setText("systems operational");
         systemTextLabel.setFontSize(fontSize);
         systemTextLabel.setFontColor(1,1,1,1);
-        systemTextLabel.setRelativePosition(1350,50, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.topAlignment);
+        systemTextLabel.setRelativePosition(1350,50, UIElement.HorizontalAlignment.LEFT_ALIGNMENT, UIElement.VerticalAlignment.TOP_ALIGNMENT);
 
         //operational systems
         systemLabel = new TextBlock();
         systemLabel.setText(String.format("%d / 15",systemsUp));
         systemLabel.setFontSize(fontSize);
         systemLabel.setFontColor(1,1,1,1);
-        systemLabel.setRelativePosition(1700,50, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.topAlignment);
+        systemLabel.setRelativePosition(1700,50, UIElement.HorizontalAlignment.LEFT_ALIGNMENT, UIElement.VerticalAlignment.TOP_ALIGNMENT);
 
         infiltratorTextLabel = new TextBlock();
         infiltratorTextLabel.setText("infiltrators remaining");
         infiltratorTextLabel.setFontSize(fontSize);
         infiltratorTextLabel.setFontColor(1,1,1,1);
-        infiltratorTextLabel.setRelativePosition(1350,100, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.topAlignment);
+        infiltratorTextLabel.setRelativePosition(1350,100, UIElement.HorizontalAlignment.LEFT_ALIGNMENT, UIElement.VerticalAlignment.TOP_ALIGNMENT);
 
         //remaining infiltrators
         infiltratorLabel = new TextBlock();
         infiltratorLabel.setText(String.format("%d / 8 ",infiltratorsRemaining));
         infiltratorLabel.setFontSize(fontSize);
         infiltratorLabel.setFontColor(1,1,1,1);
-        infiltratorLabel.setRelativePosition(1700,100, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.topAlignment);
+        infiltratorLabel.setRelativePosition(1700,100, UIElement.HorizontalAlignment.LEFT_ALIGNMENT, UIElement.VerticalAlignment.TOP_ALIGNMENT);
 
         attackTextLabel = new TextBlock();
         attackTextLabel.setText("Current attacks");
         attackTextLabel.setFontSize(fontSize);
         attackTextLabel.setFontColor(1,1,1,1);
-        attackTextLabel.setRelativePosition(1350,150, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.topAlignment);
+        attackTextLabel.setRelativePosition(1350,150, UIElement.HorizontalAlignment.LEFT_ALIGNMENT, UIElement.VerticalAlignment.TOP_ALIGNMENT);
 
 
         //systems under attack
@@ -107,7 +99,7 @@ public class Hud extends UIPage {
         attackLabel.setText("None");
         attackLabel.setFontSize(fontSize);
         attackLabel.setFontColor(1,1,1,1);
-        attackLabel.setRelativePosition(1700,150, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.topAlignment);
+        attackLabel.setRelativePosition(1700,150, UIElement.HorizontalAlignment.LEFT_ALIGNMENT, UIElement.VerticalAlignment.TOP_ALIGNMENT);
 
 
         //hallucination warning
@@ -115,7 +107,7 @@ public class Hud extends UIPage {
         hallucinateLabel.setText("");
         hallucinateLabel.setFontSize(fontSize);
         hallucinateLabel.setFontColor(1,1,1,1);
-        hallucinateLabel.setRelativePosition(1350,300, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.topAlignment);
+        hallucinateLabel.setRelativePosition(1350,300, UIElement.HorizontalAlignment.LEFT_ALIGNMENT, UIElement.VerticalAlignment.TOP_ALIGNMENT);
 
         Button saveButton = new Button();
         saveButton.setTextures(

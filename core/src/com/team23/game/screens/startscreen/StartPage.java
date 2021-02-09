@@ -21,7 +21,7 @@ public class StartPage extends UIPage {
         super();
         Image headLine = new Image(new TextureRegion(new Texture("font/Headline.png")));
         headLine.setScale(0.7f);
-        headLine.setRelativePosition(50, 50, UIElement.HorizontalAlignment.rightAlignment, UIElement.VerticalAlignment.topAlignment);
+        headLine.setRelativePosition(50, 50, UIElement.HorizontalAlignment.RIGHT_ALIGNMENT, UIElement.VerticalAlignment.TOP_ALIGNMENT);
 
         Button playButton = new Button();
         playButton.setTextures(
@@ -31,7 +31,7 @@ public class StartPage extends UIPage {
                 "");
         playButton.setWidth(playButton.getWidth()/2f);
         playButton.setHeight(playButton.getHeight()/2f);
-        playButton.setRelativePosition(0,325, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.bottomAlignment);
+        playButton.setRelativePosition(0,325, UIElement.HorizontalAlignment.LEFT_ALIGNMENT, UIElement.VerticalAlignment.BOTTOM_ALIGNMENT);
         playButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.
@@ -51,7 +51,7 @@ public class StartPage extends UIPage {
                 "ui/StartPage/loadHovered.png",
                 "ui/StartPage/loadPressed.png",
                 "");
-        loadButton.setRelativePosition(0,250, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.bottomAlignment);
+        loadButton.setRelativePosition(0,250, UIElement.HorizontalAlignment.LEFT_ALIGNMENT, UIElement.VerticalAlignment.BOTTOM_ALIGNMENT);
         loadButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.
@@ -68,7 +68,7 @@ public class StartPage extends UIPage {
                 "ui/StartPage/demoHovered.png",
                 "ui/StartPage/demoPressed.png",
                 "");
-        demoButton.setRelativePosition(0,175, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.bottomAlignment);
+        demoButton.setRelativePosition(0,175, UIElement.HorizontalAlignment.LEFT_ALIGNMENT, UIElement.VerticalAlignment.BOTTOM_ALIGNMENT);
         demoButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.
@@ -86,7 +86,7 @@ public class StartPage extends UIPage {
                 "ui/StartPage/exitHovered.png",
                 "ui/StartPage/exitPressed.png",
                 "");
-        exitButton.setRelativePosition(0,100, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.bottomAlignment);
+        exitButton.setRelativePosition(0,100, UIElement.HorizontalAlignment.LEFT_ALIGNMENT, UIElement.VerticalAlignment.BOTTOM_ALIGNMENT);
         exitButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.
