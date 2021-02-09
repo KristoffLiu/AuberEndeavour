@@ -14,7 +14,13 @@ import com.team23.game.ui.controls.Button;
 import com.team23.game.ui.controls.ButtonClickListener;
 import com.team23.game.ui.controls.Image;
 
+/***
+ * UI page for creating new game
+ */
 public class CreateNewGamePage extends UIPage {
+    /***
+     * Constructor
+     */
     public CreateNewGamePage() {
         super();
 

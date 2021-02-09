@@ -28,6 +28,9 @@ public class StartScreen implements Screen {
     private Animation walkAnimation;
     private TextureRegion currentFrame;
 
+    /***
+     * Constructor
+     */
     public StartScreen(final GameEntry gameEntry){
         this.gameEntry = gameEntry;
         introTexture = new Texture("IntroV2.png");
@@ -56,12 +59,19 @@ public class StartScreen implements Screen {
         Gdx.input.setInputProcessor(startPage);
     }
 
+    /***
+     * Constructor
+     */
     @Override
     public void show() {
         backgroundBatch = new SpriteBatch();
         Gdx.input.setInputProcessor(startPage);
     }
 
+    /***
+     * render
+     * @param delta the difference of time
+     */
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(21/255f,25/255f,38/255f,0);

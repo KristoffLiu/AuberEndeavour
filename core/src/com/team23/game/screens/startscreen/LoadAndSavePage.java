@@ -17,6 +17,9 @@ import com.team23.game.ui.pages.UIPage;
 import com.team23.game.ui.controls.*;
 import com.team23.game.ui.controls.labels.LabelStyles;
 
+/***
+ * Page for loading and saving
+ */
 public class LoadAndSavePage extends UIPage {
     Label saveTitle;
     ListView listView;

@@ -4,6 +4,9 @@ import com.team23.game.save.Save;
 import com.team23.game.ui.controls.ListViewItem;
 import com.team23.game.ui.controls.TextBlock;
 
+/***
+ * save list view item
+ */
 public class SaveListViewItem extends ListViewItem {
     Save save;
 
@@ -12,6 +15,9 @@ public class SaveListViewItem extends ListViewItem {
     TextBlock titleTextBlock;
     TextBlock timeTextBlock;
 
+    /***
+     * Constructor
+     */
     public SaveListViewItem(Save existingSave) {
         super();
         this.setTextures(

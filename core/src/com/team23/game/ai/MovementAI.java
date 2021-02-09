@@ -3,9 +3,10 @@ package com.team23.game.ai;
 import com.badlogic.gdx.math.Vector2;
 import com.team23.game.utils.Utility;
 
+/***
+ * Movement AI class
+ */
 public class MovementAI {
-
-
     public Vector2 destination;
 
     public void setDestination(Vector2 destination) {

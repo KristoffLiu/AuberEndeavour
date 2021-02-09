@@ -39,6 +39,9 @@ public class TeleportPage extends UIPage {
 
     Array<RectangleMapObject> rooms;
 
+    /***
+     * Constructor
+     */
     public TeleportPage(){
         loader      = new TmxMapLoader();
         map         = loader.load("MiniMap.tmx");
@@ -77,7 +80,7 @@ public class TeleportPage extends UIPage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                GameEntry.current.setGameState(PlayState.playing);
+                GameEntry.current.setGameState(PlayState.PLAYING);
             }
         });
 

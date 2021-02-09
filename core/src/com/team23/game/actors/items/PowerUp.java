@@ -6,6 +6,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.team23.game.ai.InfiltratorAI;
 import com.team23.game.save.PowerUpInfo;
 
+/***
+ * PowerUp class
+ */
 public class PowerUp extends Item {
 
     private InfiltratorAI ai;

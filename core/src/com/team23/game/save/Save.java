@@ -24,6 +24,10 @@ public class Save {
     public ArrayList<PowerUpInfo> powerUpInfoList;
     public ArrayList<ShipSystemInfo> shipSystemInfoList;
 
+    /***
+     * Constructor
+     * @param name
+     */
     public Save(String name){
         this.name = name;
         Date date = new Date();
@@ -33,14 +37,23 @@ public class Save {
         shipSystemInfoList = new ArrayList<>();
     }
 
+    /***
+     * Save
+     */
     public Save(){
 
     }
 
+    /***
+     * get the Auber
+     */
     public Auber getAuber(){
         return new Auber(this.auberInfo);
     }
 
+    /***
+     * get the NPCs List
+     */
     public ArrayList<NPC> getNPCsList(PathGraph pathGraph){
         ArrayList<NPC> results = new ArrayList<>();
         for(NPCInfo npcInfo : npcsInfoList){
@@ -49,6 +62,9 @@ public class Save {
         return results;
     }
 
+    /***
+     * get the Enemy List
+     */
     public ArrayList<Infiltrator> getEnemyList(PathGraph pathGraph){
         ArrayList<Infiltrator> results = new ArrayList<>();
         for(EnemyInfo enemyInfo : enemiesInfoList){
@@ -57,6 +73,9 @@ public class Save {
         return results;
     }
 
+    /***
+     * get the Power Up list
+     */
     public ArrayList<PowerUp> getPowerUpList(){
         ArrayList<PowerUp> results = new ArrayList<>();
         for(PowerUpInfo powerUpInfo : this.powerUpInfoList){
@@ -65,6 +84,9 @@ public class Save {
         return results;
     }
 
+    /***
+     * get the Power Up list
+     */
     public ArrayList<ShipSystem> getSystemList(PathGraph pathGraph){
         ArrayList<ShipSystem> results = new ArrayList<>();
         for(ShipSystemInfo shipSystemInfo : this.shipSystemInfoList){
@@ -73,10 +95,16 @@ public class Save {
         return results;
     }
 
+    /***
+     * set the auber info
+     */
     public void setAuberInfo(Auber auber){
         this.auberInfo = new AuberInfo(auber);
     }
 
+    /***
+     * set the npcs info list
+     */
     public void setNpcsInfoList(ArrayList<NPC> arrayList){
         npcsInfoList = new ArrayList<>();
         for(NPC npc : arrayList){
@@ -84,6 +112,9 @@ public class Save {
         }
     }
 
+    /***
+     * set the enemies info list
+     */
     public void setEnemiesInfoList(ArrayList<Infiltrator> arrayList){
         enemiesInfoList = new ArrayList<>();
         for(Infiltrator infiltrator : arrayList){
@@ -91,6 +122,9 @@ public class Save {
         }
     }
 
+    /***
+     * set the power up info list
+     */
     public void setPowerUpInfoList(ArrayList<PowerUp> arrayList){
         powerUpInfoList = new ArrayList<>();
         for(PowerUp powerUp : arrayList){
@@ -98,6 +132,9 @@ public class Save {
         }
     }
 
+    /***
+     * set the ship system info list
+     */
     public void setShipSystemInfoList(ArrayList<ShipSystem> arrayList){
         shipSystemInfoList = new ArrayList<>();
         for(ShipSystem shipSystem : arrayList){

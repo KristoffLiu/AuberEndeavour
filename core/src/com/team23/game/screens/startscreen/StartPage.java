@@ -15,8 +15,13 @@ import com.team23.game.ui.controls.Button;
 import com.team23.game.ui.controls.ButtonClickListener;
 import com.team23.game.ui.controls.Image;
 
+/***
+ * the starting page
+ */
 public class StartPage extends UIPage {
-
+    /***
+     * Constructor
+     */
     public StartPage() {
         super();
         Image headLine = new Image(new TextureRegion(new Texture("font/Headline.png")));

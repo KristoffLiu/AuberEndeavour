@@ -6,7 +6,6 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -28,6 +27,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.*;
 
+/***
+ * Play Screen
+ */
 public class PlayScreen implements Screen {
     protected GameEntry gameEntry;
     private PlayConfig config;
@@ -346,11 +348,11 @@ public class PlayScreen implements Screen {
             case loadedGame:
                 //switch to teleport menu
                 if (player.teleportCheck(tiles)) {
-                    gameEntry.setGameState(PlayState.teleporting);
+                    gameEntry.setGameState(PlayState.TELEPORTING);
                 }
 
                 else if(player.isTeleportPowerUp()){
-                    gameEntry.setGameState(PlayState.teleporting);
+                    gameEntry.setGameState(PlayState.TELEPORTING);
                     player.setTeleportPowerUp(false);
                 }
                 break;
@@ -395,7 +397,7 @@ public class PlayScreen implements Screen {
                 player.act(0);
                 break;
         }
-        gameEntry.setGameState(PlayState.playing);
+        gameEntry.setGameState(PlayState.PLAYING);
     }
 
     /**
@@ -452,7 +454,7 @@ public class PlayScreen implements Screen {
             gameEntry.setGameState(PlayState.win);
         }
         if (hud.getSystemsUp() == 0) {
-            gameEntry.setGameState(PlayState.lost);
+            gameEntry.setGameState(PlayState.LOST);
         }
     }
 

@@ -4,8 +4,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.team23.game.ai.graph.PathGraph;
 import com.team23.game.ai.graph.PathNode;
 
+/***
+ * Demo AI class
+ */
 public class DemoAI extends InfiltratorAI {
-
     public DemoAI(PathGraph graph){
         super(graph);
     }

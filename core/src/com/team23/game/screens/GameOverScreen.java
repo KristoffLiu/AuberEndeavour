@@ -7,11 +7,18 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.team23.game.GameEntry;
 
+/***
+ * Game Over Screen
+ */
 public class GameOverScreen implements Screen {
     private OrthographicCamera gamecam;
     private GameEntry game;
     private BitmapFont font;
 
+    /***
+     * Constuctor
+     * @param game
+     */
     public GameOverScreen(GameEntry game){
         this.game=game;
 
@@ -44,7 +51,7 @@ public class GameOverScreen implements Screen {
             case win:
                 font.draw(game.batch, "Game Over: You Won!", GameEntry.VIEW_WIDTH / 2f - 300f, GameEntry.VIEW_HEIGHT / 2f);
                 break;
-            case lost:
+            case LOST:
                 font.draw(game.batch, "Game Over: You Lost", GameEntry.VIEW_WIDTH / 2f - 300f, GameEntry.VIEW_HEIGHT / 2f);
                 break;
             default:

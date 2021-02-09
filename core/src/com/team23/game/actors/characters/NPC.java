@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.team23.game.ai.InfiltratorAI;
 import com.team23.game.ai.graph.PathGraph;
 import com.team23.game.save.NPCInfo;
+
 /***
  * N P C
  */

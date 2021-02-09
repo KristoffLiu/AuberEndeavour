@@ -1,9 +1,7 @@
 package com.team23.game.screens.playscreen;
 
-import com.team23.game.GameEntry;
-
 /***
- *
+ * Play Config
  */
 public class PlayConfig {
     public PlayMode mode;
@@ -18,22 +16,22 @@ public class PlayConfig {
     }
 
     public static PlayConfig simpleNewGame(){
-        return new PlayConfig(PlayMode.newGame, PlayDifficulty.simple, PlayState.playing);
+        return new PlayConfig(PlayMode.newGame, PlayDifficulty.simple, PlayState.PLAYING);
     }
 
     public static PlayConfig normalNewGame(){
-        return new PlayConfig(PlayMode.newGame, PlayDifficulty.normal, PlayState.playing);
+        return new PlayConfig(PlayMode.newGame, PlayDifficulty.normal, PlayState.PLAYING);
     }
 
     public static PlayConfig difficultNewGame(){
-        return new PlayConfig(PlayMode.newGame, PlayDifficulty.difficult, PlayState.playing);
+        return new PlayConfig(PlayMode.newGame, PlayDifficulty.difficult, PlayState.PLAYING);
     }
 
     public static PlayConfig loadedGame(){
-        return new PlayConfig(PlayMode.loadedGame, PlayDifficulty.normal, PlayState.playing);
+        return new PlayConfig(PlayMode.loadedGame, PlayDifficulty.normal, PlayState.PLAYING);
     }
 
     public static PlayConfig demoGame(){
-        return new PlayConfig(PlayMode.demoGame, PlayDifficulty.normal, PlayState.playing);
+        return new PlayConfig(PlayMode.demoGame, PlayDifficulty.normal, PlayState.PLAYING);
     }
 }

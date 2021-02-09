@@ -5,6 +5,9 @@ import com.team23.game.utils.Utility;
 import com.team23.game.ai.graph.PathGraph;
 import com.team23.game.ai.graph.PathNode;
 
+/***
+ * Infiltrator AI class
+ */
 public class InfiltratorAI {
     //The Infiltrator will go here if it has nowhere else to go
     protected final PathNode restingPosition = new PathNode(new Vector2(4712,4956),false);

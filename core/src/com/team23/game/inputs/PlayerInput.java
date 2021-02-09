@@ -3,6 +3,9 @@ package com.team23.game.inputs;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
+/***
+ * Player Input class
+ */
 public class PlayerInput {
     /**
      * Decides the direction the player is inputting

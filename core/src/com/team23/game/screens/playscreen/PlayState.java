@@ -1,10 +1,13 @@
 package com.team23.game.screens.playscreen;
 
+/***
+ * Play State
+ */
 public enum PlayState {
-    notStarted,
-    start,
-    playing,
-    teleporting,
-    lost,
+    NOTSTARTED,
+    START,
+    PLAYING,
+    TELEPORTING,
+    LOST,
     win
 }

@@ -9,6 +9,9 @@ import com.team23.game.actors.CustomActor;
 
 import java.util.List;
 
+/***
+ * Item class
+ */
 public abstract class Item extends CustomActor {
     protected Batch batch;
 
