@@ -16,23 +16,15 @@ public class SelectableUIElement extends Container {
     public TextureRegion selectedPressedTexture     ;
     public TextureRegion notActivatedTexture        ;
 
-//    unselected,
-//    selected,
-//    unselectedHovered,
-//    unselectedPressed,
-//    selectedHovered,
-//    selectedPressed,
-//    notActivated
-
     SelectableUIElementClickListener selectableUIElementClickListener;
-    SelectableUIState uiState = SelectableUIState.unselected;
-    SelectableState selectableState = SelectableState.unselected;
+    SelectableUIState uiState = SelectableUIState.UNSELECTED;
+    SelectableState selectableState = SelectableState.UNSELECTED;
 
     public SelectableUIElement() {
         super();
         container = new Container();
         container.setUIParent(this);
-        uiState = SelectableUIState.unselected;
+        uiState = SelectableUIState.UNSELECTED;
         selectableUIElementClickListener = new SelectableUIElementClickListener();
         this.addListener(selectableUIElementClickListener);
     }
@@ -66,25 +58,25 @@ public class SelectableUIElement extends Container {
         this.selectedPressedTexture     = !selectedPressedTexturePath.isEmpty() ? new TextureRegion(new Texture(selectedPressedTexturePath)) : null;
         this.notActivatedTexture        = !notActivatedTexturePath.isEmpty() ? new TextureRegion(new Texture(notActivatedTexturePath)) : null;
         switch (this.uiState){
-            case unselected:
+            case UNSELECTED:
                 this.setTextureRegion(unselectedTexture);
                 break;
-            case selected:
+            case SELECTED:
                 this.setTextureRegion(selectedTexture);
                 break;
-            case unselectedHovered:
+            case UNSELECTEDHOVERED:
                 this.setTextureRegion(unselectedHoveredTexture);
                 break;
-            case unselectedPressed:
+            case UNSELECTEDPRESSED:
                 this.setTextureRegion(unselectedPressedTexture);
                 break;
-            case selectedHovered:
+            case SELECTEDHOVERED:
                 this.setTextureRegion(selectedHoveredTexture);
                 break;
-            case selectedPressed:
+            case SELECTEDPRESSED:
                 this.setTextureRegion(selectedPressedTexture);
                 break;
-            case notActivated:
+            case NOTACTIVATED:
                 this.setTextureRegion(notActivatedTexture);
                 break;
         }
@@ -96,41 +88,31 @@ public class SelectableUIElement extends Container {
         this.addListener(selectableUIElementClickListener);
     }
 
-//    public void isEnabled(boolean isEnabled){
-//        this.isEnabled = isEnabled;
-//        if(isEnabled){
-//            setButtonUIState(uiState.normal);
-//        }
-//        else {
-//            setButtonUIState(ClickableUIElement.ButtonUIState.notActivated);
-//        }
-//    }
-
     //Switches the texture of the button to be highlighted or not highlighted
     public void setUIState(SelectableUIState selectableUIState){
         if(selectableUIState != this.uiState){
             float previousWidth  = this.getWidth();
             float previousHeight = this.getHeight();
             switch (selectableUIState){
-                case unselected:
+                case UNSELECTED:
                     this.setTextureRegion(unselectedTexture);
                     break;
-                case selected:
+                case SELECTED:
                     this.setTextureRegion(selectedTexture);
                     break;
-                case unselectedHovered:
+                case UNSELECTEDHOVERED:
                     this.setTextureRegion(unselectedHoveredTexture);
                     break;
-                case unselectedPressed:
+                case UNSELECTEDPRESSED:
                     this.setTextureRegion(unselectedPressedTexture);
                     break;
-                case selectedHovered:
+                case SELECTEDHOVERED:
                     this.setTextureRegion(selectedHoveredTexture);
                     break;
-                case selectedPressed:
+                case SELECTEDPRESSED:
                     this.setTextureRegion(selectedPressedTexture);
                     break;
-                case notActivated:
+                case NOTACTIVATED:
                     this.setTextureRegion(notActivatedTexture);
                     break;
             }
@@ -140,21 +122,16 @@ public class SelectableUIElement extends Container {
         }
     }
 
-    @Override
-    public void act(float delta){
-        super.act(delta);
-    }
-
     public void setState(SelectableState selectableState){
         if(selectableState != this.selectableState){
             switch (selectableState){
-                case unselected:
+                case UNSELECTED:
                     this.setTextureRegion(unselectedTexture);
                     break;
-                case selected:
+                case SELECTED:
                     this.setTextureRegion(selectedTexture);
                     break;
-                case notActivated:
+                case NOTACTIVATED:
                     this.setTextureRegion(notActivatedTexture);
                     break;
             }
@@ -162,21 +139,30 @@ public class SelectableUIElement extends Container {
         }
     }
 
+    /***
+     * actions when it has been selected
+     */
     public void select(){
-
+        //need to be implemented
     }
 
+    /***
+     * enum for selectable ui state
+     */
     public enum SelectableUIState {
-        unselected,
-        selected,
-        unselectedHovered,
-        unselectedPressed,
-        selectedHovered,
-        selectedPressed,
-        notActivated
+        UNSELECTED,
+        SELECTED,
+        UNSELECTEDHOVERED,
+        UNSELECTEDPRESSED,
+        SELECTEDHOVERED,
+        SELECTEDPRESSED,
+        NOTACTIVATED
     }
 
+    /***
+     * enum for selectable state
+     */
     public enum SelectableState {
-        unselected, selected, notActivated
+        UNSELECTED, SELECTED, NOTACTIVATED
     }
 }

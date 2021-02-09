@@ -22,20 +22,17 @@ import java.util.List;
 public class Hud extends UIPage {
     public PlayScreen playScreen;
     private Viewport viewport;
+
     private int systemsUp;
+    private int infiltratorsRemaining;
+
     private TextBlock systemLabel;
     private TextBlock systemTextLabel;
-
-    private int infiltratorsRemaining;
     private TextBlock infiltratorLabel;
     private TextBlock infiltratorTextLabel;
-
     private TextBlock attackLabel;
     private TextBlock attackTextLabel;
-
     private TextBlock hallucinateLabel;
-
-    private BitmapFont font;
 
     private ArrayList<Infiltrator> enemies;
     private ArrayList<ShipSystem> systems;
@@ -56,9 +53,6 @@ public class Hud extends UIPage {
         systemsUp = systems.size();
         infiltratorsRemaining = enemies.size();
 
-        System.out.format("%d / 15 systems",systemsUp);
-        font=new BitmapFont();
-        font.getData().setScale(3f);
         float fontSize = 0.5f;
 
         systemTextLabel = new TextBlock();
@@ -93,14 +87,12 @@ public class Hud extends UIPage {
         attackTextLabel.setFontColor(1,1,1,1);
         attackTextLabel.setRelativePosition(1350,150, UIElement.HorizontalAlignment.LEFT_ALIGNMENT, UIElement.VerticalAlignment.TOP_ALIGNMENT);
 
-
         //systems under attack
         attackLabel = new TextBlock();
         attackLabel.setText("None");
         attackLabel.setFontSize(fontSize);
         attackLabel.setFontColor(1,1,1,1);
         attackLabel.setRelativePosition(1700,150, UIElement.HorizontalAlignment.LEFT_ALIGNMENT, UIElement.VerticalAlignment.TOP_ALIGNMENT);
-
 
         //hallucination warning
         hallucinateLabel = new TextBlock();
@@ -164,14 +156,12 @@ public class Hud extends UIPage {
      */
     public void updateAttacks(List<ShipSystem> systems){
         /*Update hud to reflect attacks*/
-        String room=new String();
+        String room = "";
         systemsUp=0;
         for (ShipSystem system:systems){
-            if (system.getState()==1){
-                if (!room.contains(system.getRoom())){
-                    room+=system.getRoom();
-                    room+="\n";
-                }
+            if (system.getState()==1 && !room.contains(system.getRoom())){
+                room+=system.getRoom();
+                room+="\n";
             }
             if (system.getState()!=2){systemsUp+=1;}
         }

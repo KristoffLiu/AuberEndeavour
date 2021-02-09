@@ -53,4 +53,14 @@ public class Container extends UIElement {
             child.act(delta);
         }
     }
+
+    public void removed(){
+        for(UIElement child : children){
+            children.remove(child);
+            child.getRootPage().removeUIElement(child);
+            if(child instanceof Container){
+                ((Container)child).removed();
+            }
+        }
+    }
 }

@@ -65,7 +65,7 @@ public class LoadAndSavePage extends UIPage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                getParentFrame().goBack();
+                deleteSave();
             }
         });
 
@@ -88,7 +88,7 @@ public class LoadAndSavePage extends UIPage {
         });
 
         saveTitle = new Label("Auber Game", LabelStyles.getGameTitleLabelStyle());
-        saveTitle.setPosition(this.getWidth()/2-this.getWidth()/2,800);
+        saveTitle.setPosition(0,800);
         this.addUIElement(listView);
         this.addUIElement(loadAndSavePage);
         this.addUIElement(loadButton);
@@ -98,14 +98,22 @@ public class LoadAndSavePage extends UIPage {
     }
 
     public void loadSave(){
+        if(listView.selectedItem != null){
+            Save selectedSave = ((SaveListViewItem)listView.selectedItem).save;
+            SaveManager.current.setLoadedSave(selectedSave);
+            GameEntry.current.createPlayScreen(PlayConfig.loadedGame());
+        }
+    }
+
+    public void deleteSave(){
         Save selectedSave = ((SaveListViewItem)listView.selectedItem).save;
-        SaveManager.current.setLoadedSave(selectedSave);
-        GameEntry.current.createPlayScreen(PlayConfig.loadedGame());
+        this.listView.deleteItem((SaveListViewItem)listView.selectedItem);
+        SaveManager.current.delete(selectedSave);
     }
 
     public void updateSaveList(){
         for(Save save : GameEntry.current.saveManager.getSaves()){
-            listView.add(new SaveListViewItem(save));
+            listView.addItem(new SaveListViewItem(save));
         }
     }
 

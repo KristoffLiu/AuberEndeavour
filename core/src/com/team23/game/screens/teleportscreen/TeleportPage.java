@@ -19,7 +19,6 @@ import com.badlogic.gdx.utils.Array;
 import com.team23.game.GameEntry;
 import com.team23.game.screens.playscreen.PlayState;
 import com.team23.game.ui.controls.*;
-import com.team23.game.ui.minimap.ZoneClickButton;
 import com.team23.game.ui.pages.UIPage;
 
 import java.util.ArrayList;
@@ -30,7 +29,6 @@ import java.util.ArrayList;
  * @author Zhikang Liu
  */
 public class TeleportPage extends UIPage {
-    public ArrayList<ZoneClickButton> zoneClickButtons;
     public Image image;
 
     private OrthogonalTiledMapRenderer orthogonalTiledMapRenderer;

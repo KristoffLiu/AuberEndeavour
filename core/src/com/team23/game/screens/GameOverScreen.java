@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.team23.game.GameEntry;
-import com.team23.game.screens.playscreen.PlayState;
 
 public class GameOverScreen implements Screen {
     private OrthographicCamera gamecam;
@@ -24,6 +23,10 @@ public class GameOverScreen implements Screen {
 
 
     }
+
+    /**
+     * Called when this screen becomes the current screen for a {@link Game}.
+     */
     @Override
     public void show() {
 
@@ -39,35 +42,54 @@ public class GameOverScreen implements Screen {
         //draw background, objects, etc.
         switch (game.getState()){
             case win:
-                font.draw(game.batch, "Game Over: You Won!", GameEntry.VIEW_WIDTH / 2 - 300, GameEntry.VIEW_HEIGHT / 2);
+                font.draw(game.batch, "Game Over: You Won!", GameEntry.VIEW_WIDTH / 2f - 300f, GameEntry.VIEW_HEIGHT / 2f);
                 break;
             case lost:
-                font.draw(game.batch, "Game Over: You Lost", GameEntry.VIEW_WIDTH / 2 - 300, GameEntry.VIEW_HEIGHT / 2);
+                font.draw(game.batch, "Game Over: You Lost", GameEntry.VIEW_WIDTH / 2f - 300f, GameEntry.VIEW_HEIGHT / 2f);
+                break;
+            default:
                 break;
         }
         game.batch.end();
     }
 
+    /**
+     * @param width
+     * @param height
+     * @see ApplicationListener#resize(int, int)
+     */
     @Override
     public void resize(int width, int height) {
 
     }
 
+    /**
+     * @see ApplicationListener#pause()
+     */
     @Override
     public void pause() {
 
     }
 
+    /**
+     * @see ApplicationListener#resume()
+     */
     @Override
     public void resume() {
 
     }
 
+    /**
+     * Called when this screen is no longer the current screen for a {@link Game}.
+     */
     @Override
     public void hide() {
 
     }
 
+    /**
+     * Called when this screen should release all resources.
+     */
     @Override
     public void dispose() {
 
