@@ -283,7 +283,10 @@ public class PlayScreen implements Screen {
         Save currentSave = new Save();
         currentSave.setAuberInfo(this.player);
         currentSave.setEnemiesInfoList(this.enemies);
+        currentSave.setEnemiesInfoList(this.enemies);
         currentSave.setNpcsInfoList(this.npcs);
+        currentSave.setPowerUpInfoList(this.powerups);
+        currentSave.setShipSystemInfoList(this.tiles.getSystems());
         SaveManager.current.add(currentSave);
     }
 
