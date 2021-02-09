@@ -17,6 +17,8 @@ public class UIElement extends CustomActor implements IUIElement{
     float relativeX = 0;
     float relativeY = 0;
 
+    private Object tag;
+
     /***
      * add UI element
      */
@@ -401,5 +403,15 @@ public class UIElement extends CustomActor implements IUIElement{
         this.relativeY = relativeY;
         setHorizontalAlignment(horizontalAlignment);
         setVerticalAlignment(verticalAlignment);
+    }
+
+    @Override
+    public void setTag(Object tag){
+        this.tag = tag;
+    }
+
+    @Override
+    public Object getTag(){
+        return this.tag;
     }
 }

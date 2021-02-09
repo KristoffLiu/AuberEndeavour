@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="63" tilewidth="16" tileheight="16" infinite="0" nextlayerid="30" nextobjectid="240">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="63" tilewidth="16" tileheight="16" infinite="0" nextlayerid="30" nextobjectid="241">
  <tileset firstgid="1" source="tilesheet.tsx"/>
  <layer id="1" name="bg" width="50" height="63">
   <data encoding="csv">
@@ -139,7 +139,7 @@
   <object id="232" name="Brig" x="80.6667" y="464" width="156.667" height="253.333"/>
   <object id="233" name="Infirmary" x="256" y="496.667" width="288" height="190.667"/>
   <object id="234" name="CrewCabin" x="561.333" y="463.333" width="158" height="256"/>
-  <object id="235" name="EngineRoom" x="273.333" y="704.667" width="254" height="190"/>
+  <object id="235" name="Engine" x="273.333" y="704.667" width="254" height="190"/>
   <object id="236" name="Laboratory" x="256.667" y="287.333" width="287.333" height="192"/>
   <object id="238" name="Command" x="290" y="114" width="217.333" height="152.667"/>
  </objectgroup>

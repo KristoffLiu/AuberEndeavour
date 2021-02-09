@@ -19,8 +19,8 @@ import com.team23.game.TileWorld;
 import com.team23.game.actors.characters.*;
 import com.team23.game.actors.items.PowerUp;
 import com.team23.game.save.*;
-import com.team23.game.screens.TeleportMenu;
-import com.team23.game.ui.minimap.TeleportPage;
+import com.team23.game.screens.teleportscreen.TeleportScreen;
+import com.team23.game.screens.teleportscreen.TeleportPage;
 import com.team23.game.utils.Utility;
 import com.team23.game.ai.graph.PathGraph;
 import com.team23.game.ai.graph.PathNode;
@@ -80,7 +80,6 @@ public class PlayScreen implements Screen {
         //create ai pathing graph
         graph = createPathGraph("csv/nodes.csv", "csv/edges.csv");
 
-        teleportPage = new TeleportPage(this);
 
         //sets up stage and actors
         tiles = new TileWorld(this);
@@ -118,8 +117,6 @@ public class PlayScreen implements Screen {
         for (NPC npc: npcs){
             shipStage.addActor(npc);
         }
-
-
 
         //Used for the infiltrator's hallucinate power
         hallucinateTexture = new Texture("hallucinateV2.png");
@@ -322,8 +319,6 @@ public class PlayScreen implements Screen {
         if (hallucinate) { drawHallucinate();}
         hud.updateAttacks(tiles.getSystems());
         hud.stage.draw();
-
-        teleportPage.draw();
     }
 
     private void updateCamera(){
@@ -345,26 +340,19 @@ public class PlayScreen implements Screen {
             case newGame:
             case loadedGame:
                 //switch to teleport menu
-                if (player.teleportCheck(tiles) && gameEntry.teleporting == "false") {
-                    gameEntry.setScreen(new TeleportMenu(gameEntry));
+                if (player.teleportCheck(tiles)) {
+                    gameEntry.setGameState(PlayState.teleporting);
                 }
 
                 else if(player.isTeleportPowerUp()){
-                    gameEntry.setScreen(new TeleportMenu(gameEntry));
+                    gameEntry.setGameState(PlayState.teleporting);
                     player.setTeleportPowerUp(false);
-                }
-
-                //teleport auber
-                if (gameEntry.teleporting != "true" && gameEntry.teleporting != "false") {
-                    teleportAuber();
-                    gameEntry.teleporting = "false";
                 }
                 break;
             //teleport is disabled in demo mode, because the ai can't handle it
             case demoGame:
                 return;
         }
-
     }
 
     /**
@@ -389,9 +377,9 @@ public class PlayScreen implements Screen {
     /**
      * Sets auber's position to selected teleporter's position
      */
-    public void teleportAuber() {
-        float x = tiles.getTeleporters().get(gameEntry.teleporting).x + 100;
-        float y = tiles.getTeleporters().get(gameEntry.teleporting).y;
+    public void teleportAuber(String teleportDestination) {
+        float x = tiles.getTeleporterRectangle(teleportDestination).x + 50;
+        float y = tiles.getTeleporterRectangle(teleportDestination).y + 50;
         player.setPosition(x, y);
         player.movementSystem.updatePos(new Vector2(x, y));
         switch (this.config.mode){
@@ -402,6 +390,7 @@ public class PlayScreen implements Screen {
                 player.act(0);
                 break;
         }
+        gameEntry.setGameState(PlayState.playing);
     }
 
     /**
@@ -463,7 +452,6 @@ public class PlayScreen implements Screen {
     }
 
     public void updateInfiltrators(float dt) {
-
         for (Infiltrator enemy : enemies) {
             enemy.updateTimers(dt * 100);
 
@@ -475,7 +463,6 @@ public class PlayScreen implements Screen {
             if (enemy.getPowerDuration() > 1000) {
                 enemy.stopPower(this);
             }
-
         }
         checkInfiltratorsSystems();
     }
@@ -548,7 +535,6 @@ public class PlayScreen implements Screen {
                 }
             }
         }
-
     }
 
     @Override

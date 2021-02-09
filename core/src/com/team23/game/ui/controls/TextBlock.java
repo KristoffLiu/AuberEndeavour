@@ -45,6 +45,16 @@ public class TextBlock extends UIElement {
         updateText();
     }
 
+    public void updateText(){
+        label = new Label(
+                this.text,
+                LabelStylesHelper.generateLabelStyle(
+                        this.fontFamily,
+                        this.isClearer,
+                        this.fontSize,
+                        this.fontColor));
+    }
+
     /**
      * logic handler of the actor
      *
@@ -57,16 +67,6 @@ public class TextBlock extends UIElement {
     public void act(float delta) {
         super.act(delta);
         label.setPosition(this.getX(), this.getY() - label.getHeight());
-    }
-
-    public void updateText(){
-        label = new Label(
-                this.text,
-                LabelStylesHelper.generateLabelStyle(
-                        this.fontFamily,
-                        this.isClearer,
-                        this.fontSize,
-                        this.fontColor));
     }
 
     /**

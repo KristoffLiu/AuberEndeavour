@@ -80,4 +80,12 @@ public class UIPage extends Stage implements IUIPage {
     public void setParentFrame(Frame frame){
         this.parentFrame = frame;
     }
+
+    @Override
+    public void act(float delta){
+        super.act(delta);
+        for(Actor actor : this.getActors()){
+            actor.act(delta);
+        }
+    }
 }

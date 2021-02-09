@@ -53,7 +53,6 @@ public class StartScreen implements Screen {
         walkAnimation = new Animation(0.5F, backgroundFrames);
         walkAnimation.setPlayMode(Animation.PlayMode.LOOP);
 
-
         Gdx.input.setInputProcessor(startPage);
     }
 

@@ -9,6 +9,7 @@ public class PlayConfig {
     public PlayMode mode;
     public PlayDifficulty difficulty;
     public PlayState state;
+    public boolean teleporterStatus = false;
 
     public PlayConfig(PlayMode mode, PlayDifficulty difficulty, PlayState playState){
         this.mode = mode;

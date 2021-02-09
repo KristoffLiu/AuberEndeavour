@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.team23.game.save.AuberInfo;
 import com.team23.game.save.CharacterInfo;
+import com.team23.game.screens.teleportscreen.TeleportScreen;
 import com.team23.game.utils.Position;
 import com.team23.game.save.Save;
 import com.team23.game.save.SaveManager;
@@ -28,6 +29,7 @@ public class GameEntry extends Game {
 	public static final int ZOOM = 12;
 	public String teleporting;
 	public boolean demo;
+	public PlayConfig playConfig;
 	private PlayState state;
 
 	public StartScreen startScreen;
@@ -69,10 +71,6 @@ public class GameEntry extends Game {
 	@Override
 	public void render () {
 		super.render();
-		if (teleporting !="true" && teleporting !="false"){
-			//exit teleport screen
-			setScreen(screen);
-		}
 	}
 
 	public PlayState getState(){
@@ -87,6 +85,9 @@ public class GameEntry extends Game {
 					break;
 				case playing:
 					setScreen(playScreen);
+					break;
+				case teleporting:
+					setScreen(new TeleportScreen(this));
 					break;
 				case win:
 					setScreen(gameOverScreen);
