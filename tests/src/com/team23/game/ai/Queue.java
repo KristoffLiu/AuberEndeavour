@@ -6,7 +6,6 @@ import com.team23.game.ai.graph.queue.PriorityItem;
 import com.team23.game.ai.graph.queue.PriorityQueue;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.*;
 
 public class Queue {
 
