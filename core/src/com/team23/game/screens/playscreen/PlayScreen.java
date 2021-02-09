@@ -20,6 +20,7 @@ import com.team23.game.actors.characters.*;
 import com.team23.game.actors.items.PowerUp;
 import com.team23.game.save.*;
 import com.team23.game.screens.TeleportMenu;
+import com.team23.game.ui.minimap.TeleportPage;
 import com.team23.game.utils.Utility;
 import com.team23.game.ai.graph.PathGraph;
 import com.team23.game.ai.graph.PathNode;
@@ -34,7 +35,7 @@ public class PlayScreen implements Screen {
     private PlayConfig config;
 
     private Hud hud;
-    private OrthographicCamera gamecam;
+    private OrthographicCamera camera;
     private Viewport gamePort;
     private TmxMapLoader mapLoader;
     private TiledMap map;
@@ -54,6 +55,7 @@ public class PlayScreen implements Screen {
     //Used for the infiltrator's hallucinate power
     private boolean hallucinate;
     private Texture hallucinateTexture;
+    public TeleportPage teleportPage;
 
 
     private TileWorld tiles;
@@ -65,8 +67,8 @@ public class PlayScreen implements Screen {
         this.gameEntry = gameEntry;
         this.config = playConfig;
         this.scale = GameEntry.ZOOM;
-        gamecam = new OrthographicCamera();
-        gamePort = new FitViewport(GameEntry.VIEW_WIDTH, GameEntry.VIEW_HEIGHT, gamecam);
+        camera = new OrthographicCamera();
+        gamePort = new FitViewport(GameEntry.VIEW_WIDTH, GameEntry.VIEW_HEIGHT, camera);
         /*Possible fullscreen
         Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());*/
 
@@ -78,9 +80,11 @@ public class PlayScreen implements Screen {
         //create ai pathing graph
         graph = createPathGraph("csv/nodes.csv", "csv/edges.csv");
 
+        teleportPage = new TeleportPage(this);
+
         //sets up stage and actors
         tiles = new TileWorld(this);
-        shipStage = new Stage(new StretchViewport(GameEntry.VIEW_WIDTH, GameEntry.VIEW_HEIGHT, gamecam));
+        shipStage = new Stage(new StretchViewport(GameEntry.VIEW_WIDTH, GameEntry.VIEW_HEIGHT, camera));
         switch (this.config.mode){
             case newGame:
                 switch (this.config.difficulty){
@@ -318,17 +322,22 @@ public class PlayScreen implements Screen {
         if (hallucinate) { drawHallucinate();}
         hud.updateAttacks(tiles.getSystems());
         hud.stage.draw();
+
+        teleportPage.draw();
     }
 
     private void updateCamera(){
         //sets camera to players position
         Vector3 pos = new Vector3((player.getX()) + player.getWidth() / 2, (player.getY()) + player.getHeight() / 2, 0);
         shipStage.getViewport().getCamera().position.set(pos);
-        gamecam.position.set(pos);
-        gamecam.update();
-        renderer.setView(gamecam);
+        camera.position.set(pos);
+        camera.update();
+        renderer.setView(camera);
         gameEntry.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+    }
 
+    public OrthographicCamera getCamera(){
+        return this.camera;
     }
 
     private void teleportCheck(){
@@ -565,6 +574,5 @@ public class PlayScreen implements Screen {
         gameEntry.batch.dispose();
 
     }
-
 }
 
