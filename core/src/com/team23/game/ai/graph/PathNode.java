@@ -16,15 +16,12 @@ public class PathNode {
         this.position = position;
         this.system = system;
         this.working = true;
-        adjacentNodes = new ArrayList<PathNode>();
+        adjacentNodes = new ArrayList<>();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if(position==((PathNode)obj).position){
-            return  true;
-        }
-        return false;
+        return  obj!=null&&position==((PathNode)obj).position;
     }
 
     public void addAdjacentNode(PathNode node){
@@ -45,10 +42,7 @@ public class PathNode {
      * @return True if the node represents a working system, false otherwise
      */
     public boolean isWorkingSystem(){
-        if(system&&working){
-            return true;
-        }
-        return false;
+        return system&&working;
     }
 
     public void setWorking(boolean working){

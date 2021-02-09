@@ -25,16 +25,16 @@ public class SaveListViewItem extends ListViewItem {
         this.save = existingSave;
         titleTextBlock = new TextBlock();
         titleTextBlock.setText(save.name);
-        titleTextBlock.setVerticalAlignment(VerticalAlignment.centreAlignment);
-        titleTextBlock.setHorizontalAlignment(HorizontalAlignment.leftAlignment);
+        titleTextBlock.setVerticalAlignment(VerticalAlignment.CENTRE_ALIGNMENT);
+        titleTextBlock.setHorizontalAlignment(HorizontalAlignment.LEFT_ALIGNMENT);
         titleTextBlock.setRelativePosition(40,-45);
         titleTextBlock.setFontSize(0.8f);
         titleTextBlock.setFontColor(1,1,1,1);
 
         timeTextBlock = new TextBlock();
         timeTextBlock.setText(save.dateTime);
-        timeTextBlock.setVerticalAlignment(VerticalAlignment.centreAlignment);
-        timeTextBlock.setHorizontalAlignment(HorizontalAlignment.leftAlignment);
+        timeTextBlock.setVerticalAlignment(VerticalAlignment.CENTRE_ALIGNMENT);
+        timeTextBlock.setHorizontalAlignment(HorizontalAlignment.LEFT_ALIGNMENT);
         timeTextBlock.setRelativePosition(620,-60);
         timeTextBlock.setFontSize(0.4f);
         timeTextBlock.setFontColor(1,1,1,1);

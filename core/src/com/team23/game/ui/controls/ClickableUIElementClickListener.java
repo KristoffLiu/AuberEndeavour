@@ -22,11 +22,11 @@ public class ClickableUIElementClickListener extends ClickListener {
         ClickableUIElement clickableUIElement = (ClickableUIElement) event.getListenerActor();
         if (clickableUIElement.isEnabled) {
             if(!isPressed()){
-                clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.hovered);
+                clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.HOVERED);
             }
         }
         else {
-            clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.notActivated);
+            clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.NOTACTIVATED);
         }
         isStillOverAfterClicked = false;
     }
@@ -44,10 +44,10 @@ public class ClickableUIElementClickListener extends ClickListener {
             ClickableUIElement clickableUIElement = (ClickableUIElement) event.getListenerActor();
             if (clickableUIElement.isEnabled){
                 if(!isPressed()){
-                    clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.normal);
+                    clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.NORMAL);
                 }
             } else {
-                clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.notActivated);
+                clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.NOTACTIVATED);
             }
         }
     }
@@ -74,9 +74,9 @@ public class ClickableUIElementClickListener extends ClickListener {
         if(clickableUIElement.isEnabled){
             isStillPressed = true;
             if (clickableUIElement.isEnabled) {
-                clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.pressed);
+                clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.PRESSED);
             } else {
-                clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.notActivated);
+                clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.NOTACTIVATED);
             }
         }
         return super.touchDown(event, x, y, pointer, button);
@@ -90,9 +90,9 @@ public class ClickableUIElementClickListener extends ClickListener {
         super.touchDragged(event, x, y, pointer);
         ClickableUIElement clickableUIElement = (ClickableUIElement) event.getListenerActor();
         if (clickableUIElement.isEnabled) {
-            clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.pressed);
+            clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.PRESSED);
         } else {
-            clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.notActivated);
+            clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.NOTACTIVATED);
         }
     }
 
@@ -102,20 +102,19 @@ public class ClickableUIElementClickListener extends ClickListener {
     @Override
     public void clicked (InputEvent event, float x, float y) {
         super.clicked(event, x, y);
-        boolean a = isOver();
         if(isOver()){
             isStillOverAfterClicked = true;
         }
         ClickableUIElement clickableUIElement = (ClickableUIElement) event.getListenerActor();
         if (clickableUIElement.isEnabled) {
             if(isStillOverAfterClicked){
-                clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.hovered);
+                clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.HOVERED);
             }
             else{
-                clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.normal);
+                clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.NORMAL);
             }
         } else {
-            clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.notActivated);
+            clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.NOTACTIVATED);
         }
     }
 }

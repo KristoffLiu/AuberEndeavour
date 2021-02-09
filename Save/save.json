@@ -502,5 +502,256 @@ saves: [
 			}
 		]
 	}
+	{
+		id: 3
+		name: Save 3
+		auberInfo: {
+			position: {
+				x: 4707
+				y: 6294
+			}
+			moveSpeed: 9
+		}
+		npcsInfoList: [
+			{
+				position: {
+					x: 4700
+					y: 2000
+				}
+				moveSpeed: 9
+			}
+			{
+				position: {
+					x: 4800
+					y: 2300
+				}
+				moveSpeed: 9
+			}
+			{
+				position: {
+					x: 5000
+					y: 7356
+				}
+				moveSpeed: 9
+			}
+			{
+				position: {
+					x: 4732
+					y: 7000
+				}
+				moveSpeed: 9
+			}
+			{
+				position: {
+					x: 4732
+					y: 7500
+				}
+				moveSpeed: 9
+			}
+			{
+				position: {
+					x: 4732
+					y: 7800
+				}
+				moveSpeed: 9
+			}
+			{
+				position: {
+					x: 4200
+					y: 7800
+				}
+				moveSpeed: 9
+			}
+			{
+				position: {
+					x: 5400
+					y: 7800
+				}
+				moveSpeed: 9
+			}
+		]
+		enemiesInfoList: [
+			{
+				position: {
+					x: 4718
+					y: 4889
+				}
+				moveSpeed: 9
+				power: 1
+			}
+			{
+				position: {
+					x: 4719
+					y: 5675
+				}
+				moveSpeed: 9
+				power: 2
+			}
+			{
+				position: {
+					x: 4973
+					y: 4944
+				}
+				moveSpeed: 9
+				power: 3
+			}
+			{
+				position: {
+					x: 4063
+					y: 9338
+				}
+				moveSpeed: 9
+				power: 4
+			}
+			{
+				position: {
+					x: 4291
+					y: 4953
+				}
+				moveSpeed: 9
+				power: 1
+			}
+			{
+				position: {
+					x: 4174
+					y: 4956
+				}
+				moveSpeed: 9
+				power: 1
+			}
+			{
+				position: {
+					x: 3624
+					y: 7872
+				}
+				moveSpeed: 9
+				power: 2
+			}
+			{
+				position: {
+					x: 4716
+					y: 5010
+				}
+				moveSpeed: 9
+				power: 2
+			}
+		]
+		powerUpInfoList: [
+			{
+				position: {
+					x: 4700
+					y: 7800
+				}
+				name: Speed
+				isActivated: true
+			}
+			{
+				position: {
+					x: 4700
+					y: 5400
+				}
+				name: Immunity
+			}
+			{
+				position: {
+					x: 6900
+					y: 4750
+				}
+				name: Highlight
+			}
+			{
+				position: {
+					x: 4750
+					y: 3000
+				}
+				name: Freeze
+			}
+			{
+				position: {
+					x: 2500
+					y: 4700
+				}
+				name: Teleport
+			}
+		]
+		shipSystemInfoList: [
+			{
+				x: 3648
+				y: 9600
+				room: command
+			}
+			{
+				x: 4032
+				y: 9984
+				room: command
+			}
+			{
+				x: 5376
+				y: 9984
+				room: command
+			}
+			{
+				x: 5760
+				y: 9600
+				room: command
+			}
+			{
+				x: 3456
+				y: 7872
+				room: laboratory
+			}
+			{
+				x: 4224
+				y: 7872
+				state: 2
+				room: laboratory
+			}
+			{
+				x: 3840
+				y: 7104
+				room: laboratory
+			}
+			{
+				x: 3648
+				y: 5376
+				room: infirmary
+			}
+			{
+				x: 5760
+				y: 5376
+				room: infirmary
+			}
+			{
+				x: 1152
+				y: 4032
+				room: brig
+			}
+			{
+				x: 2496
+				y: 4032
+				room: brig
+			}
+			{
+				x: 7488
+				y: 4224
+				room: crew
+			}
+			{
+				x: 7488
+				y: 5760
+				room: crew
+			}
+			{
+				x: 3648
+				y: 2880
+				room: engine
+			}
+			{
+				x: 3648
+				y: 2112
+				room: engine
+			}
+		]
+	}
 ]
 }

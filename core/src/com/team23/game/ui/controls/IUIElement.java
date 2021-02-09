@@ -6,10 +6,10 @@ import com.team23.game.ui.pages.UIPage;
 
 public interface IUIElement {
     Object uiParent = null;
-    UIElement.HorizontalAlignment horizontalAlignment = UIElement.HorizontalAlignment.leftAlignment;
-    UIElement.VerticalAlignment verticalAlignment = UIElement.VerticalAlignment.bottomAlignment;
-    float relativeX = 0;
-    float relativeY = 0;
+    UIElement.HorizontalAlignment horizontalAlignment = UIElement.HorizontalAlignment.LEFT_ALIGNMENT;
+    UIElement.VerticalAlignment verticalAlignment = UIElement.VerticalAlignment.BOTTOM_ALIGNMENT;
+    float RELATIVEX = 0;
+    float RELATIVEY = 0;
 
     void setUIParent(UIElement _uiElement);
     Object getParent();
@@ -17,10 +17,10 @@ public interface IUIElement {
     void setRootPage(UIPage rootPage);
     UIPage getRootPage();
 
-    float getRelativeX();
-    float getRelativeY();
-    void setRelativeX(float relativeX);
-    void setRelativeY(float relativeY);
+    float getXRelative();
+    float getYRelative();
+    void setXRelative(float XRelative);
+    void setYRelative(float YRelative);
     UIElement.HorizontalAlignment getHorizontalAlignment();
     UIElement.VerticalAlignment getVerticalAlignment();
     void setHorizontalAlignment(UIElement.HorizontalAlignment alignment);

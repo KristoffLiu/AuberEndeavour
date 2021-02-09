@@ -20,13 +20,13 @@ public class CreateNewGamePage extends UIPage {
 
         Image headLine = new Image(new TextureRegion(new Texture("font/Headline.png")));
         headLine.setScale(0.7f);
-        headLine.setRelativePosition(50, 50, UIElement.HorizontalAlignment.rightAlignment, UIElement.VerticalAlignment.topAlignment);
+        headLine.setRelativePosition(50, 50, UIElement.HorizontalAlignment.RIGHT_ALIGNMENT, UIElement.VerticalAlignment.TOP_ALIGNMENT);
 
         Image createNewGameTitle = new Image(new TextureRegion(new Texture("ui/CreateNewGamePage/CreateNewGame.png")));
-        createNewGameTitle.setRelativePosition(0, 550, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.bottomAlignment);
+        createNewGameTitle.setRelativePosition(0, 550, UIElement.HorizontalAlignment.LEFT_ALIGNMENT, UIElement.VerticalAlignment.BOTTOM_ALIGNMENT);
 
         Image selectYourDifficultyTitle = new Image(new TextureRegion(new Texture("ui/CreateNewGamePage/SelectYourDifficulty.png")));
-        selectYourDifficultyTitle.setRelativePosition(0, 450,  UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.bottomAlignment);
+        selectYourDifficultyTitle.setRelativePosition(0, 450,  UIElement.HorizontalAlignment.LEFT_ALIGNMENT, UIElement.VerticalAlignment.BOTTOM_ALIGNMENT);
 
         Button difficultButton = new Button();
         difficultButton.setTextures(
@@ -34,7 +34,7 @@ public class CreateNewGamePage extends UIPage {
                 "ui/CreateNewGamePage/difficultHovered.png",
                 "ui/CreateNewGamePage/difficultPressed.png",
                 "");
-        difficultButton.setRelativePosition(0,375, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.bottomAlignment);
+        difficultButton.setRelativePosition(0,375, UIElement.HorizontalAlignment.LEFT_ALIGNMENT, UIElement.VerticalAlignment.BOTTOM_ALIGNMENT);
         difficultButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.
@@ -52,7 +52,7 @@ public class CreateNewGamePage extends UIPage {
                 "ui/CreateNewGamePage/normalHovered.png",
                 "ui/CreateNewGamePage/normalPressed.png",
                 "");
-        normalButton.setRelativePosition(0,300, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.bottomAlignment);
+        normalButton.setRelativePosition(0,300, UIElement.HorizontalAlignment.LEFT_ALIGNMENT, UIElement.VerticalAlignment.BOTTOM_ALIGNMENT);
         normalButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.
@@ -70,7 +70,7 @@ public class CreateNewGamePage extends UIPage {
                 "ui/CreateNewGamePage/simpleHovered.png",
                 "ui/CreateNewGamePage/simplePressed.png",
                 "");
-        simpleButton.setRelativePosition(0,225, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.bottomAlignment);
+        simpleButton.setRelativePosition(0,225, UIElement.HorizontalAlignment.LEFT_ALIGNMENT, UIElement.VerticalAlignment.BOTTOM_ALIGNMENT);
         simpleButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.
@@ -88,7 +88,7 @@ public class CreateNewGamePage extends UIPage {
                 "ui/CreateNewGamePage/backHovered.png",
                 "ui/CreateNewGamePage/backPressed.png",
                 "");
-        backButton.setRelativePosition(0,100, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.bottomAlignment);
+        backButton.setRelativePosition(0,100, UIElement.HorizontalAlignment.LEFT_ALIGNMENT, UIElement.VerticalAlignment.BOTTOM_ALIGNMENT);
         backButton.setClickListener(new ButtonClickListener(){
             /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
              * button or touch. The touchUp event is always {@link Event#handle() handled}.

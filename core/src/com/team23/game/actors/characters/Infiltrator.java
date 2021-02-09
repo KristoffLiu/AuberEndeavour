@@ -2,7 +2,6 @@ package com.team23.game.actors.characters;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.team23.game.ShipSystem;
@@ -19,10 +18,9 @@ public class Infiltrator extends Character {
 
     //Constants
     private float movSpeed;
-    private final float TIME_TO_DESTROY = 500f;
+    private final static float TIMETODESTROY = 500f;
 
     private InfiltratorAI ai;
-    private Vector2 destination;
     private boolean isArrested;
     //0=none, 1=invisibility, 2=hallucination 3=shapeshift 4=speed booast
     private int power;
@@ -76,12 +74,12 @@ public class Infiltrator extends Character {
             return;}
         if(destroyingSystem!=null){
             destructionTimer += delta*100;
-            if(destructionTimer>TIME_TO_DESTROY){
+            if(destructionTimer> TIMETODESTROY){
                 destroyingSystem.destroy();
                 destroyingSystem = null;
             }
         }else {
-            ai.update(delta, new Vector2(getX(), getY()));
+            ai.update( new Vector2(getX(), getY()));
             super.act(delta);
             powerCoolDown = (int) (Math.random() * 1000);
         }
@@ -95,7 +93,7 @@ public class Infiltrator extends Character {
     public void usePower(PlayScreen screen,String room){
         resetPower();
         if (power==1){this.getTextureRegion().setTexture(new Texture(Gdx.files.internal("Characters/infiltratorInvisibleSprite.png")));}
-        if (power==2&&room!="infirmary"){screen.setHallucinate(true);}
+        if (power==2&&!room.equals("infirmary")){screen.setHallucinate(true);}
         if (power==3){this.getTextureRegion().setTexture(new Texture(Gdx.files.internal("Characters/infiltratorShapeshift.png")));}
         if (power==4){movementSystem.setSpeed(20f);}
     }
@@ -119,9 +117,8 @@ public class Infiltrator extends Character {
 
     /***
      * stop the power
-     * @param screen
      */
-    public void stopPower(PlayScreen screen){
+    public void stopPower(){
         if (power==1){resetTexture(); }
         if (power==3){resetTexture();}
         if (power==4){movementSystem.setSpeed(movSpeed);}
@@ -152,7 +149,7 @@ public class Infiltrator extends Character {
             if (ai.left(new Vector2(getX(), getY()), isArrested)) {
                 Vector2 pos = movementSystem.left();
                 setPosition(pos.x, pos.y);
-                if (facingRight == true) {
+                if (facingRight) {
                     this.getTextureRegion().flip(true, false);
                     facingRight = false;
                 }
@@ -160,7 +157,7 @@ public class Infiltrator extends Character {
             if (ai.right(new Vector2(getX(), getY()), isArrested)) {
                 Vector2 pos = movementSystem.right();
                 setPosition(pos.x, pos.y);
-                if (facingRight == false) {
+                if (!facingRight) {
                     this.getTextureRegion().flip(true, false);
                     facingRight = true;
                 }
@@ -187,7 +184,6 @@ public class Infiltrator extends Character {
 
     /***
      * reset the texture
-     * @param screen
      */
     public void resetTexture(){
         powerCoolDown=0;
@@ -199,10 +195,10 @@ public class Infiltrator extends Character {
 
 
     public void updateTimers(float dt){
-        if (powerOn==false){
+        if (!powerOn){
             powerCoolDown+=dt;
         }
-        if (powerOn==true){
+        if (powerOn){
             powerDuration+=dt;
         }
     }

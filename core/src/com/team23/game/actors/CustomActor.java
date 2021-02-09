@@ -15,12 +15,16 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class CustomActor extends Actor {
     // TextureRegion of this Customer Actor
     private TextureRegion textureRegion;
-    private final Rectangle Bounds = new Rectangle();
+    private final Rectangle bounds = new Rectangle();
 
     public CustomActor() {
         super();
     }
 
+    /**
+     * Constructor - Create a custom actor
+     * @param textureRegion The texture of the actor
+     */
     public CustomActor(TextureRegion textureRegion) {
         super();
         setTextureRegion(textureRegion);
@@ -30,16 +34,25 @@ public class CustomActor extends Actor {
         return textureRegion;
     }
 
+    /**
+     * Retrieves the bounds of the actor
+     * @return
+     */
     public Rectangle getBounds(){
-        Bounds.set(
+        bounds.set(
                 this.getX(),
                 this.getY(),
                 this.getWidth(),
                 this.getHeight()
         );
-        return Bounds;
+        return bounds;
     }
 
+
+    /**
+     * Sets the texture of the actor
+     * @param textureRegion The texture of the actor
+     */
     public void setTextureRegion(TextureRegion textureRegion) {
         this.textureRegion = textureRegion;
         // reset the width and height after resetting the texture region.
@@ -48,22 +61,6 @@ public class CustomActor extends Actor {
             setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
         }
     }
-
-    /**
-     * logic handler of the actor
-     *
-     * @param delta
-     *		the change of time from the last rendered frame to the current rendering frame,
-     *	    or we call it the rendering time step / time difference.
-     *	    the unite is second.
-     */
-    @Override
-    public void act(float delta) {
-        super.act(delta);
-        // Usually there's no more actions to deal with.
-    }
-
-
 
     /**
      * RenderActor
@@ -79,14 +76,10 @@ public class CustomActor extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if (textureRegion == null || !isVisible()) {
-            return;
-        }
-        else if (textureRegion.getTexture() == null){
+        if (textureRegion == null || !isVisible() || textureRegion.getTexture() == null)  {
             return;
         }
 
-        Color tempBatchColor = batch.getColor();
         Color color = getColor();
         batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
 

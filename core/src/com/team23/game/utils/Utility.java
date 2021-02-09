@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Utility {
     private static final float DISTANCE_BUFFER = 10;
 
-    public static final String[] rooms = {"brig","crew","infirmary","laboratory","command","engine"};
+    protected static final String[] rooms = {"brig","crew","infirmary","laboratory","command","engine"};
 
     /***
      * Gives a random positive integer less than n
@@ -23,9 +23,6 @@ public class Utility {
      * @return True if the positions are close enough, false otherwise
      */
     public static boolean closeEnough(Vector2 pos1,Vector2 pos2){
-        if(pos1.dst(pos2)< DISTANCE_BUFFER){
-            return true;
-        }
-        return false;
+        return pos1.dst(pos2)< DISTANCE_BUFFER;
     }
 }

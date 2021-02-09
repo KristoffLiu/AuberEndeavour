@@ -19,7 +19,6 @@ import java.util.ArrayList;
  */
 public class Auber extends Character {
 
-    private float movSpeed;
     protected boolean facingRight;
     private int powerDuration;
     private String currentPower;
@@ -47,6 +46,7 @@ public class Auber extends Character {
         movementSystem.setSpeed(movSpeed);
         facingRight=true;
         teleportPowerUp = false;
+        currentPower = "";
     }
 
     /***
@@ -65,14 +65,14 @@ public class Auber extends Character {
         switch (PlayerInput.getDirection()){
             case 1:
                 handleMovement(movementSystem.left());
-                if (facingRight == true){
+                if (facingRight){
                     this.getTextureRegion().flip(true,false);
                     facingRight = false;
                 }
                 break;
             case 2:
                 handleMovement(movementSystem.right());
-                if (facingRight == false){
+                if (!facingRight){
                     this.getTextureRegion().flip(true,false);
                     facingRight = true;
                 }
@@ -94,6 +94,9 @@ public class Auber extends Character {
                 break;
             case 8:
                 handleMovement(movementSystem.upLeft());
+                break;
+
+            default:
                 break;
         }
     }
@@ -145,20 +148,19 @@ public class Auber extends Character {
     public void usePowerUp(ArrayList<PowerUp> powerups, ArrayList<Infiltrator> infiltrators, ArrayList<NPC> npcs){
         if(PlayerInput.arrest() && powerDuration == 0) {
             for (PowerUp powerup : powerups) {
-                if(!powerup.isActivated()) {
-                    if (Math.abs(powerup.getX() - this.getX()) < 100 && Math.abs(powerup.getY() - this.getY()) < 100) {
-                        if (powerup.getName() == "Speed") {
+                    if (!powerup.isActivated() && Math.abs(powerup.getX() - this.getX()) < 100 && Math.abs(powerup.getY() - this.getY()) < 100) {
+                        if (powerup.getName().equals("Speed")) {
                             currentPower = powerup.getName();
                             setMovSpeed(movementSystem.getSpeed() * 2);
                             powerup.activate();
                             powerDuration = 300;
                         }
-                        else if(powerup.getName() == "Immunity"){
+                        else if(powerup.getName().equals("Immunity")){
                             currentPower = powerup.getName();
                             powerup.activate();
                             powerDuration = 300;
                         }
-                        else if(powerup.getName() == "Highlight"){
+                        else if(powerup.getName().equals("Highlight")){
                             currentPower = powerup.getName();
                             for(Infiltrator infiltrator : infiltrators){
                                 infiltrator.setTexture(new Texture(Gdx.files.internal("Characters/infiltratorSpriteHighlighted.png")));
@@ -167,7 +169,7 @@ public class Auber extends Character {
                             powerup.activate();
                             powerDuration = 300;
                         }
-                        else if(powerup.getName() == "Freeze"){
+                        else if(powerup.getName().equals("Freeze")){
                             currentPower = powerup.getName();
                             for(Infiltrator infiltrator : infiltrators){
                                 infiltrator.setFrozen(true);
@@ -178,13 +180,12 @@ public class Auber extends Character {
                             powerup.activate();
                             powerDuration = 300;
                         }
-                        else if(powerup.getName() == "Teleport"){
+                        else if(powerup.getName().equals("Teleport")){
                             currentPower = powerup.getName();
                             teleportPowerUp = true;
                             powerup.activate();
                             powerDuration = 300;
                         }
-                    }
                 }
             }
         }
@@ -210,12 +211,13 @@ public class Auber extends Character {
     /***
      * the overridden act method.
      */
+    @Override
     public void act(float delta){
         if(powerDuration != 0) {
             powerDuration -= delta;
         }
         if(powerDuration <= 0){
-            if(currentPower == "Speed"){
+            if(currentPower.equals("Speed")){
                 setMovSpeed(movementSystem.getSpeed() / 2);
             }
             powerDuration = 0;

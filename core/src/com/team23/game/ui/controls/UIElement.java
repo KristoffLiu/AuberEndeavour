@@ -12,10 +12,10 @@ import com.team23.game.ui.pages.UIPage;
 public class UIElement extends CustomActor implements IUIElement{
     UIElement uiParent = null;
     UIPage rootPage = null;
-    HorizontalAlignment horizontalAlignment = HorizontalAlignment.leftAlignment;
-    VerticalAlignment verticalAlignment = VerticalAlignment.topAlignment;
-    float relativeX = 0;
-    float relativeY = 0;
+    HorizontalAlignment horizontalAlignment = HorizontalAlignment.LEFT_ALIGNMENT;
+    VerticalAlignment verticalAlignment = VerticalAlignment.TOP_ALIGNMENT;
+    float XRelative = 0;
+    float YRelative = 0;
 
     private Object tag;
 
@@ -28,10 +28,10 @@ public class UIElement extends CustomActor implements IUIElement{
 
     /***
      * set the UI Parent
-     * @param _uiParent parent of the ui
+     * @param uiParent parent of the ui
      */
-    public void setUIParent(UIElement _uiParent){
-        this.uiParent = _uiParent;
+    public void setUIParent(UIElement uiParent){
+        this.uiParent = uiParent;
     }
 
     /***
@@ -60,8 +60,8 @@ public class UIElement extends CustomActor implements IUIElement{
      * @return get the relative coordination of X
      */
     @Override
-    public float getRelativeX() {
-        return relativeX;
+    public float getXRelative() {
+        return XRelative;
     }
 
     /***
@@ -69,18 +69,17 @@ public class UIElement extends CustomActor implements IUIElement{
      * @return get the relative coordination of X
      */
     @Override
-    public float getRelativeY() {
-        return relativeY;
+    public float getYRelative() {
+        return YRelative;
     }
 
     /***
      * set the relative coordination of X
-     * @param relativeX the relative coordination of X
+     * @param XRelative the relative coordination of X
      */
-    public void setRelativeX(float relativeX){
+    public void setXRelative(float XRelative){
         if(this.rootPage != null){
-            float x_UIParent = 0;
-            float width_UIParent = 0;
+            float xUIParent = 0;
             float offset = 0f;
             float parentWidth = this.getRootPage().getWidth();
 
@@ -88,72 +87,69 @@ public class UIElement extends CustomActor implements IUIElement{
 
             }
             else{
-                x_UIParent = uiParent.getX();
-                width_UIParent = uiParent.getWidth();
-                offset += x_UIParent;
+                xUIParent = uiParent.getX();
+                offset += xUIParent;
                 parentWidth = this.getParent().getWidth();
             }
 
             switch (this.horizontalAlignment){
-                case leftAlignment:
-                    this.setX(offset + relativeX);
+                case LEFT_ALIGNMENT:
+                    this.setX(offset + XRelative);
                     break;
-                case centreAlignment:
+                case CENTRE_ALIGNMENT:
                     offset += parentWidth / 2 - this.getWidth() * this.getScaleX() / 2;
-                    this.setX(offset + relativeX);
+                    this.setX(offset + XRelative);
                     break;
-                case rightAlignment:
+                case RIGHT_ALIGNMENT:
                     offset += parentWidth - this.getWidth() * this.getScaleX();
-                    this.setX(offset - relativeX);
+                    this.setX(offset - XRelative);
                     break;
             }
         }
         else{
-            setX(relativeX);
+            setX(XRelative);
         }
-        this.relativeX = relativeX;
+        this.XRelative = XRelative;
     }
 
     /***
      * set the relative coordination of Y
-     * @param relativeY the relative coordination of Y
+     * @param YRelative the relative coordination of Y
      */
-    public void setRelativeY(float relativeY){
+    public void setYRelative(float YRelative){
         if(this.rootPage != null){
-            float y_UIParent = 0;
-            float height_UIParent = 0;
+            float yUIParent = 0;
             float offset = 0f;
-            float parentHeight = 0f;
+            float parentHeight;
             parentHeight = this.getRootPage().getHeight();
 
             if(uiParent == null){
 
             }
             else{
-                y_UIParent = uiParent.getY() + uiParent.getHeight();
-                height_UIParent = uiParent.getHeight();
-                offset += y_UIParent;
+                yUIParent = uiParent.getY() + uiParent.getHeight();
+                offset += yUIParent;
                 parentHeight = this.getParent().getHeight();
             }
 
             switch (this.verticalAlignment) {
-                case topAlignment:
+                case TOP_ALIGNMENT:
                     offset += (parentHeight - this.getHeight() * this.getScaleY());
-                    this.setY(offset - relativeY);
+                    this.setY(offset - YRelative);
                     break;
-                case centreAlignment:
+                case CENTRE_ALIGNMENT:
                     offset += parentHeight / 2 - (this.getHeight() * this.getScaleY()) / 2;
-                    this.setY(offset + relativeY);
+                    this.setY(offset + YRelative);
                     break;
-                case bottomAlignment:
-                    this.setY(offset + relativeY);
+                case BOTTOM_ALIGNMENT:
+                    this.setY(offset + YRelative);
                     break;
             }
         }
         else{
-            setX(relativeY);
+            setX(YRelative);
         }
-        this.relativeY = relativeY;
+        this.YRelative = YRelative;
     }
 
     /***
@@ -180,7 +176,7 @@ public class UIElement extends CustomActor implements IUIElement{
      */
     public void setHorizontalAlignment(HorizontalAlignment alignment){
         horizontalAlignment = alignment;
-        setRelativeX(relativeX);
+        setXRelative(XRelative);
     }
 
     /***
@@ -189,7 +185,7 @@ public class UIElement extends CustomActor implements IUIElement{
      */
     public void setVerticalAlignment(VerticalAlignment alignment){
         verticalAlignment = alignment;
-        setRelativeY(relativeY);
+        setYRelative(YRelative);
     }
 
     /***
@@ -198,8 +194,8 @@ public class UIElement extends CustomActor implements IUIElement{
      * @param relativeY set the relative coordination of Y
      */
     public void setRelativePosition(float relativeX, float relativeY) {
-        this.relativeX = relativeX;
-        this.relativeY = relativeY;
+        this.XRelative = relativeX;
+        this.YRelative = relativeY;
         setHorizontalAlignment(this.horizontalAlignment);
         setVerticalAlignment(this.verticalAlignment);
     }
@@ -213,8 +209,8 @@ public class UIElement extends CustomActor implements IUIElement{
      */
     @Override
     public void setRelativePosition(float relativeX, float relativeY, HorizontalAlignment horizontalAlignment, VerticalAlignment verticalAlignment) {
-        this.relativeX = relativeX;
-        this.relativeY = relativeY;
+        this.XRelative = relativeX;
+        this.YRelative = relativeY;
         setHorizontalAlignment(horizontalAlignment);
         setVerticalAlignment(verticalAlignment);
     }
@@ -224,21 +220,22 @@ public class UIElement extends CustomActor implements IUIElement{
      * @param width set the width
      * @param height set the height
      */
+    @Override
     public void setSize(float width, float height){
         this.setWidth(width);
         this.setHeight(height);
     }
 
     public enum HorizontalAlignment{
-        leftAlignment, centreAlignment, rightAlignment
+        LEFT_ALIGNMENT, CENTRE_ALIGNMENT, RIGHT_ALIGNMENT
     }
 
     public enum VerticalAlignment{
-        topAlignment, centreAlignment, bottomAlignment
+        TOP_ALIGNMENT, CENTRE_ALIGNMENT, BOTTOM_ALIGNMENT
     }
 
-    float animationOrigin_X = 0f;
-    float animationOrigin_Y = 0f;
+    float animationOriginX = 0f;
+    float animationOriginY = 0f;
 
     /***
      * set the animation
@@ -246,8 +243,8 @@ public class UIElement extends CustomActor implements IUIElement{
      * @param y set the x coordination for animation
      */
     public void setAnimationOrigin(float x, float y){
-        animationOrigin_X = x;
-        animationOrigin_Y = y;
+        animationOriginX = x;
+        animationOriginY = y;
     }
 
     /***
@@ -311,18 +308,18 @@ public class UIElement extends CustomActor implements IUIElement{
     /***
      * fade out this ui element in a duration of time
      */
-    public void fadeOut(float offset_x, float offset_y, float duration){
-        fadeOut(offset_x, offset_y, duration, null);
+    public void fadeOut(float offsetX, float offsetY, float duration){
+        fadeOut(offsetX, offsetY, duration, null);
     }
 
     /***
      * fade out this ui element in a duration of time
      */
-    public void fadeOut(float offset_x, float offset_y, float duration, @Null Interpolation interpolation){
+    public void fadeOut(float offsetX, float offsetY, float duration, @Null Interpolation interpolation){
         if(this.isVisible()){
             AlphaAction uiElementAlphaAction = Actions.alpha(0f, duration, interpolation);
-            MoveByAction uiElementMoveByAction = Actions.moveBy(offset_x, offset_y, duration, interpolation);
-            MoveByAction endingMoveByAction = Actions.moveBy(-offset_x,-offset_y,0f);
+            MoveByAction uiElementMoveByAction = Actions.moveBy(offsetX, offsetY, duration, interpolation);
+            MoveByAction endingMoveByAction = Actions.moveBy(-offsetX,-offsetY,0f);
             ParallelAction parallelAction = Actions.parallel(uiElementAlphaAction, uiElementMoveByAction);
             SequenceAction sequenceAction = Actions.sequence(parallelAction,endingMoveByAction);
             this.addAction(sequenceAction);
@@ -332,11 +329,11 @@ public class UIElement extends CustomActor implements IUIElement{
     /***
      * fade out this ui element in a duration of time
      */
-    public void fadeOut(float x, float y, float offset_x, float offset_y, float duration, @Null Interpolation interpolation){
+    public void fadeOut(float x, float y, float offsetX, float offsetY, float duration, @Null Interpolation interpolation){
         if(this.isVisible()){
             MoveToAction uiElementMoveToAction = Actions.moveTo(x,y,0f);
             AlphaAction uiElementAlphaAction = Actions.alpha(0f, duration, interpolation);
-            MoveByAction uiElementMoveByAction = Actions.moveBy(offset_x, offset_y, duration, interpolation);
+            MoveByAction uiElementMoveByAction = Actions.moveBy(offsetX, offsetY, duration, interpolation);
             ParallelAction parallelAction = Actions.parallel(uiElementAlphaAction, uiElementMoveByAction);
             SequenceAction sequenceAction = Actions.sequence(uiElementMoveToAction,parallelAction);
             this.addAction(sequenceAction);
@@ -361,20 +358,20 @@ public class UIElement extends CustomActor implements IUIElement{
     /***
      * fade in this ui element in a duration of time
      */
-    public void fadeIn(float offset_x, float offset_y, float duration){
-        fadeIn(offset_x, offset_y, duration, null);
+    public void fadeIn(float offsetX, float offsetY, float duration){
+        fadeIn(offsetX, offsetY, duration, null);
     }
 
     /***
      * fade in this ui element in a duration of time
      */
-    public void fadeIn(float offset_x, float offset_y, float duration, @Null Interpolation interpolation){
+    public void fadeIn(float offsetX, float offsetY, float duration, @Null Interpolation interpolation){
         if(this.isVisible()){
             VisibleAction uiElementVisibleAction = Actions.visible(true);
-            MoveByAction beginningMoveToAction = Actions.moveBy(-offset_x, -offset_y,0f);
+            MoveByAction beginningMoveToAction = Actions.moveBy(-offsetX, -offsetY,0f);
             AlphaAction beginningAlphaAction = Actions.alpha(0f, 0);
             AlphaAction uiElementAlphaAction = Actions.alpha(1f, duration, interpolation);
-            MoveByAction uiElementMoveByAction = Actions.moveBy(offset_x, offset_y, duration, interpolation);
+            MoveByAction uiElementMoveByAction = Actions.moveBy(offsetX, offsetY, duration, interpolation);
             ParallelAction parallelAction = Actions.parallel(uiElementAlphaAction, uiElementMoveByAction);
             SequenceAction sequenceAction = Actions.sequence(uiElementVisibleAction,beginningMoveToAction,beginningAlphaAction,parallelAction);
             this.addAction(sequenceAction);
@@ -384,13 +381,13 @@ public class UIElement extends CustomActor implements IUIElement{
     /***
      * fade in this ui element in a duration of time
      */
-    public void fadeIn(float x, float y, float offset_x, float offset_y, float duration, @Null Interpolation interpolation){
+    public void fadeIn(float x, float y, float offsetX, float offsetY, float duration, @Null Interpolation interpolation){
         if(this.isVisible()){
             VisibleAction uiElementVisibleAction = Actions.visible(true);
-            MoveToAction uiElementMoveToAction = Actions.moveTo(x - offset_x,y - offset_y,0f);
+            MoveToAction uiElementMoveToAction = Actions.moveTo(x - offsetX,y - offsetY,0f);
             AlphaAction beginningAlphaAction = Actions.alpha(0f, 0);
             AlphaAction uiElementAlphaAction = Actions.alpha(1f, duration, interpolation);
-            MoveByAction uiElementMoveByAction = Actions.moveBy(offset_x, offset_y, duration, interpolation);
+            MoveByAction uiElementMoveByAction = Actions.moveBy(offsetX, offsetY, duration, interpolation);
             ParallelAction parallelAction = Actions.parallel(uiElementAlphaAction, uiElementMoveByAction);
             SequenceAction sequenceAction = Actions.sequence(uiElementVisibleAction,uiElementMoveToAction,beginningAlphaAction,parallelAction);
             this.addAction(sequenceAction);
@@ -399,8 +396,6 @@ public class UIElement extends CustomActor implements IUIElement{
 
     @Override
     public void act(float delta){
-        this.relativeX = relativeX;
-        this.relativeY = relativeY;
         setHorizontalAlignment(horizontalAlignment);
         setVerticalAlignment(verticalAlignment);
     }

@@ -4,8 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
 public class PlayerInput {
-
-
     /**
      * Decides the direction the player is inputting
      * @return 1 if left, 2 if right, 3 if up, 4 if down and 0 if none
@@ -27,8 +25,6 @@ public class PlayerInput {
      * @return True if player is inputting arrest, false otherwise
      */
     public static boolean arrest(){
-        if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
-            return true;
-        }return false;
+        return Gdx.input.isKeyPressed(Input.Keys.SPACE);
     }
 }

@@ -18,9 +18,7 @@ public class MovementAI {
      * @return True if the agent should move left, false otherwise
      */
     public boolean left(Vector2 position){
-        if(position.x>destination.x){
-            return true;
-        }return false;
+        return position.x>destination.x;
     }
 
     /**
@@ -29,9 +27,7 @@ public class MovementAI {
      * @return True if the agent should move right, false otherwise
      */
     public boolean right(Vector2 position){
-        if(position.x<destination.x){
-            return true;
-        }return false;
+        return position.x<destination.x;
     }
 
     /**
@@ -40,9 +36,7 @@ public class MovementAI {
      * @return True if the agent should move up, false otherwise
      */
     public boolean up(Vector2 position ){
-        if(position.y<destination.y){
-            return true;
-        }return false;
+        return position.y<destination.y;
     }
 
     /**
@@ -51,17 +45,12 @@ public class MovementAI {
      * @return True if the agent should move down, false otherwise
      */
     public boolean down(Vector2 position){
-        if(position.y>destination.y){
-            return true;
-        }return false;
+        return position.y>destination.y;
     }
 
 
     public boolean hasDestination(){
-        if(destination!=null){
-            return true;
-        }
-        return false;
+        return destination!=null;
     }
 
     /**

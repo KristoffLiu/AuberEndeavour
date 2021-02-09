@@ -2,25 +2,21 @@ package com.team23.game.actors.items;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.team23.game.actors.CustomActor;
 
 import java.util.List;
 
-public abstract class item extends CustomActor {
+public abstract class Item extends CustomActor {
     protected Batch batch;
-    private String spriteName;
 
-    public item(Vector2 position, String spriteName){
-        this.batch = batch;
+    public Item(Vector2 position, String spriteName){
         this.setTextureRegion(new TextureRegion(getTexture(spriteName)));
         this.setWidth(150);
         this.setHeight(170);
+        this.setPosition(position.x, position.y);
     }
 
     protected abstract Texture getTexture(String spriteName);
@@ -31,11 +27,6 @@ public abstract class item extends CustomActor {
 
     @Override
     public void act(float delta) {
-    }
-
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch,parentAlpha);
     }
 
     @Override
@@ -51,8 +42,6 @@ public abstract class item extends CustomActor {
      */
     public boolean checkCollision(List<Rectangle> collisionBoxes){
         for (Rectangle collisionBox: collisionBoxes){
-            //System.out.println(sprite.getBoundingRectangle());
-            //System.out.println(wall);
             if(this.getBounds().overlaps(collisionBox)){
                 return true;
             }

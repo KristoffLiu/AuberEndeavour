@@ -11,8 +11,8 @@ import com.badlogic.gdx.utils.Null;
 public class NonUIAnimationHelper {
 
     Actor actor;
-    float animationOrigin_X = 0f;
-    float animationOrigin_Y = 0f;
+    float animationOriginX = 0f;
+    float animationOriginY = 0f;
 
     /***
      * constructor
@@ -25,8 +25,8 @@ public class NonUIAnimationHelper {
      * set the origin of the animation
      */
     public void setAnimationOrigin(float x, float y){
-        animationOrigin_X = x;
-        animationOrigin_Y = y;
+        animationOriginX = x;
+        animationOriginY = y;
     }
 
     /***
@@ -94,25 +94,25 @@ public class NonUIAnimationHelper {
      * fade out
      * @param duration the time of duration
      */
-    public void fadeOut(float offset_x, float offset_y, float duration){
-        fadeOut(offset_x, offset_y, duration, null);
+    public void fadeOut(float offsetX, float offsetY, float duration){
+        fadeOut(offsetX, offsetY, duration, null);
     }
 
     /***
      * fade out
      */
-    public void fadeOut(float offset_x, float offset_y, float duration, @Null Interpolation interpolation){
-        fadeOut(animationOrigin_X, animationOrigin_Y, offset_x, offset_y, duration, interpolation);
+    public void fadeOut(float offsetX, float offsetY, float duration, @Null Interpolation interpolation){
+        fadeOut(animationOriginX, animationOriginY, offsetX, offsetY, duration, interpolation);
     }
 
     /***
      * fade out
      */
-    public void fadeOut(float x, float y, float offset_x, float offset_y, float duration, @Null Interpolation interpolation){
+    public void fadeOut(float x, float y, float offsetX, float offsetY, float duration, @Null Interpolation interpolation){
         if(actor.isVisible()){
             MoveToAction uiElementMoveToAction = Actions.moveTo(x,y,0f);
             AlphaAction uiElementAlphaAction = Actions.alpha(0f, duration, interpolation);
-            MoveByAction uiElementMoveByAction = Actions.moveBy(offset_x, offset_y, duration, interpolation);
+            MoveByAction uiElementMoveByAction = Actions.moveBy(offsetX, offsetY, duration, interpolation);
             ParallelAction parallelAction = Actions.parallel(uiElementAlphaAction, uiElementMoveByAction);
             SequenceAction sequenceAction = Actions.sequence(uiElementMoveToAction,parallelAction);
             actor.addAction(sequenceAction);
@@ -137,25 +137,25 @@ public class NonUIAnimationHelper {
     /***
      * fade in
      */
-    public void fadeIn(float offset_x, float offset_y, float duration){
-        fadeIn(offset_x, offset_y, duration, null);
+    public void fadeIn(float offsetX, float offsetY, float duration){
+        fadeIn(offsetX, offsetY, duration, null);
     }
 
     /***
      * fade in
      */
-    public void fadeIn(float offset_x, float offset_y, float duration, @Null Interpolation interpolation){
-        fadeIn(animationOrigin_X, animationOrigin_Y, offset_x, offset_y, duration, interpolation);
+    public void fadeIn(float offsetX, float offsetY, float duration, @Null Interpolation interpolation){
+        fadeIn(animationOriginX, animationOriginY, offsetX, offsetY, duration, interpolation);
     }
 
     /***
      * fade in
      */
-    public void fadeIn(float x, float y, float offset_x, float offset_y, float duration, @Null Interpolation interpolation){
+    public void fadeIn(float x, float y, float offsetX, float offsetY, float duration, @Null Interpolation interpolation){
         if(actor.isVisible()){
-            MoveToAction uiElementMoveToAction = Actions.moveTo(x - offset_x,y - offset_y,0f);
+            MoveToAction uiElementMoveToAction = Actions.moveTo(x - offsetX,y - offsetY,0f);
             AlphaAction uiElementAlphaAction = Actions.alpha(1f, duration, interpolation);
-            MoveByAction uiElementMoveByAction = Actions.moveBy(offset_x, offset_y, duration, interpolation);
+            MoveByAction uiElementMoveByAction = Actions.moveBy(offsetX, offsetY, duration, interpolation);
             ParallelAction parallelAction = Actions.parallel(uiElementAlphaAction, uiElementMoveByAction);
             SequenceAction sequenceAction = Actions.sequence(uiElementMoveToAction,parallelAction);
             actor.addAction(sequenceAction);
