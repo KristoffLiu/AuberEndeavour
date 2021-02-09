@@ -1,6 +1,5 @@
 package com.team23.game.actors.characters;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.team23.game.TileWorld;
 import com.team23.game.ai.DemoAI;
@@ -13,7 +12,6 @@ import java.util.ArrayList;
  * Demo Auber class
  */
 public class DemoAuber extends Auber{
-    private float movSpeed;
     private DemoAI ai;
 
     public DemoAuber(Vector2 position, PathGraph graph,float movSpeed) {
@@ -39,7 +37,7 @@ public class DemoAuber extends Auber{
         if(ai.left(getPosition())){
             Vector2 position = movementSystem.left();
             setPosition(position.x,position.y);
-            if (facingRight==true){
+            if (facingRight){
                 this.getTextureRegion().flip(true,false);
                 facingRight=false;
             }
@@ -48,7 +46,7 @@ public class DemoAuber extends Auber{
         if(ai.right(getPosition())){
             Vector2 position = movementSystem.right();
             setPosition(position.x,position.y);
-            if (facingRight==false){
+            if (!facingRight){
                 this.getTextureRegion().flip(true,false);
                 facingRight=true;
             }

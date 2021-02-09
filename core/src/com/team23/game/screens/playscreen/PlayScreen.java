@@ -566,8 +566,6 @@ public class PlayScreen implements Screen {
         renderer.dispose();
         shipStage.dispose();
         gameEntry.batch.dispose();
-
     }
-
 }
 
