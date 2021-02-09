@@ -34,4 +34,7 @@ public interface IUIElement {
     void fadeOut(float x, float y, float duration, @Null Interpolation interpolation);
     void fadeIn(float x, float y, float duration, @Null Interpolation interpolation);
 
+
+    void setTag(Object tag);
+    Object getTag();
 }

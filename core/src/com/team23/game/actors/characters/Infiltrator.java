@@ -35,10 +35,21 @@ public class Infiltrator extends Character {
     private boolean highlighted;
     private boolean frozen;
 
+    /***
+     * Constructor - create the Auber object when it is loaded from the save
+     * @param enemyInfo info the AuberInfo instance which is loaded from the save
+     * @param graph the path graph
+     */
     public Infiltrator(EnemyInfo enemyInfo, PathGraph graph) {
         this(enemyInfo.position.toVector2(), enemyInfo.power, graph, enemyInfo.moveSpeed);
     }
 
+    /***
+     * Constructor - create the Auber object from the new game.
+     * @param position info the AuberInfo instance which is loaded from the save
+     * @param power the path graph
+     * @param movSpeed the movement speed
+     */
     public Infiltrator(Vector2 position, int power, PathGraph graph, float movSpeed) {
         super(position, movSpeed);
         this.setSize(150, 170);
@@ -54,6 +65,10 @@ public class Infiltrator extends Character {
         frozen = false;
     }
 
+    /***
+     * store the logic code
+     * @param delta
+     */
     @Override
     public void act(float delta) {
         if(isArrested){
@@ -72,6 +87,11 @@ public class Infiltrator extends Character {
         }
     }
 
+    /***
+     * use the power
+     * @param screen
+     * @param room
+     */
     public void usePower(PlayScreen screen,String room){
         resetPower();
         if (power==1){this.getTextureRegion().setTexture(new Texture(Gdx.files.internal("Characters/infiltratorInvisibleSprite.png")));}
@@ -80,29 +100,47 @@ public class Infiltrator extends Character {
         if (power==4){movementSystem.setSpeed(20f);}
     }
 
+    /***
+     * set the Texture
+     * @param texture
+     */
     public void setTexture(Texture texture){
         this.getTextureRegion().setTexture(texture);
     }
 
+    /***
+     * reset the power
+     */
     private void resetPower(){
         powerCoolDown=0;
         powerDuration=0;
         powerOn=true;
     }
 
+    /***
+     * stop the power
+     * @param screen
+     */
     public void stopPower(PlayScreen screen){
         if (power==1){resetTexture(); }
         if (power==3){resetTexture();}
         if (power==4){movementSystem.setSpeed(movSpeed);}
         powerOn=false;
-
-
     }
 
+    /***
+     * stop the duration of the power
+     */
     public float getPowerDuration(){return powerDuration;}
+
+    /***
+     * stop the time of cooldown of the power
+     */
     public float getPowerCooldown(){return powerCoolDown;}
 
-
+    /***
+     * stop the duration of the power
+     */
     @Override
     protected Texture getTexture(){
         return new Texture(Gdx.files.internal("Characters/infiltratorSprite.png"));
@@ -145,10 +183,12 @@ public class Infiltrator extends Character {
     public void arrest(Vector2 coords){
         isArrested = true;
         setPosition(coords.x, coords.y);
-
-
     }
 
+    /***
+     * reset the texture
+     * @param screen
+     */
     public void resetTexture(){
         powerCoolDown=0;
         powerDuration=0;

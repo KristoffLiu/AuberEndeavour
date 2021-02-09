@@ -39,10 +39,10 @@ public class GameOverScreen implements Screen {
         //draw background, objects, etc.
         switch (game.getState()){
             case win:
-                font.draw(game.batch, "Game Over: You Won!", GameEntry.VIEW_WIDTH /2-300, GameEntry.VIEW_HEIGHT /2);
+                font.draw(game.batch, "Game Over: You Won!", GameEntry.VIEW_WIDTH / 2 - 300, GameEntry.VIEW_HEIGHT / 2);
                 break;
             case lost:
-                font.draw(game.batch, "Game Over: You Lost", GameEntry.VIEW_WIDTH /2-300, GameEntry.VIEW_HEIGHT /2);
+                font.draw(game.batch, "Game Over: You Lost", GameEntry.VIEW_WIDTH / 2 - 300, GameEntry.VIEW_HEIGHT / 2);
                 break;
         }
         game.batch.end();

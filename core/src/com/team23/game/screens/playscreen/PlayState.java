@@ -4,6 +4,7 @@ public enum PlayState {
     notStarted,
     start,
     playing,
+    teleporting,
     lost,
     win
 }

@@ -1,5 +1,6 @@
 package com.team23.game;
 
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -27,6 +28,7 @@ public class TileWorld {
     private Rectangle command;
     private Rectangle laboratory;
     private Rectangle engine;
+    private ArrayList<RectangleMapObject> teleporterRectangleMapObjects;
     private int scale;
 
 
@@ -71,6 +73,12 @@ public class TileWorld {
         for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = magnifyRectange(((RectangleMapObject) object).getRectangle());
             collisionBoxes.add(rect);
+        }
+
+        teleporterRectangleMapObjects = new ArrayList<>();
+        MapLayer teleporterLayer = map.getLayers().get("teleporters");
+        for(MapObject mapObject : teleporterLayer.getObjects()){
+            teleporterRectangleMapObjects.add((RectangleMapObject) mapObject);
         }
 
         //create
@@ -119,6 +127,21 @@ public class TileWorld {
      */
     public Hashtable<String, Rectangle> getTeleporters(){
         return teleporters;
+    }
+
+    /**
+     * get the teleporters.
+     * @return the
+     */
+    public Rectangle getTeleporterRectangle(String name){
+        Rectangle rectangle = new Rectangle();
+        for(RectangleMapObject mapObject : this.teleporterRectangleMapObjects){
+            String mapObjectName = mapObject.getName();
+            if(mapObject.getName().equals(name)){
+                rectangle = mapObject.getRectangle();
+            }
+        }
+        return rectangle;
     }
 
     /**

@@ -1,0 +1,506 @@
+{
+saves: [
+	{
+		id: 1
+		name: Save 1
+		auberInfo: {
+			position: {
+				x: 1811
+				y: 4457
+			}
+			moveSpeed: 9
+		}
+		npcsInfoList: [
+			{
+				position: {
+					x: 4700
+					y: 2000
+				}
+				moveSpeed: 9
+			}
+			{
+				position: {
+					x: 4800
+					y: 2300
+				}
+				moveSpeed: 9
+			}
+			{
+				position: {
+					x: 5000
+					y: 7356
+				}
+				moveSpeed: 9
+			}
+			{
+				position: {
+					x: 4732
+					y: 7000
+				}
+				moveSpeed: 9
+			}
+			{
+				position: {
+					x: 4732
+					y: 7500
+				}
+				moveSpeed: 9
+			}
+			{
+				position: {
+					x: 4732
+					y: 7800
+				}
+				moveSpeed: 9
+			}
+			{
+				position: {
+					x: 4200
+					y: 7800
+				}
+				moveSpeed: 9
+			}
+			{
+				position: {
+					x: 5400
+					y: 7800
+				}
+				moveSpeed: 9
+			}
+		]
+		enemiesInfoList: [
+			{
+				position: {
+					x: 4727
+					y: 3224
+				}
+				moveSpeed: 9
+				power: 1
+			}
+			{
+				position: {
+					x: 4728
+					y: 4010
+				}
+				moveSpeed: 9
+				power: 2
+			}
+			{
+				position: {
+					x: 4712
+					y: 6366
+				}
+				moveSpeed: 9
+				power: 3
+			}
+			{
+				position: {
+					x: 4714
+					y: 5290
+				}
+				moveSpeed: 9
+				power: 4
+			}
+			{
+				position: {
+					x: 4714
+					y: 6204
+				}
+				moveSpeed: 9
+				power: 1
+			}
+			{
+				position: {
+					x: 5029
+					y: 9348
+				}
+				moveSpeed: 9
+				power: 1
+			}
+			{
+				position: {
+					x: 4227
+					y: 7863
+				}
+				moveSpeed: 9
+				power: 2
+			}
+			{
+				position: {
+					x: 3690
+					y: 7872
+				}
+				moveSpeed: 9
+				power: 2
+			}
+		]
+		powerUpInfoList: [
+			{
+				position: {
+					x: 4732
+					y: 7800
+				}
+				name: Speed
+			}
+			{
+				position: {
+					x: 4200
+					y: 7800
+				}
+				name: Immunity
+			}
+			{
+				position: {
+					x: 5400
+					y: 7800
+				}
+				name: Highlight
+			}
+			{
+				position: {
+					x: 5400
+					y: 7500
+				}
+				name: Freeze
+			}
+			{
+				position: {
+					x: 4732
+					y: 7500
+				}
+				name: Teleport
+			}
+		]
+		shipSystemInfoList: [
+			{
+				x: 3648
+				y: 9600
+				room: command
+			}
+			{
+				x: 4032
+				y: 9984
+				room: command
+			}
+			{
+				x: 5376
+				y: 9984
+				room: command
+			}
+			{
+				x: 5760
+				y: 9600
+				room: command
+			}
+			{
+				x: 3456
+				y: 7872
+				room: laboratory
+			}
+			{
+				x: 4224
+				y: 7872
+				state: 1
+				room: laboratory
+			}
+			{
+				x: 3840
+				y: 7104
+				room: laboratory
+			}
+			{
+				x: 3648
+				y: 5376
+				room: infirmary
+			}
+			{
+				x: 5760
+				y: 5376
+				room: infirmary
+			}
+			{
+				x: 1152
+				y: 4032
+				room: brig
+			}
+			{
+				x: 2496
+				y: 4032
+				room: brig
+			}
+			{
+				x: 7488
+				y: 4224
+				room: crew
+			}
+			{
+				x: 7488
+				y: 5760
+				room: crew
+			}
+			{
+				x: 3648
+				y: 2880
+				room: engine
+			}
+			{
+				x: 3648
+				y: 2112
+				room: engine
+			}
+		]
+	}
+	{
+		id: 2
+		name: Save 2
+		auberInfo: {
+			position: {
+				x: 4977
+				y: 9300
+			}
+			moveSpeed: 9
+		}
+		npcsInfoList: [
+			{
+				position: {
+					x: 4700
+					y: 2000
+				}
+				moveSpeed: 9
+			}
+			{
+				position: {
+					x: 4800
+					y: 2300
+				}
+				moveSpeed: 9
+			}
+			{
+				position: {
+					x: 5000
+					y: 7356
+				}
+				moveSpeed: 9
+			}
+			{
+				position: {
+					x: 4732
+					y: 7000
+				}
+				moveSpeed: 9
+			}
+			{
+				position: {
+					x: 4732
+					y: 7500
+				}
+				moveSpeed: 9
+			}
+			{
+				position: {
+					x: 4732
+					y: 7800
+				}
+				moveSpeed: 9
+			}
+			{
+				position: {
+					x: 4200
+					y: 7800
+				}
+				moveSpeed: 9
+			}
+			{
+				position: {
+					x: 5400
+					y: 7800
+				}
+				moveSpeed: 9
+			}
+		]
+		enemiesInfoList: [
+			{
+				position: {
+					x: 4727
+					y: 3701
+				}
+				moveSpeed: 9
+				power: 1
+			}
+			{
+				position: {
+					x: 4719
+					y: 4487
+				}
+				moveSpeed: 9
+				power: 2
+			}
+			{
+				position: {
+					x: 3461
+					y: 7869
+				}
+				moveSpeed: 9
+				power: 3
+			}
+			{
+				position: {
+					x: 3841
+					y: 7099
+				}
+				moveSpeed: 9
+				power: 4
+			}
+			{
+				position: {
+					x: 4075
+					y: 9354
+				}
+				moveSpeed: 9
+				power: 1
+			}
+			{
+				position: {
+					x: 4291
+					y: 6954
+				}
+				moveSpeed: 9
+				power: 1
+			}
+			{
+				position: {
+					x: 4227
+					y: 7863
+				}
+				moveSpeed: 9
+				power: 2
+			}
+			{
+				position: {
+					x: 3960
+					y: 7098
+				}
+				moveSpeed: 9
+				power: 2
+			}
+		]
+		powerUpInfoList: [
+			{
+				position: {
+					x: 4732
+					y: 7800
+				}
+				name: Speed
+			}
+			{
+				position: {
+					x: 4200
+					y: 7800
+				}
+				name: Immunity
+			}
+			{
+				position: {
+					x: 5400
+					y: 7800
+				}
+				name: Highlight
+			}
+			{
+				position: {
+					x: 5400
+					y: 7500
+				}
+				name: Freeze
+			}
+			{
+				position: {
+					x: 4732
+					y: 7500
+				}
+				name: Teleport
+			}
+		]
+		shipSystemInfoList: [
+			{
+				x: 3648
+				y: 9600
+				room: command
+			}
+			{
+				x: 4032
+				y: 9984
+				room: command
+			}
+			{
+				x: 5376
+				y: 9984
+				room: command
+			}
+			{
+				x: 5760
+				y: 9600
+				room: command
+			}
+			{
+				x: 3456
+				y: 7872
+				state: 1
+				room: laboratory
+			}
+			{
+				x: 4224
+				y: 7872
+				state: 1
+				room: laboratory
+			}
+			{
+				x: 3840
+				y: 7104
+				state: 1
+				room: laboratory
+			}
+			{
+				x: 3648
+				y: 5376
+				room: infirmary
+			}
+			{
+				x: 5760
+				y: 5376
+				room: infirmary
+			}
+			{
+				x: 1152
+				y: 4032
+				room: brig
+			}
+			{
+				x: 2496
+				y: 4032
+				room: brig
+			}
+			{
+				x: 7488
+				y: 4224
+				room: crew
+			}
+			{
+				x: 7488
+				y: 5760
+				room: crew
+			}
+			{
+				x: 3648
+				y: 2880
+				room: engine
+			}
+			{
+				x: 3648
+				y: 2112
+				room: engine
+			}
+		]
+	}
+]
+}

@@ -2,8 +2,6 @@ package com.team23.game.actors.characters;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -11,7 +9,7 @@ import com.team23.game.TileWorld;
 import com.team23.game.actors.items.PowerUp;
 import com.team23.game.inputs.PlayerInput;
 import com.team23.game.save.AuberInfo;
-import com.team23.game.stages.Hud;
+import com.team23.game.screens.playscreen.Hud;
 
 import java.util.ArrayList;
 
@@ -27,10 +25,19 @@ public class Auber extends Character {
     private String currentPower;
     private boolean teleportPowerUp;
 
+    /***
+     * Constructor - create the Auber object when it is loaded from the save
+     * @param info the AuberInfo instance which is loaded from the save
+     */
     public Auber(AuberInfo info){
         this(info.position.toVector2(), info.moveSpeed);
     }
 
+    /***
+     * Constructor - create the Auber object from a new game
+     * @param position the position
+     * @param movSpeed the movement speed
+     */
     public Auber(Vector2 position, float movSpeed) {
         super(position, movSpeed);
         this.setSize(150, 170);
@@ -42,65 +49,60 @@ public class Auber extends Character {
         teleportPowerUp = false;
     }
 
+    /***
+     * get the texture.
+     */
     @Override
     protected Texture getTexture() {
         return new Texture(Gdx.files.internal("Characters/auberSprite.png"));
     }
 
+    /***
+     * handle the movement of the auber
+     */
     @Override
     protected void handleMovement() {
-        //Left movement
-        if(PlayerInput.getDirection()==1){
-            Vector2 position = movementSystem.left();
-            setPosition(position.x,position.y);
-            if (facingRight==true){
-                this.getTextureRegion().flip(true,false);
-                facingRight=false;
-            }
+        switch (PlayerInput.getDirection()){
+            case 1:
+                handleMovement(movementSystem.left());
+                if (facingRight == true){
+                    this.getTextureRegion().flip(true,false);
+                    facingRight = false;
+                }
+                break;
+            case 2:
+                handleMovement(movementSystem.right());
+                if (facingRight == false){
+                    this.getTextureRegion().flip(true,false);
+                    facingRight = true;
+                }
+                break;
+            case 3:
+                handleMovement(movementSystem.up());
+                break;
+            case 4:
+                handleMovement(movementSystem.down());
+                break;
+            case 5:
+                handleMovement(movementSystem.upRight());
+                break;
+            case 6:
+                handleMovement(movementSystem.downRight());
+                break;
+            case 7:
+                handleMovement(movementSystem.downLeft());
+                break;
+            case 8:
+                handleMovement(movementSystem.upLeft());
+                break;
         }
-        //Right movement
-        if(PlayerInput.getDirection()==2){
-            Vector2 position = movementSystem.right();
-            setPosition(position.x,position.y);
-            if (facingRight==false){
-                this.getTextureRegion().flip(true,false);
-                facingRight=true;
-            }
-        }
-        //Up movement
-        if(PlayerInput.getDirection()==3){
-            Vector2 position = movementSystem.up();
-            setPosition(position.x,position.y);
-        }
-        //Down movement
-        if(PlayerInput.getDirection()==4){
-            Vector2 position = movementSystem.down();
-            setPosition(position.x,position.y);
-        }
+    }
 
-        //upRight movement
-        if(PlayerInput.getDirection()==5){
-            Vector2 position = movementSystem.upRight();
-            setPosition(position.x,position.y);
-        }
-
-        //downRight movement
-        if(PlayerInput.getDirection()==6){
-            Vector2 position = movementSystem.downRight();
-            setPosition(position.x,position.y);
-        }
-
-        //downLeft movement
-        if(PlayerInput.getDirection()==7){
-            Vector2 position = movementSystem.downLeft();
-            setPosition(position.x,position.y);
-        }
-
-        //downRight movement
-        if(PlayerInput.getDirection()==8){
-            Vector2 position = movementSystem.upLeft();
-            setPosition(position.x,position.y);
-        }
+    /***
+     * handle the movement of the auber
+     */
+    private void handleMovement(Vector2 position) {
+        setPosition(position.x,position.y);
     }
 
     /**
@@ -110,7 +112,7 @@ public class Auber extends Character {
      */
     public boolean teleportCheck(TileWorld tiles){
         //check if standing on teleporter
-        for ( Rectangle rect : tiles.getTeleporters().values()) {
+        for (Rectangle rect : tiles.getTeleporters().values()) {
             if(this.getBounds().contains(rect)){
                 return true;
             }
@@ -130,7 +132,6 @@ public class Auber extends Character {
                     infiltrator.arrest(new Vector2((float)Math.random()*1000+1200,(float)Math.random()*400+5400));
                     hud.infiltratorCaught(infiltrators);
                 }
-
             }
         }
     }
@@ -189,16 +190,26 @@ public class Auber extends Character {
         }
     }
 
+
+    /***
+     * set the movement speed.
+     * @param  newMovSpeed the float value to be set as the movement speed.
+     */
     private void setMovSpeed(float newMovSpeed) {
         movementSystem.setSpeed(newMovSpeed);
     }
 
-    //moves the camera to the auber when game starts
+    /***
+     * moves the camera to the auber when game starts
+     */
     public void shuffle(){
         Vector2 position = movementSystem.left();
         setPosition(position.x,position.y);
     }
 
+    /***
+     * the overridden act method.
+     */
     public void act(float delta){
         if(powerDuration != 0) {
             powerDuration -= delta;
@@ -209,20 +220,30 @@ public class Auber extends Character {
             }
             powerDuration = 0;
             currentPower = "";
-
         }
-
         handleMovement();
     }
 
+    /***
+     * set the movement speed.
+     * @return return the current power of the auber as a String.
+     */
     public String getCurrentPower() {
         return currentPower;
     }
 
+    /***
+     * whether teh auber has the power up of teleporting.
+     * @return return whether teh auber has the power up of teleporting.
+     */
     public boolean isTeleportPowerUp() {
         return teleportPowerUp;
     }
 
+    /***
+     * set the Power Up of teleporting ability to the auber.
+     * @param teleportPowerUp the boolean value which indicates whether the auber should have the teleport power up ability.
+     */
     public void setTeleportPowerUp(boolean teleportPowerUp) {
         this.teleportPowerUp = teleportPowerUp;
     }

@@ -28,7 +28,9 @@ public class SaveManager {
             }
         }
         newSave.id = maxId + 1;
+        newSave.name = "Save " + String.valueOf(newSave.id);
         this.model.saves.add(newSave);
+        saveToFile();
     }
 
     public void saveCurrentGame(Save save){
@@ -38,6 +40,7 @@ public class SaveManager {
 
     public void delete(int index){
         this.model.saves.remove(index);
+        saveToFile();
     }
 
     public void delete(Save deletingSave){
