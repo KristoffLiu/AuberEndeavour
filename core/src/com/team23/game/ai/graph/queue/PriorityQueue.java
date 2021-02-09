@@ -6,7 +6,7 @@ public class PriorityQueue {
     private ArrayList<PriorityItem> queue;
 
     public PriorityQueue(){
-        queue = new ArrayList<PriorityItem>();
+        queue = new ArrayList<>();
     }
 
     public PriorityQueue(PriorityItem[] arr){
