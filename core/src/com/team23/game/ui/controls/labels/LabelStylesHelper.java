@@ -12,7 +12,7 @@ public class LabelStylesHelper {
                                                 boolean isClearer,
                                                 float scale,
                                                 float r, float g, float b, float a){
-        BitmapFont bitmapFont = getBitmapFontFromAssets(path);
+        BitmapFont bitmapFont = getBitmapFontFromAssets();
         if (isClearer) {
             bitmapFont.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         }
@@ -28,7 +28,7 @@ public class LabelStylesHelper {
                                                 boolean isClearer,
                                                 float scale,
                                                 Color color){
-        BitmapFont bitmapFont = getBitmapFontFromAssets(path);
+        BitmapFont bitmapFont = getBitmapFontFromAssets();
         if (isClearer) {
             bitmapFont.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         }
@@ -40,7 +40,7 @@ public class LabelStylesHelper {
         return labelStyle;
     }
 
-    public static BitmapFont getBitmapFontFromAssets(String path){
+    public static BitmapFont getBitmapFontFromAssets(){
         return new BitmapFont(Gdx.files.internal("font/ImpactFont.fnt"));
     }
 
