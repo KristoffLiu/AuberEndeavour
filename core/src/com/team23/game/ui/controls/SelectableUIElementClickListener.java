@@ -26,6 +26,7 @@ public class SelectableUIElementClickListener extends ClickListener {
                 break;
             case NOTACTIVATED:
                 selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.NOTACTIVATED);
+                break;
         }
     }
 
@@ -49,6 +50,7 @@ public class SelectableUIElementClickListener extends ClickListener {
                     break;
                 case NOTACTIVATED:
                     selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.NOTACTIVATED);
+                    break;
             }
         }
     }
@@ -62,6 +64,7 @@ public class SelectableUIElementClickListener extends ClickListener {
         switch (selectableUIElement.selectableState){
             case UNSELECTED:
             case SELECTED:
+                selectableUIElement.select();
                 super.touchUp(event,x,y,pointer,button);
                 break;
             case NOTACTIVATED:
@@ -86,6 +89,7 @@ public class SelectableUIElementClickListener extends ClickListener {
                 break;
             case NOTACTIVATED:
                 selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.NOTACTIVATED);
+                break;
         }
         isTouchedDownBefore = true;
         return super.touchDown(event, x, y, pointer, button);
