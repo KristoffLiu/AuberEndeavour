@@ -14,14 +14,10 @@ public class LostScreen implements Screen {
 
     public LostScreen(GameEntry game){
         this.game=game;
-
         gamecam=new OrthographicCamera();
-
         gamecam.setToOrtho(false, GameEntry.VIEW_WIDTH, GameEntry.VIEW_HEIGHT);
         font = new BitmapFont();
         font.getData().setScale(5f);
-
-
     }
     @Override
     public void show() {

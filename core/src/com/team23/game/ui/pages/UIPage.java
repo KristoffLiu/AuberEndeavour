@@ -14,7 +14,7 @@ import com.team23.game.ui.controls.UIElement;
  */
 public class UIPage extends Stage implements IUIPage {
     private Frame parentFrame = null;
-    Array<Actor> uiElements = new Array<Actor>();
+    Array<Actor> uiElements = new Array<>();
 
     public UIPage() {
         super(new StretchViewport(GameEntry.VIEW_WIDTH, GameEntry.VIEW_HEIGHT));
@@ -41,7 +41,7 @@ public class UIPage extends Stage implements IUIPage {
      */
     @Override
     public void removeUIElement(UIElement uiElement) {
-
+        super.getActors().removeValue(uiElement, true);
     }
 
     /***

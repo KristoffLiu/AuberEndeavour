@@ -1,17 +1,10 @@
 package com.team23.game.screens.playscreen;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.team23.game.GameEntry;
 import com.team23.game.ShipSystem;
 import com.team23.game.actors.characters.Infiltrator;
 import com.team23.game.ui.controls.Button;
@@ -19,7 +12,6 @@ import com.team23.game.ui.controls.ButtonClickListener;
 import com.team23.game.ui.controls.TextBlock;
 import com.team23.game.ui.controls.UIElement;
 import com.team23.game.ui.pages.UIPage;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,20 +22,17 @@ import java.util.List;
 public class Hud extends UIPage {
     public PlayScreen playScreen;
     private Viewport viewport;
+
     private int systemsUp;
+    private int infiltratorsRemaining;
+
     private TextBlock systemLabel;
     private TextBlock systemTextLabel;
-
-    private int infiltratorsRemaining;
     private TextBlock infiltratorLabel;
     private TextBlock infiltratorTextLabel;
-
     private TextBlock attackLabel;
     private TextBlock attackTextLabel;
-
     private TextBlock hallucinateLabel;
-
-    private BitmapFont font;
 
     private ArrayList<Infiltrator> enemies;
     private ArrayList<ShipSystem> systems;
@@ -64,9 +53,6 @@ public class Hud extends UIPage {
         systemsUp = systems.size();
         infiltratorsRemaining = enemies.size();
 
-        System.out.format("%d / 15 systems",systemsUp);
-        font=new BitmapFont();
-        font.getData().setScale(3f);
         float fontSize = 0.5f;
 
         systemTextLabel = new TextBlock();
@@ -101,14 +87,12 @@ public class Hud extends UIPage {
         attackTextLabel.setFontColor(1,1,1,1);
         attackTextLabel.setRelativePosition(1350,150, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.topAlignment);
 
-
         //systems under attack
         attackLabel = new TextBlock();
         attackLabel.setText("None");
         attackLabel.setFontSize(fontSize);
         attackLabel.setFontColor(1,1,1,1);
         attackLabel.setRelativePosition(1700,150, UIElement.HorizontalAlignment.leftAlignment, UIElement.VerticalAlignment.topAlignment);
-
 
         //hallucination warning
         hallucinateLabel = new TextBlock();
@@ -172,14 +156,12 @@ public class Hud extends UIPage {
      */
     public void updateAttacks(List<ShipSystem> systems){
         /*Update hud to reflect attacks*/
-        String room=new String();
+        String room = "";
         systemsUp=0;
         for (ShipSystem system:systems){
-            if (system.getState()==1){
-                if (!room.contains(system.getRoom())){
-                    room+=system.getRoom();
-                    room+="\n";
-                }
+            if (system.getState()==1 && !room.contains(system.getRoom())){
+                room+=system.getRoom();
+                room+="\n";
             }
             if (system.getState()!=2){systemsUp+=1;}
         }

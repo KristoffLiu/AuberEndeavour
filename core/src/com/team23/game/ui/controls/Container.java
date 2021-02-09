@@ -69,4 +69,14 @@ public class Container extends UIElement {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
     }
+
+    public void removed(){
+        for(UIElement child : children){
+            children.remove(child);
+            child.getRootPage().removeUIElement(child);
+            if(child instanceof Container){
+                ((Container)child).removed();
+            }
+        }
+    }
 }

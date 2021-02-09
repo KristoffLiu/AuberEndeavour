@@ -1,6 +1,5 @@
 package com.team23.game.ui.controls;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.team23.game.ui.basics.Padding;
 
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class ListView extends Container {
      * add UI element
      * @param child the actor which will be the child
      */
-    public void add(ListViewItem child){
+    public void addItem(ListViewItem child){
         super.add(child);
         if(this.getRootPage() != null){
             child.setRootPage(this.getRootPage());
@@ -47,6 +46,17 @@ public class ListView extends Container {
     }
 
     /***
+     * add UI element
+     * @param child the actor which will be the child
+     */
+    public void deleteItem(ListViewItem child){
+        children.remove(child);
+        child.getRootPage().removeUIElement(child);
+        child.removed();
+        child.container.removed();
+    }
+
+    /***
      * select item
      * @param item the list view item
      */
@@ -54,12 +64,12 @@ public class ListView extends Container {
         for(UIElement ui_child : children){
             ListViewItem child = (ListViewItem)ui_child;
             if(child == item){
-                child.setState(SelectableUIElement.SelectableState.selected);
+                child.setState(SelectableUIElement.SelectableState.SELECTED);
                 selectedItem = child;
             }
             else {
-                if(child.selectableState != SelectableUIElement.SelectableState.notActivated){
-                    child.setState(SelectableUIElement.SelectableState.unselected);
+                if(child.selectableState != SelectableUIElement.SelectableState.NOTACTIVATED){
+                    child.setState(SelectableUIElement.SelectableState.UNSELECTED);
                 }
             }
         }
@@ -77,21 +87,5 @@ public class ListView extends Container {
     public void act(float delta) {
         super.act(delta);
         updateLayout();
-    }
-
-    /**
-     * RenderActor
-     *
-     * @param batch
-     *
-     * @param parentAlpha
-     * 		The Sprite Batch, is used to render the texture of actor encapsulation.
-     *
-     * @param parentAlpha
-     * 		the transparent of parent
-     */
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
     }
 }

@@ -9,11 +9,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class NinePatchImage extends UIElement {
 
-    NinePatch ninePatch         ;
-    float ninePatch_X           ;
-    float ninePatch_Y           ;
-    float ninePatch_width       ;
-    float ninePatch_height      ;
+    NinePatch   ninePatch;
+    float       ninePatchX;
+    float       ninePatchY;
+    float       ninePatchWidth;
+    float       ninePatchHeight;
 
     /**
      * constructor
@@ -37,7 +37,7 @@ public class NinePatchImage extends UIElement {
      ***/
     @Override
     public float getX(){
-        return ninePatch_X;
+        return ninePatchX;
     }
 
     /**
@@ -45,7 +45,7 @@ public class NinePatchImage extends UIElement {
      ***/
     @Override
     public float getY(){
-        return ninePatch_Y;
+        return ninePatchY;
     }
 
     /**
@@ -53,7 +53,7 @@ public class NinePatchImage extends UIElement {
      ***/
     @Override
     public void setX(float x){
-        ninePatch_X = x;
+        ninePatchX = x;
     }
 
     /**
@@ -61,7 +61,7 @@ public class NinePatchImage extends UIElement {
      ***/
     @Override
     public void setY(float y){
-        ninePatch_Y = y;
+        ninePatchY = y;
     }
 
     /**
@@ -88,10 +88,10 @@ public class NinePatchImage extends UIElement {
         }
         ninePatch.draw(
                 batch,
-                ninePatch_X,
-                ninePatch_Y,
-                ninePatch_width,
-                ninePatch_height
+                ninePatchX,
+                ninePatchY,
+                ninePatchWidth,
+                ninePatchHeight
         );
     }
 }

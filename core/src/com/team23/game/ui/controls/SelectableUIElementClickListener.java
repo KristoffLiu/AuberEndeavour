@@ -18,14 +18,14 @@ public class SelectableUIElementClickListener extends ClickListener {
         super.enter(event, x, y, pointer, fromActor);
         SelectableUIElement selectableUIElement = (SelectableUIElement) event.getListenerActor();
         switch (selectableUIElement.selectableState){
-            case unselected:
-                selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.unselectedHovered);
+            case UNSELECTED:
+                selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.UNSELECTEDHOVERED);
                 break;
-            case selected:
-                selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.selectedHovered);
+            case SELECTED:
+                selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.SELECTEDHOVERED);
                 break;
-            case notActivated:
-                selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.notActivated);
+            case NOTACTIVATED:
+                selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.NOTACTIVATED);
         }
     }
 
@@ -41,14 +41,14 @@ public class SelectableUIElementClickListener extends ClickListener {
         }else {
             SelectableUIElement selectableUIElement = (SelectableUIElement) event.getListenerActor();
             switch (selectableUIElement.selectableState){
-                case unselected:
-                    selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.unselected);
+                case UNSELECTED:
+                    selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.UNSELECTED);
                     break;
-                case selected:
-                    selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.selected);
+                case SELECTED:
+                    selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.SELECTED);
                     break;
-                case notActivated:
-                    selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.notActivated);
+                case NOTACTIVATED:
+                    selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.NOTACTIVATED);
             }
         }
     }
@@ -60,12 +60,11 @@ public class SelectableUIElementClickListener extends ClickListener {
     public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
         SelectableUIElement selectableUIElement = (SelectableUIElement) event.getListenerActor();
         switch (selectableUIElement.selectableState){
-            case unselected:
-            case selected:
-                selectableUIElement.select();
+            case UNSELECTED:
+            case SELECTED:
                 super.touchUp(event,x,y,pointer,button);
                 break;
-            case notActivated:
+            case NOTACTIVATED:
                 break;
         }
     }
@@ -79,14 +78,14 @@ public class SelectableUIElementClickListener extends ClickListener {
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
         SelectableUIElement selectableUIElement = (SelectableUIElement) event.getListenerActor();
         switch (selectableUIElement.selectableState){
-            case unselected:
-                selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.unselectedPressed);
+            case UNSELECTED:
+                selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.UNSELECTEDPRESSED);
                 break;
-            case selected:
-                selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.selectedPressed);
+            case SELECTED:
+                selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.SELECTEDPRESSED);
                 break;
-            case notActivated:
-                selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.notActivated);
+            case NOTACTIVATED:
+                selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.NOTACTIVATED);
         }
         isTouchedDownBefore = true;
         return super.touchDown(event, x, y, pointer, button);
@@ -100,37 +99,14 @@ public class SelectableUIElementClickListener extends ClickListener {
         super.touchDragged(event, x, y, pointer);
         SelectableUIElement selectableUIElement = (SelectableUIElement) event.getListenerActor();
         switch (selectableUIElement.selectableState){
-            case unselected:
-                selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.unselectedPressed);
+            case UNSELECTED:
+                selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.UNSELECTEDPRESSED);
                 break;
-            case selected:
-                selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.selectedPressed);
+            case SELECTED:
+                selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.SELECTEDPRESSED);
                 break;
-            case notActivated:
-                selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.notActivated);
+            case NOTACTIVATED:
+                selectableUIElement.setUIState(SelectableUIElement.SelectableUIState.NOTACTIVATED);
         }
     }
-
-//    /** Called when a mouse button or a finger touch goes up anywhere, but only if touchDown previously returned true for the mouse
-//     * button or touch. The touchUp event is always {@link Event#handle() handled}.
-//     * @see ClickListener */
-//    @Override
-//    public void clicked (InputEvent event, float x, float y) {
-//        super.clicked(event, x, y);
-//        boolean a = isOver();
-//        if(isOver()){
-//            isStillOverAfterClicked = true;
-//        }
-//        ClickableUIElement clickableUIElement = (ClickableUIElement) event.getListenerActor();
-//        if (clickableUIElement.isEnabled) {
-//            if(isStillOverAfterClicked){
-//                clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.hovered);
-//            }
-//            else{
-//                clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.normal);
-//            }
-//        } else {
-//            clickableUIElement.setButtonUIState(ClickableUIElement.ButtonUIState.notActivated);
-//        }
-//    }
 }

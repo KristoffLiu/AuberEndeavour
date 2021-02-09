@@ -27,7 +27,6 @@ public class Save {
     public Save(String name){
         this.name = name;
         Date date = new Date();
-        System.out.println(date.toString());
         this.dateTime = date.toString();
         auberInfo = new AuberInfo();
         npcsInfoList = new ArrayList<>();
