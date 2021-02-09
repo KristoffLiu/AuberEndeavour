@@ -67,7 +67,7 @@ public class Hud {
         systemTextLabel=new Label("systems operational", new Label.LabelStyle(font, Color.WHITE));
 
         //remaining infiltrators
-        infiltratorLabel = new Label(String.format("%d / 8 ",infiltratorsRemaining), new Label.LabelStyle(font, Color.WHITE));
+        infiltratorLabel = new Label(String.format("%d / %s ",infiltratorsRemaining, enemies.size()), new Label.LabelStyle(font, Color.WHITE));
         infiltratorTextLabel=new Label("infiltrators remaining", new Label.LabelStyle(font, Color.WHITE));
 
         //systems under attack
@@ -103,9 +103,9 @@ public class Hud {
     /**
      * Updates the HUD to decrease the amount of infiltrators
      */
-    public void infiltratorCaught(){
+    public void infiltratorCaught(ArrayList<Infiltrator> infiltrators){
         infiltratorsRemaining-=1;
-        infiltratorLabel.setText(String.format("%d / 8",infiltratorsRemaining));
+        infiltratorLabel.setText(String.format("%d / %s",infiltratorsRemaining,infiltrators.size()));
 
     }
 

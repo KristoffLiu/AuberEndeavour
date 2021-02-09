@@ -73,7 +73,7 @@ public class DemoAuber extends Auber{
         for (Infiltrator infiltrator : infiltrators) {
             if (Math.abs(infiltrator.getX() - this.getX()) < 200 && Math.abs(infiltrator.getY() - this.getY()) < 200) {
                 infiltrator.arrest(new Vector2((float)Math.random()*1000+1200,(float)Math.random()*400+5400));
-                hud.infiltratorCaught();
+                hud.infiltratorCaught(infiltrators);
             }
         }
     }
