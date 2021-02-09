@@ -128,13 +128,19 @@ public class Auber extends Character {
             for (Infiltrator infiltrator : infiltrators) {
                 if (Math.abs(infiltrator.getX() - this.getX()) < 100 && Math.abs(infiltrator.getY() - this.getY()) < 100) {
                     infiltrator.arrest(new Vector2((float)Math.random()*1000+1200,(float)Math.random()*400+5400));
-                    hud.infiltratorCaught();
+                    hud.infiltratorCaught(infiltrators);
                 }
 
             }
         }
     }
 
+    /**Runs when the player picks up a powerup
+     *
+     * @param powerups A list of all powerups in the game
+     * @param infiltrators A list of all infiltrators in the game
+     * @param npcs A list of all npcs in the game
+     */
     public void usePowerUp(ArrayList<PowerUp> powerups, ArrayList<Infiltrator> infiltrators, ArrayList<NPC> npcs){
         if(PlayerInput.arrest() && powerDuration == 0) {
             for (PowerUp powerup : powerups) {

@@ -124,41 +124,42 @@ public class PlayScreen implements Screen {
         hud = new Hud(gameEntry.batch, enemies, tiles.getSystems());
     }
 
+    /**Creates auber, enemies, npcs and powerups for a simple game**/
     public void createSimpleGame(){
         player = new Auber(new Vector2(450 * scale, 778 * scale), 9f);
 
         //Creating and placing infiltrators
         enemies = new ArrayList<Infiltrator>(Arrays.asList(
-                new Infiltrator(new Vector2(4700, 2000), 1, graph, 9f),
-                new Infiltrator(new Vector2(4800, 2300), 2, graph, 9f),
-                new Infiltrator(new Vector2(5000, 7356), 3, graph, 9f),
-                new Infiltrator(new Vector2(4732, 7000), 4, graph, 9f),
-                new Infiltrator(new Vector2(4732, 7500), 1, graph, 9f),
-                new Infiltrator(new Vector2(4732, 7800), 1, graph, 9f),
-                new Infiltrator(new Vector2(4200, 7800), 2, graph, 9f),
-                new Infiltrator(new Vector2(5400, 7800), 2, graph, 9f)
+                new Infiltrator(new Vector2(4700, 2000), 1, graph, 7f),
+                new Infiltrator(new Vector2(4800, 2300), 2, graph, 7f),
+                new Infiltrator(new Vector2(5000, 7356), 3, graph, 7f),
+                new Infiltrator(new Vector2(4732, 7000), 4, graph, 7f),
+                new Infiltrator(new Vector2(4732, 7500), 1, graph, 7f),
+                new Infiltrator(new Vector2(4732, 7800), 1, graph, 7f)
         ));
 
         npcs = new ArrayList<NPC>(Arrays.asList(
-                new NPC(new Vector2(4700, 2000), graph, 9f),
-                new NPC(new Vector2(4800, 2300), graph, 9f),
-                new NPC(new Vector2(5000, 7356), graph, 9f),
-                new NPC(new Vector2(4732, 7000), graph, 9f),
-                new NPC(new Vector2(4732, 7500), graph, 9f),
-                new NPC(new Vector2(4732, 7800), graph, 9f),
-                new NPC(new Vector2(4200, 7800), graph, 9f),
-                new NPC(new Vector2(5400, 7800), graph, 9f)
+                new NPC(new Vector2(4700, 2000), graph, 7f),
+                new NPC(new Vector2(4800, 2300), graph, 7f),
+                new NPC(new Vector2(5000, 7356), graph, 7f),
+                new NPC(new Vector2(4732, 7000), graph, 7f),
+                new NPC(new Vector2(4732, 7500), graph, 7f),
+                new NPC(new Vector2(4732, 7800), graph, 7f)
         ));
 
         powerups = new ArrayList<PowerUp>(Arrays.asList(
-            new PowerUp(new Vector2(4732, 7800), "Speed"),
-            new PowerUp(new Vector2(4200, 7800), "Immunity"),
-            new PowerUp(new Vector2(5400, 7800), "Highlight"),
-            new PowerUp(new Vector2(5400, 7500), "Freeze"),
-            new PowerUp(new Vector2(4732, 7500), "Teleport")
+            new PowerUp(new Vector2(4700, 7800), "Speed"),
+                new PowerUp(new Vector2(4700, 6000), "Speed"),
+                new PowerUp(new Vector2(4700, 5400), "Immunity"),
+            new PowerUp(new Vector2(6900, 4750), "Highlight"),
+                new PowerUp(new Vector2(5500, 4750), "Highlight"),
+            new PowerUp(new Vector2(4750, 3000), "Freeze"),
+            new PowerUp(new Vector2(2500, 4700), "Teleport"),
+        new PowerUp(new Vector2(4750, 4700), "Teleport")
         ));
     }
 
+    /**Creates auber, enemies, npcs and powerups for a normal game**/
     public void createNormalGame(){
         player = new Auber(new Vector2(450 * scale, 778 * scale), 9f);
         player.setPosition(450 * scale, 778 * scale);
@@ -187,47 +188,49 @@ public class PlayScreen implements Screen {
         ));
 
         powerups = new ArrayList<PowerUp>(Arrays.asList(
-            new PowerUp(new Vector2(4732, 7800), "Speed"),
-            new PowerUp(new Vector2(4200, 7800), "Immunity"),
-            new PowerUp(new Vector2(5400, 7800), "Highlight"),
-            new PowerUp(new Vector2(5400, 7500), "Freeze"),
-            new PowerUp(new Vector2(4732, 7500), "Teleport")
+                new PowerUp(new Vector2(4700, 7800), "Speed"),
+                new PowerUp(new Vector2(4700, 5400), "Immunity"),
+                new PowerUp(new Vector2(6900, 4750), "Highlight"),
+                new PowerUp(new Vector2(4750, 3000), "Freeze"),
+                new PowerUp(new Vector2(2500, 4700), "Teleport")
         ));
     }
 
+    /**Creates auber, enemies, npcs and powerups for a difficult game**/
     public void createDifficultGame(){
         player = new Auber(new Vector2(450 * scale, 778 * scale), 9f);
         player.setPosition(450 * scale, 778 * scale);
 
         //Creating and placing infiltrators
         enemies = new ArrayList<Infiltrator>(Arrays.asList(
-                new Infiltrator(new Vector2(4700, 2000), 1, graph, 9f),
-                new Infiltrator(new Vector2(4800, 2300), 2, graph, 9f),
-                new Infiltrator(new Vector2(5000, 7356), 3, graph, 9f),
-                new Infiltrator(new Vector2(4732, 7000), 4, graph, 9f),
-                new Infiltrator(new Vector2(4732, 7500), 1, graph, 9f),
-                new Infiltrator(new Vector2(4732, 7800), 1, graph, 9f),
-                new Infiltrator(new Vector2(4200, 7800), 2, graph, 9f),
-                new Infiltrator(new Vector2(5400, 7800), 2, graph, 9f)
-        ));
+                new Infiltrator(new Vector2(4700, 2000), 1, graph, 11f),
+                new Infiltrator(new Vector2(4800, 2300), 2, graph, 11f),
+                new Infiltrator(new Vector2(5000, 7356), 3, graph, 11f),
+                new Infiltrator(new Vector2(4732, 7000), 4, graph, 11f),
+                new Infiltrator(new Vector2(4732, 7500), 1, graph, 11f),
+                new Infiltrator(new Vector2(4732, 7800), 1, graph, 11f),
+                new Infiltrator(new Vector2(4200, 7800), 2, graph, 11f),
+                new Infiltrator(new Vector2(5400, 7800), 2, graph, 11f),
+                new Infiltrator(new Vector2(5000, 5300),  2, graph, 11f),
+                new Infiltrator(new Vector2(4900, 7800),  2, graph, 11f)));
+
 
         npcs = new ArrayList<NPC>(Arrays.asList(
-                new NPC(new Vector2(4700, 2000), graph, 9f),
-                new NPC(new Vector2(4800, 2300), graph, 9f),
-                new NPC(new Vector2(5000, 7356), graph, 9f),
-                new NPC(new Vector2(4732, 7000), graph, 9f),
-                new NPC(new Vector2(4732, 7500), graph, 9f),
-                new NPC(new Vector2(4732, 7800), graph, 9f),
-                new NPC(new Vector2(4200, 7800), graph, 9f),
-                new NPC(new Vector2(5400, 7800), graph, 9f)
-        ));
+                new NPC(new Vector2(4700, 2000), graph, 11f),
+                new NPC(new Vector2(4800, 2300), graph, 11f),
+                new NPC(new Vector2(5000, 7356), graph, 11f),
+                new NPC(new Vector2(4732, 7000), graph, 11f),
+                new NPC(new Vector2(4732, 7500), graph, 11f),
+                new NPC(new Vector2(4732, 7800), graph, 11f),
+                new NPC(new Vector2(4200, 7800), graph, 11f),
+                new NPC(new Vector2(5400, 7800), graph, 11f),
+                new NPC(new Vector2(5400, 7500), graph, 11f),
+                new NPC(new Vector2(4100, 7800), graph, 11f),
+                new NPC(new Vector2(4732, 7356), graph, 11f)));
+
 
         powerups = new ArrayList<PowerUp>(Arrays.asList(
-            new PowerUp(new Vector2(4732, 7800), "Speed"),
-            new PowerUp(new Vector2(4200, 7800), "Immunity"),
-            new PowerUp(new Vector2(5400, 7800), "Highlight"),
-            new PowerUp(new Vector2(5400, 7500), "Freeze"),
-            new PowerUp(new Vector2(4732, 7500), "Teleport")
+                new PowerUp(new Vector2(4700, 7800), "Speed")
         ));
     }
 
@@ -459,7 +462,7 @@ public class PlayScreen implements Screen {
             enemy.updateTimers(dt * 100);
 
             //the infiltrator will use their power if the auber is close enough and it's off cooldown
-            if (enemy.getPowerCooldown() > 500 && inRange(enemy) && enemy.getIsArrested() == false) {
+            if (enemy.getPowerCooldown() > 500 && inRange(enemy) && !enemy.getIsArrested()) {
                 enemy.usePower(this,tiles.getRoom(player.getX(), player.getY()));
             }
             //the infiltrator will stop their power when it's gone on past it's limit
@@ -518,7 +521,7 @@ public class PlayScreen implements Screen {
 
     //Resets the infiltrators and NPCs after powerups have ended
     public void resetAfterPowerup(){
-        if(player.getCurrentPower() != "Highlight"){
+        if(!player.getCurrentPower().equals("Highlight")){
             for(Infiltrator infiltrator: enemies) {
                 if(infiltrator.isHighlighted()){
                     infiltrator.setTexture(new Texture(Gdx.files.internal("Characters/infiltratorSprite.png")));
@@ -526,7 +529,7 @@ public class PlayScreen implements Screen {
                 }
             }
         }
-        if(player.getCurrentPower()!="Freeze"){
+        if(!player.getCurrentPower().equals("Freeze")){
             for(Infiltrator infiltrator: enemies) {
                 if(infiltrator.isFrozen()){
                     infiltrator.setFrozen(false);
