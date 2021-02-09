@@ -2,432 +2,138 @@
 saves: [
 	{
 		id: 1
-		name: Save 3
-		dateTime: Tue Feb 09 15:22:50 CST 2021
+		name: Save 1
 		auberInfo: {
 			position: {
-				x: 50
-				y: 200
+				x: 1892
+				y: 4457
 			}
+			moveSpeed: 9
 		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 2
-		name: Save 3
-		dateTime: Tue Feb 09 15:37:52 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
+		npcsInfoList: [
+			{
+				position: {
+					x: 4700
+					y: 2000
+				}
+				moveSpeed: 9
 			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 3
-		name: Save 3
-		dateTime: Tue Feb 09 15:38:59 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
+			{
+				position: {
+					x: 4800
+					y: 2300
+				}
+				moveSpeed: 9
 			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 4
-		name: Save 3
-		dateTime: Tue Feb 09 15:41:34 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
+			{
+				position: {
+					x: 5000
+					y: 7356
+				}
+				moveSpeed: 9
 			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 5
-		name: Save 3
-		dateTime: Tue Feb 09 15:42:40 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
+			{
+				position: {
+					x: 4732
+					y: 7000
+				}
+				moveSpeed: 9
 			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 6
-		name: Save 3
-		dateTime: Tue Feb 09 15:44:45 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
+			{
+				position: {
+					x: 4732
+					y: 7500
+				}
+				moveSpeed: 9
 			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 7
-		name: Save 3
-		dateTime: Tue Feb 09 15:45:39 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
+			{
+				position: {
+					x: 4732
+					y: 7800
+				}
+				moveSpeed: 9
 			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 8
-		name: Save 3
-		dateTime: Tue Feb 09 15:46:20 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
+			{
+				position: {
+					x: 4200
+					y: 7800
+				}
+				moveSpeed: 9
 			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 9
-		name: Save 3
-		dateTime: Tue Feb 09 15:49:28 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
+			{
+				position: {
+					x: 5400
+					y: 7800
+				}
+				moveSpeed: 9
 			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 10
-		name: Save 3
-		dateTime: Tue Feb 09 15:50:08 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
+		]
+		enemiesInfoList: [
+			{
+				position: {
+					x: 4718
+					y: 4736
+				}
+				moveSpeed: 9
+				power: 1
 			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 11
-		name: Save 3
-		dateTime: Tue Feb 09 15:54:19 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
+			{
+				position: {
+					x: 5286
+					y: 4946
+				}
+				moveSpeed: 9
+				power: 2
 			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 12
-		name: Save 3
-		dateTime: Tue Feb 09 15:58:41 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
+			{
+				position: {
+					x: 4604
+					y: 4953
+				}
+				moveSpeed: 9
+				power: 3
 			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 13
-		name: Save 3
-		dateTime: Tue Feb 09 16:00:42 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
+			{
+				position: {
+					x: 3463
+					y: 7864
+				}
+				moveSpeed: 9
+				power: 4
 			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 14
-		name: Save 3
-		dateTime: Tue Feb 09 16:02:44 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
+			{
+				position: {
+					x: 4444
+					y: 4953
+				}
+				moveSpeed: 9
+				power: 1
 			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 15
-		name: Save 3
-		dateTime: Tue Feb 09 16:03:05 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
+			{
+				position: {
+					x: 4327
+					y: 4956
+				}
+				moveSpeed: 9
+				power: 1
 			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 16
-		name: Save 3
-		dateTime: Tue Feb 09 16:04:15 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
+			{
+				position: {
+					x: 3723
+					y: 7872
+				}
+				moveSpeed: 9
+				power: 2
 			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 17
-		name: Save 3
-		dateTime: Tue Feb 09 16:05:34 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
+			{
+				position: {
+					x: 4716
+					y: 5163
+				}
+				moveSpeed: 9
+				power: 2
 			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 18
-		name: Save 3
-		dateTime: Tue Feb 09 16:06:06 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
-			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 19
-		name: Save 3
-		dateTime: Tue Feb 09 16:08:21 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
-			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 20
-		name: Save 3
-		dateTime: Tue Feb 09 16:09:00 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
-			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 21
-		name: Save 3
-		dateTime: Tue Feb 09 16:09:12 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
-			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 22
-		name: Save 3
-		dateTime: Tue Feb 09 16:09:56 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
-			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 23
-		name: Save 3
-		dateTime: Tue Feb 09 16:10:26 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
-			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 24
-		name: Save 3
-		dateTime: Tue Feb 09 16:11:14 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
-			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 25
-		name: Save 3
-		dateTime: Tue Feb 09 16:12:37 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
-			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 26
-		name: Save 3
-		dateTime: Tue Feb 09 16:14:27 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
-			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 27
-		name: Save 3
-		dateTime: Tue Feb 09 16:14:46 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
-			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 28
-		name: Save 3
-		dateTime: Tue Feb 09 16:16:46 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
-			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 29
-		name: Save 3
-		dateTime: Tue Feb 09 16:19:56 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
-			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 30
-		name: Save 3
-		dateTime: Tue Feb 09 16:23:25 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
-			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 31
-		name: Save 3
-		dateTime: Tue Feb 09 16:24:21 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
-			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 32
-		name: Save 3
-		dateTime: Tue Feb 09 16:25:10 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
-			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
-	}
-	{
-		id: 33
-		name: Save 3
-		dateTime: Tue Feb 09 16:37:39 CST 2021
-		auberInfo: {
-			position: {
-				x: 50
-				y: 200
-			}
-		}
-		npcsInfoList: []
-		shipSystemInfoList: []
+		]
 	}
 ]
 }

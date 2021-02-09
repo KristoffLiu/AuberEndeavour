@@ -1,11 +1,10 @@
 package com.team23.game.actors.characters;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.team23.game.TileWorld;
 import com.team23.game.ai.DemoAI;
 import com.team23.game.ai.graph.PathGraph;
-import com.team23.game.stages.Hud;
+import com.team23.game.screens.playscreen.Hud;
 
 import java.util.ArrayList;
 
@@ -16,23 +15,41 @@ public class DemoAuber extends Auber{
     private float movSpeed;
     private DemoAI ai;
 
+    /***
+     *
+     * @param position
+     * @param graph
+     * @param movSpeed
+     */
     public DemoAuber(Vector2 position, PathGraph graph,float movSpeed) {
         super(position, movSpeed);
         this.setSize(150, 170);
         ai = new DemoAI(graph);
     }
 
+    /***
+     *
+     * @param tiles Contains the teleporters
+     * @return
+     */
     @Override
     public boolean teleportCheck(TileWorld tiles) {
         return false;
     }
 
+    /***
+     *
+     * @param delta
+     */
     @Override
     public void act(float delta) {
         ai.update(delta,getPosition());
         super.act(delta);
     }
 
+    /***
+     * handle the movement of the auber
+     */
     @Override
     protected void handleMovement() {
         //Left movement
@@ -65,11 +82,14 @@ public class DemoAuber extends Auber{
         }
     }
 
+
+    /***
+     * Arrests the infiltrator if in range and puts it in jail
+     * @param infiltrators A list of all infiltrators in the game
+     * @param hud The games HUD overlay
+     */
     @Override
     public void arrest(ArrayList<Infiltrator> infiltrators, Hud hud) {
-        /*Arrests the infiltrator if in range and puts it in jail
-         * @param infiltrators this list of infiltrators that are being checked
-         * @hud the hud overlay*/
         for (Infiltrator infiltrator : infiltrators) {
             if (Math.abs(infiltrator.getX() - this.getX()) < 200 && Math.abs(infiltrator.getY() - this.getY()) < 200) {
                 infiltrator.arrest(new Vector2((float)Math.random()*1000+1200,(float)Math.random()*400+5400));

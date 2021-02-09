@@ -18,14 +18,23 @@ import java.util.List;
  * Character class
  */
 public abstract class Character extends CustomActor {
-
+    private String texture;
     private float movSpeed;
     public MovementSystem movementSystem;
 
+    /***
+     * Constructor - create the Character object when it is loaded from the save
+     * @param info the Character instance which is loaded from the save
+     */
     public Character(CharacterInfo info){
         this(info.position.toVector2(), info.moveSpeed);
     }
 
+    /***
+     * Constructor - create the Character object from a new game
+     * @param position the position
+     * @param movSpeed the movement speed
+     */
     public Character(Vector2 position, float movSpeed){
         super();
         movementSystem = new MovementSystem(position, movSpeed);
@@ -33,12 +42,22 @@ public abstract class Character extends CustomActor {
         this.movSpeed = movSpeed;
     }
 
+    /***
+     * get the texture.
+     */
     protected abstract Texture getTexture();
 
+    /***
+     * get the position.
+     */
     public Vector2 getPosition(){
         return new Vector2(getX(),getY());
     }
 
+    /***
+     * Constructor - create the Auber object when it is loaded from the save
+     * @param delta the AuberInfo instance which is loaded from the save
+     */
     @Override
     public void act(float delta) {
         super.act(delta);
@@ -47,19 +66,20 @@ public abstract class Character extends CustomActor {
         }
     }
 
+    /***
+     * get the movement speed.
+     * @return the current movement speed as a float value.
+     */
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
     }
 
 
+    /**
+     * Checks if the character is colliding with any of the collision boxes
+     */
     protected abstract void handleMovement();
-
-//    @Override
-//    protected void positionChanged() {
-//        super.positionChanged();
-//        sprite.setPosition(getX(),getY());
-//    }
 
     /**
      * Checks if the character is colliding with any of the collision boxes
@@ -79,12 +99,11 @@ public abstract class Character extends CustomActor {
         return false;
     }
 
-    public Position getPositionForSaving(){
-        return new Position(this.getX(),this.getY());
-    }
-
+    /***
+     * get the movement speed.
+     * @return the current movement speed as a float value.
+     */
     public float getMovSpeed(){
         return this.movSpeed;
     }
-
 }

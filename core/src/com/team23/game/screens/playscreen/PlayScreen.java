@@ -6,6 +6,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -19,12 +20,9 @@ import com.team23.game.TileWorld;
 import com.team23.game.actors.characters.*;
 import com.team23.game.actors.items.PowerUp;
 import com.team23.game.save.*;
-import com.team23.game.screens.teleportscreen.TeleportScreen;
-import com.team23.game.screens.teleportscreen.TeleportPage;
 import com.team23.game.utils.Utility;
 import com.team23.game.ai.graph.PathGraph;
 import com.team23.game.ai.graph.PathNode;
-import com.team23.game.stages.Hud;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -55,10 +53,7 @@ public class PlayScreen implements Screen {
     //Used for the infiltrator's hallucinate power
     private boolean hallucinate;
     private Texture hallucinateTexture;
-    public TeleportPage teleportPage;
-
-
-    private TileWorld tiles;
+    public TileWorld tiles;
 
     protected int scale;
 
@@ -92,8 +87,10 @@ public class PlayScreen implements Screen {
                         break;
                     case normal:
                         createNormalGame();
+                        break;
                     case difficult:
                         createDifficultGame();
+                        break;
                 }
                 break;
             case loadedGame:
@@ -122,7 +119,13 @@ public class PlayScreen implements Screen {
         hallucinateTexture = new Texture("hallucinateV2.png");
         hallucinate = false;
 
-        hud = new Hud(gameEntry.batch, enemies, tiles.getSystems());
+        hud = new Hud(this);
+        Gdx.input.setInputProcessor(hud);
+    }
+
+    @Override
+    public void show() {
+        Gdx.input.setInputProcessor(hud);
     }
 
     public void createSimpleGame(){
@@ -281,17 +284,13 @@ public class PlayScreen implements Screen {
         currentSave.setAuberInfo(this.player);
         currentSave.setEnemiesInfoList(this.enemies);
         currentSave.setNpcsInfoList(this.npcs);
+        SaveManager.current.add(currentSave);
     }
 
     public void update(float dt) {
         shipStage.act(dt);
         player.arrest(enemies, hud);
         player.usePowerUp(powerups,enemies, npcs);
-    }
-
-    @Override
-    public void show() {
-
     }
 
     /**
@@ -318,7 +317,8 @@ public class PlayScreen implements Screen {
 
         if (hallucinate) { drawHallucinate();}
         hud.updateAttacks(tiles.getSystems());
-        hud.stage.draw();
+        hud.act(delta);
+        hud.draw();
     }
 
     private void updateCamera(){
@@ -328,7 +328,6 @@ public class PlayScreen implements Screen {
         camera.position.set(pos);
         camera.update();
         renderer.setView(camera);
-        gameEntry.batch.setProjectionMatrix(hud.stage.getCamera().combined);
     }
 
     public OrthographicCamera getCamera(){

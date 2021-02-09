@@ -46,7 +46,7 @@ public class GameEntry extends Game {
 		this.setGameState(PlayState.notStarted);
 		teleporting = "false";
 
-		testAddSave();
+		//testAddSave();
 	}
 
 	public void testAddSave(){
