@@ -2,6 +2,9 @@ package com.team23.game.utils;
 
 import com.badlogic.gdx.math.Vector2;
 
+/***
+ * Utilities for vectors
+ */
 public class Utility {
     private static final float DISTANCE_BUFFER = 10;
 

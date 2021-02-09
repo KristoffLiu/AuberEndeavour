@@ -13,8 +13,6 @@ import java.util.HashMap;
 /***
  * TileWorld
  * the class for reading tiled-map file.
- *
- * @author Zhikang Liu
  */
 public class TileWorld {
     private HashMap<String,Rectangle> teleporters;

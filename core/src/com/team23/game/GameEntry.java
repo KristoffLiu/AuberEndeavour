@@ -15,9 +15,7 @@ import com.team23.game.screens.playscreen.PlayScreen;
 
 /***
  * Game Entry
- * the whole .
- *
- * @author Zhikang Liu
+ * the whole game
  */
 public class GameEntry extends Game {
 	public static GameEntry current;

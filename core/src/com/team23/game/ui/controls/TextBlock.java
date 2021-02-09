@@ -6,6 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.team23.game.ui.pages.UIPage;
 import com.team23.game.ui.controls.labels.LabelStylesHelper;
 
+/***
+ * Class for all text
+ */
 public class TextBlock extends UIElement {
     Label label;
     String text;

@@ -7,6 +7,10 @@ import com.team23.game.ui.pages.UIPage;
 
 import java.util.ArrayList;
 
+/***
+ * Container for items in the UI
+ */
+
 public class Container extends UIElement {
     public ArrayList<UIElement> children;
     float virtualWidth;

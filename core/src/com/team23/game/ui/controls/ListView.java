@@ -4,6 +4,9 @@ import com.team23.game.ui.basics.Padding;
 
 import java.util.ArrayList;
 
+/**
+ * Class for making lists in the ui
+ */
 public class ListView extends Container {
     public float itemWidth = 400f;
     public float itemHeight = 100f;

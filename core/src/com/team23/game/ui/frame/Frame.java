@@ -5,6 +5,9 @@ import com.team23.game.ui.pages.UIPage;
 
 import java.util.Stack;
 
+/***
+ * Frame to allow going between pages
+ */
 public class Frame {
     public Stack<UIPage> history;
     public UIPage currentPage;

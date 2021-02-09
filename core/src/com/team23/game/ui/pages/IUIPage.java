@@ -4,6 +4,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import com.team23.game.ui.controls.UIElement;
 
+/***
+ * Interface for a page
+ */
+
 public interface IUIPage {
     void addUIElement(UIElement uiElement);
     void removeUIElement(UIElement uiElement);

@@ -7,8 +7,6 @@ import com.team23.game.save.ShipSystemInfo;
 /***
  * Ship System
  * the class for providing the systems of the whole ship.
- *
- * @author Zhikang Liu
  */
 public class ShipSystem {
     public float x;

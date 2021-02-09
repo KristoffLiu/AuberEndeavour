@@ -5,16 +5,19 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Null;
 import com.team23.game.ui.pages.UIPage;
 
+/***
+ * Class for all selectable ui elemts
+ */
 public class SelectableUIElement extends Container {
     public Container container;
 
-    public TextureRegion unselectedTexture          ;
-    public TextureRegion selectedTexture            ;
-    public TextureRegion unselectedHoveredTexture   ;
-    public TextureRegion unselectedPressedTexture   ;
-    public TextureRegion selectedHoveredTexture     ;
-    public TextureRegion selectedPressedTexture     ;
-    public TextureRegion notActivatedTexture        ;
+    public TextureRegion unselectedTexture;
+    public TextureRegion selectedTexture;
+    public TextureRegion unselectedHoveredTexture;
+    public TextureRegion unselectedPressedTexture;
+    public TextureRegion selectedHoveredTexture;
+    public TextureRegion selectedPressedTexture;
+    public TextureRegion notActivatedTexture;
 
     SelectableUIElementClickListener selectableUIElementClickListener;
     SelectableUIState uiState = SelectableUIState.UNSELECTED;
@@ -50,13 +53,13 @@ public class SelectableUIElement extends Container {
                             String unselectedHoveredTexturePath, String unselectedPressedTexturePath,
                             String selectedHoveredTexturePath, String selectedPressedTexturePath,
                             @Null String notActivatedTexturePath){
-        this.unselectedTexture          = !unselectedTexturePath.isEmpty() ? new TextureRegion(new Texture(unselectedTexturePath)) : null;
-        this.selectedTexture            = !selectedTexturePath.isEmpty() ? new TextureRegion(new Texture(selectedTexturePath)) : null;
-        this.unselectedHoveredTexture   = !unselectedHoveredTexturePath.isEmpty() ? new TextureRegion(new Texture(unselectedHoveredTexturePath)) : null;
-        this.unselectedPressedTexture   = !unselectedPressedTexturePath.isEmpty() ? new TextureRegion(new Texture(unselectedPressedTexturePath)) : null;
-        this.selectedHoveredTexture     = !selectedHoveredTexturePath.isEmpty() ? new TextureRegion(new Texture(selectedHoveredTexturePath)) : null;
-        this.selectedPressedTexture     = !selectedPressedTexturePath.isEmpty() ? new TextureRegion(new Texture(selectedPressedTexturePath)) : null;
-        this.notActivatedTexture        = !notActivatedTexturePath.isEmpty() ? new TextureRegion(new Texture(notActivatedTexturePath)) : null;
+        this.unselectedTexture = !unselectedTexturePath.isEmpty() ? new TextureRegion(new Texture(unselectedTexturePath)) : null;
+        this.selectedTexture = !selectedTexturePath.isEmpty() ? new TextureRegion(new Texture(selectedTexturePath)) : null;
+        this.unselectedHoveredTexture = !unselectedHoveredTexturePath.isEmpty() ? new TextureRegion(new Texture(unselectedHoveredTexturePath)) : null;
+        this.unselectedPressedTexture = !unselectedPressedTexturePath.isEmpty() ? new TextureRegion(new Texture(unselectedPressedTexturePath)) : null;
+        this.selectedHoveredTexture = !selectedHoveredTexturePath.isEmpty() ? new TextureRegion(new Texture(selectedHoveredTexturePath)) : null;
+        this.selectedPressedTexture = !selectedPressedTexturePath.isEmpty() ? new TextureRegion(new Texture(selectedPressedTexturePath)) : null;
+        this.notActivatedTexture = !notActivatedTexturePath.isEmpty() ? new TextureRegion(new Texture(notActivatedTexturePath)) : null;
         switch (this.uiState){
             case UNSELECTED:
                 this.setTextureRegion(unselectedTexture);

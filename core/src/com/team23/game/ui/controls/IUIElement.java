@@ -4,6 +4,9 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.Null;
 import com.team23.game.ui.pages.UIPage;
 
+/***
+ * Interface for all ui elements
+ */
 public interface IUIElement {
     Object uiParent = null;
     UIElement.HorizontalAlignment horizontalAlignment = UIElement.HorizontalAlignment.LEFT_ALIGNMENT;
